@@ -24,7 +24,7 @@ $(window).on("load", function(){
 
     // Chart Data
     var chartData = {
-        labels: ["January", "February", "March", "April", "May"],
+        labels: ["January", "February", "March", "April", "PPK"],
         datasets: [{
             label: "My First dataset",
             data: [85, 65, 34, 45, 35],
@@ -34,7 +34,6 @@ $(window).on("load", function(){
 
     var config = {
         type: 'pie',
-
         // Chart Options
         options : chartOptions,
 

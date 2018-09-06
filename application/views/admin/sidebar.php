@@ -1,0 +1,45 @@
+<div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="main-menu-content">
+      <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <li class=" navigation-header">
+          <span>General</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="General"></i>
+        </li>
+        <li class="nav-item <?php if($this->uri->segment(2)==""){echo 'active';}?>"><a href="<?php echo site_url('admin') ?>"><i class="ft-home"></i><span class="menu-title" data-i18n="">Dashboard</span></a>
+        </li>
+        <hr>
+        <!-- Kategori Barang -->
+        <li class=" navigation-header">
+          <span>PPK</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="Apps"></i>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="daftarppk" OR $this->uri->segment(2)=="editppk"){
+          echo 'active';} ?>"><a href="<?php  echo site_url('admin/daftarppk') ?>"><i class="ft-bookmark"></i><span class="menu-title" data-i18n="">Daftar PPK</span></a>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="inputppk"){
+          echo 'active';} ?>"><a href="<?php echo base_url('admin/inputppk') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input PPK </span></a>
+        </li>
+        <!-- Barang -->
+        <li class=" navigation-header">
+          <span>User</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="Apps"></i>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="daftaruser" OR $this->uri->segment(2)=="edituser"){
+          echo 'active';} ?>"><a href="<?php echo base_url('admin/daftaruser') ?>"><i class="ft-users"></i><span class="menu-title" data-i18n="">Daftar User</span></a>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="inputuser"){
+          echo 'active';} ?>"><a href="<?php echo base_url('admin/inputuser') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input User</span></a>
+        </li>
+        <hr>
+        <!-- Profile -->
+        <li class=" navigation-header">
+          <span>Profile</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="Apps"></i>
+        </li>
+        <li class=" nav-item"><a href="<?php echo base_url('admin/editprofile') ?>"><i class="ft-user"></i><span class="menu-title" data-i18n="">Edit Profile</span></a>
+        </li>
+        <li class=" nav-item"><a href="<?php echo base_url('admin/gantipassword') ?>"><i class="ft-lock"></i><span class="menu-title" data-i18n="">Ganti Password</span></a>
+        </li>
+      </ul>
+    </div>
+  </div>
