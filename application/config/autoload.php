@@ -89,7 +89,7 @@ $autoload['drivers'] = array();
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','form','security','text','email','download','file');
+$autoload['helper'] = array('url','form','security','text','email','xss_helper','download','file');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('Penomoran_model','Datalogin_model','Datappk_model');
+$autoload['model'] = array('Penomoran_model','Datalogin_model','Datappk_model','Datauser_model');

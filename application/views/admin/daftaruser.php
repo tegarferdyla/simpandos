@@ -34,27 +34,48 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="card-body card-dashboard">
-                    <?php if ($this->session->flashdata('berhasil')):?>
-                    <div class="alert alert-success alert-dismissible mb-2" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                      </button>
-                      <strong> User Baru Berhasil Ditambahkan !</strong>
-                    </div>
+                    <?php if ($this->session->flashdata('ppkberhasil')):?>
+                      <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User PPK Baru Berhasil Ditambahkan !</strong>
+                      </div>
+                    <?php elseif ($this->session->flashdata('bmnberhasil')): ?>
+                      <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User BMN Baru Berhasil Ditambahkan !</strong>
+                      </div>
+                    <?php elseif ($this->session->flashdata('spmberhasil')): ?>
+                      <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User SPM Baru Berhasil Ditambahkan !</strong>
+                      </div>
+                    <?php elseif ($this->session->flashdata('bendaharaberhasil')): ?>
+                      <div class="alert alert-success alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User Bendahara Baru Berhasil Ditambahkan !</strong>
+                      </div>
                     <?php elseif ($this->session->flashdata('updateberhasil')): ?>
-                    <div class="alert alert-info alert-dismissible mb-2" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                      </button>
-                      <strong> User Berhasil di Perbaharui !</strong>
-                    </div>
+                      <div class="alert alert-info alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User Berhasil di Perbaharui !</strong>
+                      </div>
                     <?php elseif ($this->session->flashdata('deleteberhasil')): ?>
-                    <div class="alert alert-primary alert-dismissible mb-2" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                      </button>
-                      <strong> User Berhasil di Hapus !</strong>
-                    </div>
+                      <div class="alert alert-primary alert-dismissible mb-2" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="false">&times;</span>
+                        </button>
+                        <strong> User Berhasil di Hapus !</strong>
+                      </div>
                     <?php endif ?>
                     <ul class="nav nav-tabs nav-underline no-hover-bg">
                       <li class="nav-item">
@@ -77,60 +98,189 @@
                     <!-- User PPK -->
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tab31" aria-expanded="true" aria-labelledby="base-tab31">
-                      <table class="table table-striped table-bordered zero-configuration">
+                        <table class="table table-striped table-bordered zero-configuration">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>NIP</th>
+                              <th>Nama</th>
+                              <th>Divisi</th>
+                              <th>Email</th>
+                              <th>Username</th>
+                              <th>Action</th>
+                              <!-- <th>Action</th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <?php $no = 1; ?>
+                              <?php 
+                                foreach ($user_ppk as $u) {
+                              ?> 
+                              <tr>
+                                <td class="center"><?php echo ($no++); ?></td>
+                                <td><?php echo($u->nip);?></td>
+                                <td><?php echo ($u->nama_user); ?></td>
+                                <td><?php echo ($u->divisi); ?></td>
+                                <td><?php echo ($u->email); ?></td>
+                                <td><?php echo ($u->username); ?></td>
+                                <td class="">
+                                  <a href ="<?php echo base_url()."admin/edituser/".$u->id_user; ?>"><button type="button" class="btn btn-outline-primary "><i class="fa fa-edit"></i> Edit</button></a>
+                                  <a href ="<?php echo base_url()."admin/hapususer/".$u->id_user; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Hapus</button></a>
+                                </td>
+                              </tr>
+                            <?php } ?>
+                          </tbody>
+                          <tfoot>
+                            <tr>
+                              <th>No</th>
+                              <th>NIP</th>
+                              <th>Nama</th>
+                              <th>Divisi</th>
+                              <th>Email</th>
+                              <th>Username</th>
+                              <th>Action</th>
+                            </tr>
+                          </tfoot>
+                        </table>
+                      </div>
+                      <!-- End User PPK -->
+                      <div class="tab-pane" id="tab32" aria-labelledby="base-tab32">
+                        <table class="table table-striped table-bordered zero-configuration">
                         <thead>
                           <tr>
                             <th>No</th>
-                            <th>ID PPK</th>
-                            <th>Nama PPK</th>
-                            <th>Deskripsi</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
                             <!-- <th>Action</th> -->
                           </tr>
                         </thead>
-                        <tbody><!-- 
-                          <?php $no = 1; ?>
-                          <?php foreach ($data_ppk as $u) { ?> -->
-                          <tr>
-                            <td class="center"><!-- <?php echo ($no++); ?> --></td>
-                            <td><!-- <?php echo $u['id_ppk']; ?> --></td>
-                            <td><!-- <?php echo $u['nama_ppk']; ?> --></td>
-                            <td><!-- <?php echo $u['keterangan']; ?> --></td>
-                            <!-- <td class="right">
-                              <a href ="<?php echo base_url()."admin/editppk/".$u['id_ppk']; ?>"><button type="button" class="btn btn-outline-primary mr-1"><i class="fa fa-edit"></i> Edit</button></a>
-                              <a href ="<?php echo base_url()."admin/hapusppk/".$u['id_ppk']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
-                            </td> -->
-                          </tr><!-- 
-                          <?php } ?> -->
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php 
+                              foreach ($user_bmn as $u) {
+                            ?>                        
+                            <tr>
+                              <td class="center"><?php echo($no++); ?></td>
+                              <td><?php echo($u->nip);?></td>
+                              <td><?php echo ($u->nama_user); ?></td>
+                              <td><?php echo ($u->divisi); ?></td>
+                              <td><?php echo ($u->email); ?></td>
+                              <td><?php echo ($u->username); ?></td>
+                              <td class="right">
+                                <a href ="<?php echo base_url()."admin/edituser/".$u->id_user; ?>"><button type="button" class="btn btn-outline-primary mr-1"><i class="fa fa-edit"></i> Edit</button></a>
+                                <a href ="<?php echo base_url()."admin/hapususer/".$u->id_user; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
+                              </td>
+                            </tr>
+                            <?php } ?>
                         </tbody>
                         <tfoot>
                           <tr>
                             <th>No</th>
-                            <th>ID PPK</th>
-                            <th>Nama PPK</th>
-                            <th>Deskripsi</th>
-                            <!-- <th>Action</th> -->
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
                           </tr>
                         </tfoot>
                       </table>
                       </div>
-                      <!-- End User PPK -->
-                      <div class="tab-pane" id="tab32" aria-labelledby="base-tab32">
-                        <p>Sugar plum tootsie roll biscuit caramels. Liquorice brownie
-                          pastry cotton candy oat cake fruitcake jelly chupa chups.
-                          Pudding caramels pastry powder cake soufflé wafer caramels.
-                          Jelly-o pie cupcake.</p>
-                      </div>
                       <div class="tab-pane" id="tab33" aria-labelledby="base-tab33">
-                        <p>Biscuit ice cream halvah candy canes bear claw ice cream
-                          cake chocolate bar donut. Toffee cotton candy liquorice.
-                          Oat cake lemon drops gingerbread dessert caramels. Sweet
-                          dessert jujubes powder sweet sesame snaps.</p>
+                        <table class="table table-striped table-bordered zero-configuration">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                            <!-- <th>Action</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php 
+                              foreach ($user_spm as $u) {
+                            ?> 
+                            <tr>
+                              <td class="center"><?php echo($no++); ?></td>
+                              <td><?php echo($u->nip);?></td>
+                              <td><?php echo ($u->nama_user); ?></td>
+                              <td><?php echo ($u->divisi); ?></td>
+                              <td><?php echo ($u->email); ?></td>
+                              <td><?php echo ($u->username); ?></td>
+                              <td class="right">
+                                <a href ="<?php echo base_url()."admin/edituser/".$u->id_user; ?>"><button type="button" class="btn btn-outline-primary mr-1"><i class="fa fa-edit"></i> Edit</button></a>
+                                <a href ="<?php echo base_url()."admin/hapususer/".$u->id_user; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
+                              </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                          </tr>
+                        </tfoot>
+                      </table>
                       </div>
-                      <div class="tab-pane" id="tab33" aria-labelledby="base-tab34">
-                        <p>Biscuit ice cream halvah candy canes bear claw ice cream
-                          cake chocolate bar donut. Toffee cotton candy liquorice.
-                          Oat cake lemon drops gingerbread dessert caramels. Sweet
-                          dessert jujubes powder sweet sesame snaps.</p>
+                      <div class="tab-pane" id="tab34" aria-labelledby="base-tab34">
+                        <table class="table table-striped table-bordered zero-configuration">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                            <!-- <th>Action</th> -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php 
+                              foreach ($user_bendahara as $u) {
+                            ?> 
+                            <tr>
+                              <td class="center"><?php echo($no++); ?></td>
+                              <td><?php echo($u->nip);?></td>
+                              <td><?php echo ($u->nama_user); ?></td>
+                              <td><?php echo ($u->divisi); ?></td>
+                              <td><?php echo ($u->email); ?></td>
+                              <td><?php echo ($u->username); ?></td>
+                              <td class="right">
+                                <a href ="<?php echo base_url()."admin/edituser/".$u->id_user; ?>"><button type="button" class="btn btn-outline-primary mr-1"><i class="fa fa-edit"></i>Edit</button></a>
+                                <a href ="<?php echo base_url()."admin/hapususer/".$u->id_user; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i>Hapus</button></a>
+                              </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                        <tfoot>
+                          <tr>
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Divisi</th>
+                            <th>Email</th>
+                            <th>Username</th>
+                            <th>Action</th>
+                          </tr>
+                        </tfoot>
+                      </table>
                       </div>
                     </div>
                   </div>

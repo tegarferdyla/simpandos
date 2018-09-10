@@ -19,8 +19,8 @@
   <!-- END STACK JS-->
   <!-- BEGIN PAGE LEVEL JS-->
   <script src="<?php echo base_url('app-assets/js/scripts/charts/chartjs/pie-doughnut/pie.js') ?>" type="text/javascript"></script>
-  <script src="<?php echo base_url('app-assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js') ?>"
-  type="text/javascript"></script>
+  <!-- <script src="<?php echo base_url('app-assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js') ?>"
+  type="text/javascript"></script> -->
   <script src="<?php echo base_url('app-assets/js/scripts/charts/chartjs/pie-doughnut/doughnut.js') ?>"
   type="text/javascript"></script>
   <script src="<?php echo base_url('app-assets/js/scripts/charts/chartjs/pie-doughnut/doughnut-simple.js') ?>"
@@ -28,28 +28,65 @@
   <script src="<?php echo base_url('app-assets/js/scripts/tables/datatables/datatable-basic.js') ?>" type="text/javascript"></script>
   <script src="<?php echo base_url('app-assets/js/scripts/extensions/sweet-alerts.js') ?>" type="text/javascript"></script>
   <!-- END PAGE LEVEL JS-->
-  <script>
-   function startTime()
-{
-var today=new Date();
-var h=today.getHours();
-var m=today.getMinutes();
-var s=today.getSeconds();
-// add a zero in front of numbers<10<br>
-m=checkTime(m);
-s=checkTime(s);
-document.getElementById('txt').innerHTML=h+":"+m+":"+s;
-t=setTimeout(function(){startTime()},500);
-}
+  <script type="text/javascript">
+  $(window).on("load", function(){
 
-function checkTime(i)
-{
-if (i<10)
-  {
-  i="0" + i;
-  }
-return i;
-}
+    //Get the context of the Chart canvas element we want to select
+    var ctx = $("#simple-pie-chart");
+
+    // Chart Options
+    var chartOptions = {
+        responsive: true,
+        maintainAspectRatio: false,
+        responsiveAnimationDuration:500,
+    };
+
+    // Chart Data
+    var chartData = {
+        labels: [
+          <?php foreach ($data_ppk as $u) {
+              echo "'$u[nama_ppk]',";
+          }?>],
+        datasets: [{
+            label: "My First dataset",
+            data: [85, 65],
+            backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        // Chart Options
+        options : chartOptions,
+
+        data : chartData
+    };
+
+    // Create the chart
+    var pieSimpleChart = new Chart(ctx, config);
+});
+
+ function startTime()
+    {
+    var today=new Date();
+    var h=today.getHours();
+    var m=today.getMinutes();
+    var s=today.getSeconds();
+    // add a zero in front of numbers<10<br>
+    m=checkTime(m);
+    s=checkTime(s);
+    document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+    t=setTimeout(function(){startTime()},500);
+    }
+
+    function checkTime(i)
+    {
+    if (i<10)
+      {
+      i="0" + i;
+      }
+    return i;
+    }
   </script>
 </body>
 </html>

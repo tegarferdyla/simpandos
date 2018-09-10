@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		public function __construct()
 		{
 			parent::__construct();
-			if (!$this->session->has_userdata('status')){
+			if (!$this->session->has_userdata('status')) {
 				redirect('login');
 			}
 		}
@@ -17,8 +17,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		{
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar');
-			$this->load->view('admin/dashboard');
-			$this->load->view('admin/footer');
+			$data['data_ppk'] = $this->Datappk_model->daftarppk();
+			$this->load->view('admin/dashboard', $data);
+			$this->load->view('admin/footer',$data);
 		}
 
 		//----------------------------------------------------------
@@ -111,13 +112,405 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//----------------------- End Of PPK -----------------------
 		//----------------------------------------------------------
 
+		//----------------------------------------------------------
+		//----------------------- Star Of User -----------------------
+		//----------------------------------------------------------
+
 		public function daftaruser ()
 		{
 			$this->load->view('admin/header');
+			$data['user_ppk'] = $this->Datauser_model->datauserppk();
+			$data['user_bmn'] = $this->Datauser_model->datauserbmn();
+			$data['user_spm'] = $this->Datauser_model->datauserspm();
+			$data['user_bendahara'] = $this->Datauser_model->datauserbendahara();
 			$this->load->view('admin/sidebar');
-			$this->load->view('admin/daftaruser');
+			$this->load->view('admin/daftaruser',$data);
 			$this->load->view('admin/footer');
 		}
+
+		public function inputuser()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['data_ppk'] = $this->Datappk_model->daftarppk();
+			$this->load->view('admin/inputuser',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function tambahuserppk()
+		{
+			$this->form_validation->set_rules('nip' ,'NIP','trim|required|numeric|max_length[16]');
+			$this->load->library('generate_token');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('admin/header');
+				$this->load->view('admin/sidebar');
+				$data['data_ppk'] = $this->Datappk_model->daftarppk();
+				$this->load->view('admin/inputuser',$data);
+				$this->load->view('admin/footer');
+			}
+			else {
+				$nip 		= $this->input->post('nip');
+				$nama 		= $this->input->post('nama');
+				$id_ppk		= $this->input->post('id_ppk');
+				$email		= $this->input->post('email');
+				$alamat		= $this->input->post('alamat');
+				$username	= $this->input->post('username');
+				$password	= $this->generate_token->get_token(8);
+
+				$data = array 
+				(
+					'id_user'		=> $this->Penomoran_model->IDUSER(),
+					'username'		=> $username,
+					'password'		=> md5($password),
+					'nip'			=> $nip,
+					'nama_user'		=> $nama,
+					'bagian'		=> 'PPK',
+					'email'			=> $email,
+					'alamat'		=> $alamat,
+					'foto'			=> 'default-avatar.jpg',
+					'id_ppk'		=> $id_ppk
+				);
+				$resultchecknip = $this->Datauser_model->ceknip($nip);
+				if ($resultchecknip > 0) {
+					$this->session->set_flashdata('nipsalah','true');
+					redirect('admin/inputuser');
+				}
+				else {
+					$input = $this->Datauser_model->tambahuser($data,'tbl_user');
+					if ($input > 0) {
+						$this->load->library('email');
+					    $config = array();
+					    $config['charset'] = 'utf-8';
+					    $config['useragent'] = 'Codeigniter';
+					    $config['protocol']= "smtp";
+					    $config['mailtype']= "html";
+					    $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+					    $config['smtp_port']= "465";
+					    $config['smtp_timeout']= "400";
+					    $config['smtp_user']= "sipad.information@gmail.com"; // isi dengan email kamu
+					    $config['smtp_pass']= "coba12345"; // isi dengan password kamu
+					    $config['crlf']="\r\n"; 
+					    $config['newline']="\r\n"; 
+					    $config['wordwrap'] = TRUE;
+					    //memanggil library email dan set konfigurasi untuk pengiriman email
+					   
+					    $this->email->initialize($config);
+					    //konfigurasi pengiriman
+					    $this->email->from('SIPAD Information');
+					    $this->email->to($email);
+					    $this->email->subject("Notifikasi");
+					    $this->email->message(
+					     "Selamat , ".$nama." akun anda berhasil dibuat dengan <br>
+					     Username : ".$username." dan Password : ".$password
+					    );
+					    if($this->email->send())
+					    {
+							$this->session->set_flashdata('ppkberhasil','true');
+							redirect(base_url('admin/daftaruser'));
+						}
+					}
+					else{
+						$this->session->set_flashdata('gagal','true');
+						redirect(base_url('admin/inputuser'));
+					}
+				}
+			}							
+		}
+
+		public function tambahuserbmn ()
+		{
+			$this->form_validation->set_rules('nip' ,'NIP','trim|required|numeric|max_length[16]');
+			$this->load->library('generate_token');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('admin/header');
+				$this->load->view('admin/sidebar');
+				$data['data_ppk'] = $this->Datappk_model->daftarppk();
+				$this->load->view('admin/inputuser',$data);
+				$this->load->view('admin/footer');
+			}
+			else {
+				$nip 		= $this->input->post('nip');
+				$nama 		= $this->input->post('nama');
+				$bagian		= $this->input->post('bagian');
+				$email		= $this->input->post('email');
+				$alamat 	= $this->input->post('alamat');
+				$username 	= $this->input->post('username');
+				$password	= $this->generate_token->get_token(8);
+
+				$data = array 
+				(
+					'id_user'		=> $this->Penomoran_model->IDUSER(),
+					'username'		=> $username,
+					'password'		=> md5($password),
+					'nip'			=> $nip,
+					'nama_user'		=> $nama,
+					'bagian'		=> $bagian,
+					'email'			=> $email,
+					'alamat'		=> $alamat,
+					'foto'			=> 'default-avatar.jpg',
+					'id_ppk'		=> ""
+				);
+				$resultchecknip = $this->Datauser_model->ceknip($nip);
+				if ($resultchecknip > 0) {
+					$this->session->set_flashdata('nipsalah','true');
+					redirect('admin/inputuser');
+				}
+				else {
+					$input = $this->Datauser_model->tambahuser($data,'tbl_user');
+					if ($input > 0) {
+						$this->load->library('email');
+					    $config = array();
+					    $config['charset'] = 'utf-8';
+					    $config['useragent'] = 'Codeigniter';
+					    $config['protocol']= "smtp";
+					    $config['mailtype']= "html";
+					    $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+					    $config['smtp_port']= "465";
+					    $config['smtp_timeout']= "400";
+					    $config['smtp_user']= "sipad.information@gmail.com"; // isi dengan email kamu
+					    $config['smtp_pass']= "coba12345"; // isi dengan password kamu
+					    $config['crlf']="\r\n"; 
+					    $config['newline']="\r\n"; 
+					    $config['wordwrap'] = TRUE;
+					    //memanggil library email dan set konfigurasi untuk pengiriman email
+					   
+					    $this->email->initialize($config);
+					    //konfigurasi pengiriman
+					    $this->email->from('SIPAD Information');
+					    $this->email->to($email);
+					    $this->email->subject("Notifikasi");
+					    $this->email->message(
+					     "Selamat , ".$nama." akun anda berhasil dibuat dengan <br>
+					     Username : ".$username." dan Password : ".$password
+					    );
+					    if($this->email->send())
+					    {
+							$this->session->set_flashdata('bmnberhasil','true');
+							redirect(base_url('admin/daftaruser'));
+						}
+					}
+					else{
+						$this->session->set_flashdata('gagal','true');
+						redirect(base_url('admin/inputuser'));
+					}
+				}
+			}
+		}
+
+		public function tambahuserspm ()
+		{
+			$this->form_validation->set_rules('nip' ,'NIP','trim|required|numeric|max_length[16]');
+			$this->load->library('generate_token');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('admin/header');
+				$this->load->view('admin/sidebar');
+				$data['data_ppk'] = $this->Datappk_model->daftarppk();
+				$this->load->view('admin/inputuser',$data);
+				$this->load->view('admin/footer');
+			}
+			else {
+				$nip 		= $this->input->post('nip');
+				$nama 		= $this->input->post('nama');
+				$bagian		= $this->input->post('bagian');
+				$email		= $this->input->post('email');
+				$alamat 	= $this->input->post('alamat');
+				$username 	= $this->input->post('username');
+				$password	= $this->generate_token->get_token(8);
+
+				$data = array 
+				(
+					'id_user'		=> $this->Penomoran_model->IDUSER(),
+					'username'		=> $username,
+					'password'		=> md5($password),
+					'nip'			=> $nip,
+					'nama_user'		=> $nama,
+					'bagian'		=> $bagian,
+					'email'			=> $email,
+					'alamat'		=> $alamat,
+					'foto'			=> 'default-avatar.jpg',
+					'id_ppk'		=> ""
+				);
+				$resultchecknip = $this->Datauser_model->ceknip($nip);
+				if ($resultchecknip > 0) {
+					$this->session->set_flashdata('nipsalah','true');
+					redirect('admin/inputuser');
+				}
+				else {
+					$input = $this->Datauser_model->tambahuser($data,'tbl_user');
+					if ($input > 0) {
+						$this->load->library('email');
+					    $config = array();
+					    $config['charset'] = 'utf-8';
+					    $config['useragent'] = 'Codeigniter';
+					    $config['protocol']= "smtp";
+					    $config['mailtype']= "html";
+					    $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+					    $config['smtp_port']= "465";
+					    $config['smtp_timeout']= "400";
+					    $config['smtp_user']= "sipad.information@gmail.com"; // isi dengan email kamu
+					    $config['smtp_pass']= "coba12345"; // isi dengan password kamu
+					    $config['crlf']="\r\n"; 
+					    $config['newline']="\r\n"; 
+					    $config['wordwrap'] = TRUE;
+					    //memanggil library email dan set konfigurasi untuk pengiriman email
+					   
+					    $this->email->initialize($config);
+					    //konfigurasi pengiriman
+					    $this->email->from('SIPAD Information');
+					    $this->email->to($email);
+					    $this->email->subject("Notifikasi");
+					    $this->email->message(
+					     "Selamat , ".$nama." akun anda berhasil dibuat dengan <br>
+					     Username : ".$username." dan Password : ".$password
+					    );
+					    if($this->email->send())
+					    {
+							$this->session->set_flashdata('spmberhasil','true');
+							redirect(base_url('admin/daftaruser'));
+						}
+					}
+					else{
+						$this->session->set_flashdata('gagal','true');
+						redirect(base_url('admin/inputuser'));
+					}
+				}
+			}
+		}
+
+		public function tambahuserbendahara ()
+		{
+			$this->form_validation->set_rules('nip' ,'NIP','trim|required|numeric|max_length[16]');
+			$this->load->library('generate_token');
+
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('admin/header');
+				$this->load->view('admin/sidebar');
+				$data['data_ppk'] = $this->Datappk_model->daftarppk();
+				$this->load->view('admin/inputuser',$data);
+				$this->load->view('admin/footer');
+			}
+			else {
+				$nip 		= $this->input->post('nip');
+				$nama 		= $this->input->post('nama');
+				$bagian		= $this->input->post('bagian');
+				$email		= $this->input->post('email');
+				$alamat 	= $this->input->post('alamat');
+				$username 	= $this->input->post('username');
+				$password	= $this->generate_token->get_token(8);
+
+				$data = array 
+				(
+					'id_user'		=> $this->Penomoran_model->IDUSER(),
+					'username'		=> $username,
+					'password'		=> md5($password),
+					'nip'			=> $nip,
+					'nama_user'		=> $nama,
+					'bagian'		=> $bagian,
+					'email'			=> $email,
+					'alamat'		=> $alamat,
+					'foto'			=> 'default-avatar.jpg',
+					'id_ppk'		=> ""
+				);
+				$resultchecknip = $this->Datauser_model->ceknip($nip);
+				if ($resultchecknip > 0) {
+					$this->session->set_flashdata('nipsalah','true');
+					redirect('admin/inputuser');
+				}
+				else {
+					$input = $this->Datauser_model->tambahuser($data,'tbl_user');
+					if ($input > 0) {
+						$this->load->library('email');
+					    $config = array();
+					    $config['charset'] = 'utf-8';
+					    $config['useragent'] = 'Codeigniter';
+					    $config['protocol']= "smtp";
+					    $config['mailtype']= "html";
+					    $config['smtp_host']= "ssl://smtp.gmail.com";//pengaturan smtp
+					    $config['smtp_port']= "465";
+					    $config['smtp_timeout']= "400";
+					    $config['smtp_user']= "sipad.information@gmail.com"; // isi dengan email kamu
+					    $config['smtp_pass']= "coba12345"; // isi dengan password kamu
+					    $config['crlf']="\r\n"; 
+					    $config['newline']="\r\n"; 
+					    $config['wordwrap'] = TRUE;
+					    //memanggil library email dan set konfigurasi untuk pengiriman email
+					   
+					    $this->email->initialize($config);
+					    //konfigurasi pengiriman
+					    $this->email->from('SIPAD Information');
+					    $this->email->to($email);
+					    $this->email->subject("Notifikasi");
+					    $this->email->message(
+					     "Selamat , ".$nama." akun anda berhasil dibuat dengan <br>
+					     Username : ".$username." dan Password : ".$password
+					    );
+					    if($this->email->send())
+					    {
+							$this->session->set_flashdata('bendaharaberhasil','true');
+							redirect(base_url('admin/daftaruser'));
+						}
+					}
+					else{
+						$this->session->set_flashdata('gagal','true');
+						redirect(base_url('admin/inputuser'));
+					}
+				}
+			}
+		}
+
+		public function edituser($id_user)
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['get_user'] = $this->Datauser_model->getwhereuser($id_user); 
+			$this->load->view('admin/edituser',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function updateuser()
+		{
+			$id_user 	= $this->input->post('id_user');
+			$nip 		= $this->input->post('nip');
+			$nama_user	= $this->input->post('nama');
+			$bagian 	= $this->input->post('bagian');
+			$email		= $this->input->post('email');
+			$alamat		= $this->input->post('alamat');
+			$username	= $this->input->post('username');
+
+			$data_update = array (
+				'id_user' 		=> $id_user,
+				'nip' 			=> $nip,
+				'nama_user' 	=> $nama_user,
+				'email'			=> $email,
+				'alamat'		=> $alamat,
+				'username'		=> $username
+			);
+			$result = $this->Datauser_model->Updateuser($data_update, $id_user);
+			if ($result > 0) {
+				$this->session->set_flashdata('updateberhasil','true');
+				redirect('admin/daftaruser');
+			}
+			else {
+				$this->session->set_flashdata('updategagal','true');
+				redirect('admin/daftaruser');
+			}
+
+		}
+
+		public function hapususer ($id_user)
+		{
+			$where = array ('id_user' =>$id_user);
+			$result = $this->Datauser_model->hapususer($where, 'tbl_user');
+			$this->session->set_flashdata('deleteberhasil','true');
+			redirect(base_url('admin/daftaruser'));
+		}
+
+		//----------------------------------------------------------
+		//----------------------- End Of User -----------------------
+		//----------------------------------------------------------
 
 	}
  ?>

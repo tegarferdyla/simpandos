@@ -1,3 +1,10 @@
+  <?php 
+     $warna[1]  = '#00A5A8';
+     $warna[2]  =  '#626E82';
+     $warna[3]   =  '#FF7D4D';
+     $warna[4]   =  '#FF4558';
+     $warna[5]   =  '#16D39A';
+   ?>
   <div class="app-content content">
     <div class="content-wrapper">
       <div class="content-header row">
@@ -95,14 +102,16 @@
                       <h4 class="card-title">Daftar PPK</h4>
                       <ul class="pl-0 list-unstyled">
                           <li class="mb-1">
+                            <?php $i=0; foreach ($data_ppk as $u) {$i++ ?>
                             <div class="row">
-                              <div class="col-sm-2">
-                                <div class="color-box sm" style="background-color: #404E67;"></div>
+                              <div class="col-sm-2 right">
+                                <small class="color-box sm" style="background-color: <?php echo $warna[$i]; ?>; color: <?php echo $warna[$i]; ?>; " > > ></small>
                               </div>
-                              <div class="col-sm-8 col-12">
-                                <h5 class="block">PPK Ganca 1</h5>
+                              <div class="col-sm-10">
+                                <h6 class="block" style ="margin-top: 4px"><?php echo $u['nama_ppk'] ?></h6>
                               </div>
                             </div>
+                          <?php } ?>
                           </li>
                       </ul>
                     </div>
