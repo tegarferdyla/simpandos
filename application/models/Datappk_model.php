@@ -53,5 +53,13 @@
 		$this->db->where($where);
 		$this->db->delete($table);
 	}
+
+    public function jumlahppk ()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_ppk');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
  }
 ?>

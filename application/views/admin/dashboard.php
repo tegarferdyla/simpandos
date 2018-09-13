@@ -13,12 +13,13 @@
         <!--stats-->
         <div class="row">
           <div class="col-xl-3 col-lg-6 col-12">
+          <a href="<?php echo site_url('admin/daftaruser') ?>">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
                   <div class="media">
                     <div class="media-body text-left w-100">
-                      <h3 class="primary">20</h3>
+                      <h3 class="primary"><?php echo $jmluser; ?></h3>
                       <span>Total User Aktif</span>
                     </div>
                     <div class="media-right media-middle">
@@ -28,14 +29,16 @@
                 </div>
               </div>
             </div>
+          </a>
           </div>
           <div class="col-xl-3 col-lg-6 col-12">
+            <a href="<?php echo site_url('admin/daftarppk') ?>">
             <div class="card">
               <div class="card-content">
                 <div class="card-body">
                   <div class="media">
                     <div class="media-body text-left w-100">
-                      <h3 class="danger">12</h3>
+                      <h3 class="danger"><?php echo $jmlppk; ?></h3>
                       <span>Total PPK</span>
                     </div>
                     <div class="media-right media-middle">
@@ -45,6 +48,7 @@
                 </div>
               </div>
             </div>
+          </a>
           </div>
           <div class="col-xl-3 col-lg-6 col-12">
             <div class="card">

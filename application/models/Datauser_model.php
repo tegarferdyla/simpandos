@@ -49,6 +49,15 @@
       return $query->result();  
     }
 
+    public function getwhereadmin($id_admin)
+    {
+    	$this->db->select('*');
+    	$this->db->from('admin');
+    	$this->db->where('id_admin',$id_admin);
+    	$query = $this->db->get();
+    	return $query->row_array();
+    }
+
     public function getwhereuser($id_user)
     {
     	$this->db->select('*');
@@ -64,10 +73,24 @@
         return $this->db->update('tbl_user',$data_update);
     }
 
+    public function Updateadmin ($data_update,$id_admin)
+    {
+        $this->db->where('id_admin',$id_admin);
+        return $this->db->update('admin',$data_update);
+    }
+
      public function hapususer($where, $table)
 	{
 		$this->db->where($where);
 		$this->db->delete($table);
 	}
+	
+	public function jumlahUser ()
+    {
+        $this->db->select('*');
+        $this->db->from('tbl_user');
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
  }
 ?>

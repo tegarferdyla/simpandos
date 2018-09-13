@@ -15,6 +15,11 @@ class Datalogin_model extends CI_Model
 	{
 		return $this->db->get_where($table,$where);
 	}
+
+	public function cekloginuser($table,$where)
+	{
+		return $this->db->get_where($table,$where);
+	}
 }
 
  ?>

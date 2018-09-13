@@ -44,5 +44,54 @@
 		$kodejadi = "USR" . $kodemax;
 		return $kodejadi;
 	}
+
+	//Penomoran ID PPK
+	public function IDTahun() {
+		$this->db->select("RIGHT(id_tahun,4) AS kode");
+		$this->db->order_by('id_tahun', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('tbl_tahun');
+		if ($query->num_rows() > 0) {
+			$data = $query->row();
+			$kode = intval($data->kode) + 1;
+		} else {
+			$kode = 1;
+		}
+		$kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT);
+		$kodejadi = "THN" . $kodemax;
+		return $kodejadi;
+	}
+
+	public function IDJENIS() {
+		$this->db->select("RIGHT(id_jenis,4) AS kode");
+		$this->db->order_by('id_jenis', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('tbl_jenis');
+		if ($query->num_rows() > 0) {
+			$data = $query->row();
+			$kode = intval($data->kode) + 1;
+		} else {
+			$kode = 1;
+		}
+		$kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT);
+		$kodejadi = "JNS" . $kodemax;
+		return $kodejadi;
+	}
+
+	public function IDPaket() {
+		$this->db->select("RIGHT(id_paket,4) AS kode");
+		$this->db->order_by('id_paket', 'DESC');
+		$this->db->limit(1);
+		$query = $this->db->get('tbl_paket');
+		if ($query->num_rows() > 0) {
+			$data = $query->row();
+			$kode = intval($data->kode) + 1;
+		} else {
+			$kode = 1;
+		}
+		$kodemax = str_pad($kode, 4, "0", STR_PAD_LEFT);
+		$kodejadi = "PKT" . $kodemax;
+		return $kodejadi;
+	}
  }
 ?>

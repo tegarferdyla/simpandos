@@ -10,6 +10,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			parent::__construct();
 			if (!$this->session->has_userdata('status')) {
 				redirect('login');
+			}else if ($this->session->userdata('bagian') == 'PPK') {
+				redirect('ppk');
 			}
 		}
 
@@ -17,6 +19,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		{
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar');
+			$data['jmluser']  = $this->Datauser_model->jumlahuser();
+			$data['jmlppk']  = $this->Datappk_model->jumlahppk();	
 			$data['data_ppk'] = $this->Datappk_model->daftarppk();
 			$this->load->view('admin/dashboard', $data);
 			$this->load->view('admin/footer',$data);
@@ -508,8 +512,144 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			redirect(base_url('admin/daftaruser'));
 		}
 
+		public function gantipassword ()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/gantipassword');
+			$this->load->view('admin/footer');
+		}
+
+		public function updatepassword ()
+		{
+			$id_admin 	= $this->session->userdata('id_admin');
+			$oldpassword = $this->input->post('oldpassword');
+			$newpassword = $this->input->post('newpassword');
+			$renewpassword = $this->input->post('renewpassword');
+
+			$data['admin'] = $this->Datauser_model->getwhereadmin($id_admin);
+			$validasipass = $data['admin']['password'];
+
+			if ($validasipass != md5($oldpassword)) {
+				$this->session->set_flashdata('passwordsalah','true');
+				redirect('admin/gantipassword');
+			}
+			elseif ($newpassword != $renewpassword) {
+				$this->session->set_flashdata('passwordtidaksesuai','true');
+				redirect('admin/gantipassword');	
+			} else {
+				$data_update = array('password'	=> md5($newpassword));
+				$result = $this->Datauser_model->Updateadmin($data_update,$id_admin);
+				if ($result > 0) {
+					$this->session->set_flashdata('berhasil','true');
+					redirect('admin/gantipassword');
+				}				
+			}
+
+		}
+
 		//----------------------------------------------------------
-		//----------------------- End Of User -----------------------
+		//----------------------- End Of User ----------------------
+		//----------------------------------------------------------
+
+		//----------------------------------------------------------
+		//----------------------- Start Of Jenis -------------------
+		//----------------------------------------------------------
+
+		public function daftarjenis()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['data_jenis']  = $this->Datajenis_model->daftarjenis();
+			$this->load->view('admin/daftarjenis',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function inputjenis()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/inputjenis');
+			$this->load->view('admin/footer');
+		}
+
+		public function tambahjenis()
+		{
+			$nama_jenis = $this->input->post('nama_jenis');
+			$deskripsi	= $this->input->post('keterangan');
+		
+			if (!$this->input->post('topic1')) {
+				$data = array (
+					'id_jenis' 		=> $this->Penomoran_model->IDJENIS(),
+					'main_jenis'	=> $nama_jenis,
+					'sub_jenis'		=> "",
+					'keterangan'	=> $deskripsi
+				);
+				$input = $this->Datajenis_model->tambahjenis($data, 'tbl_jenis');
+				if ($input > 0) {
+					$this->session->set_flashdata('berhasil','true');
+					redirect('admin/daftarjenis');
+				}
+			}
+			else{
+				$sub_jenis	= $this->input->post('sub_jenis');
+				$data = array (
+					'id_jenis' 		=> $this->Penomoran_model->IDJENIS(),
+					'main_jenis'	=> $nama_jenis,
+					'sub_jenis'		=> $sub_jenis,
+					'keterangan'	=> $deskripsi
+				);
+				$input = $this->Datajenis_model->tambahjenis($data, 'tbl_jenis');
+				if ($input > 0) {
+					$this->session->set_flashdata('berhasil','true');
+					redirect('admin/daftarjenis');
+				}
+			}
+
+			
+		}
+		public function editjenis($id_jenis)
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['get_jenis']  = $this->Datajenis_model->getwherejenis($id_jenis);
+			$this->load->view('admin/editjenis',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function updatejenis()
+		{
+			$id_jenis 	= $this->input->post('id_jenis');
+			$nama_jenis = $this->input->post('nama_jenis');
+			$sub_jenis	= $this->input->post('sub_jenis');
+			$deskripsi	= $this->input->post('keterangan');
+
+			$data_update = array (
+				'id_jenis' 		=> $id_jenis,
+				'main_jenis' 	=> $nama_jenis,
+				'sub_jenis' 	=> $sub_jenis,
+				'keterangan'	=> $deskripsi
+			);
+			$result = $this->Datajenis_model->updatejenis($data_update, $id_jenis);
+			if ($result > 0) {
+				$this->session->set_flashdata('updateberhasil','true');
+				redirect('admin/daftarjenis');
+			}
+			else {
+				$this->session->set_flashdata('updategagal','true');
+				redirect('admin/daftarjenis');
+			}
+		}
+
+		public function hapusjenis($id_jenis)
+		{
+			$where = array ('id_jenis' =>$id_jenis);
+			$result = $this->Datajenis_model->hapusjenis($where, 'tbl_jenis');
+			$this->session->set_flashdata('deleteberhasil','true');
+			redirect(base_url('admin/daftarjenis'));
+		}
+		//----------------------------------------------------------
+		//----------------------- End Of Jenis ---------------------
 		//----------------------------------------------------------
 
 	}

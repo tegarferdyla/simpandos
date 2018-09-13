@@ -19,6 +19,17 @@
         <li class="nav-item <?php if ( $this->uri->segment(2)=="inputppk"){
           echo 'active';} ?>"><a href="<?php echo base_url('admin/inputppk') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input PPK </span></a>
         </li>
+        <!-- jenis -->
+        <li class=" navigation-header">
+          <span>Jenis Paket</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="Apps"></i>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="daftarjenis" OR $this->uri->segment(2)=="editjenis"){
+          echo 'active';} ?>"><a href="<?php  echo site_url('admin/daftarjenis') ?>"><i class="ft-folder"></i><span class="menu-title" data-i18n="">Daftar Jenis</span></a>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="inputjenis"){
+          echo 'active';} ?>"><a href="<?php echo base_url('admin/inputjenis') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input Jenis </span></a>
+        </li>
         <!-- Barang -->
         <li class=" navigation-header">
           <span>User</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
@@ -38,7 +49,8 @@
         </li>
         <li class=" nav-item"><a href="<?php echo base_url('admin/editprofile') ?>"><i class="ft-user"></i><span class="menu-title" data-i18n="">Edit Profile</span></a>
         </li>
-        <li class=" nav-item"><a href="<?php echo base_url('admin/gantipassword') ?>"><i class="ft-lock"></i><span class="menu-title" data-i18n="">Ganti Password</span></a>
+        <li class=" nav-item <?php if ( $this->uri->segment(2)=="gantipassword"){
+          echo 'active';} ?>"><a href="<?php echo base_url('admin/gantipassword') ?>"><i class="ft-lock"></i><span class="menu-title" data-i18n="">Ganti Password</span></a>
         </li>
       </ul>
     </div>
