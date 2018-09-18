@@ -22,7 +22,8 @@ class ppk extends CI_Controller
 		$id_ppk = $this->session->userdata('id_ppk');
 		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
 		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
-		$data['data_tahun'] = $this->Datatahun_model->daftartahun();
+		$data['data_tahun'] = $this->Datatahun_model->daftartahunppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
 
 		$this->load->view('ppk/header',$data);
 		$this->load->view('ppk/sidebar',$data);
@@ -39,12 +40,13 @@ class ppk extends CI_Controller
 		$id_ppk = $this->session->userdata('id_ppk');
 		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
 		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
-		$data['data_tahun'] = $this->Datatahun_model->daftartahun();
+		$data['data_tahun'] = $this->Datatahun_model->daftartahunppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
 
 		$this->load->view('ppk/header',$data);
 		$this->load->view('ppk/sidebar',$data);
 		$this->load->view('ppk/daftartahun',$data);
-		$this->load->view('ppk/footer');
+		$this->load->view('admin/footer');
 	}
 
 	public function inputtahun()
@@ -53,6 +55,7 @@ class ppk extends CI_Controller
 		$id_ppk = $this->session->userdata('id_ppk');
 		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
 		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
 
 		$this->load->view('ppk/header',$data);
 		$this->load->view('ppk/sidebar',$data);
@@ -124,7 +127,8 @@ class ppk extends CI_Controller
 		$data['data_user'] 	= $this->Datauser_model->getwhereuser($id_user);
 		$data['data_ppk']  	= $this->Datappk_model->getwhereppk($id_ppk);
 		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
-		$data['data_tahun'] = $this->Datatahun_model->daftartahun();
+		$data['data_tahun'] = $this->Datatahun_model->daftartahunppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
 
 		$this->load->view('ppk/header',$data);
 		$this->load->view('ppk/sidebar',$data);
@@ -239,43 +243,155 @@ class ppk extends CI_Controller
 		}
 	}
 
-	public function daftarkontraktual()
+	public function daftarpaket($id_jenis)
 	{
-		$this->load->view('header');
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_jenis']	 	= $this->Datajenis_model->subjeniskontraktual();
+		$data['daftarpaket']	= $this->Datapaket_model->daftarpaket($id_jenis,$id_ppk);
+		$data['get_jenis']  = $this->Datajenis_model->getwherejenis($id_jenis);
+
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+		$this->load->view('ppk/daftarpaket',$data);
+		$this->load->view('admin/footer');
 	}
 
-	public function daftarswakelola()
+	public function deletepaketkontraktual($id_paket)
 	{
+		//Nama PPK
+		$id_ppk 	= $this->session->userdata('id_ppk');
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
+		$nama_ppk 	= $data['nama_ppk'];
+		//Nama Paket, Main Jenis , Sub Jenis , Tahun 
+		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		$id_jenis 	= $paket[0]['id_jenis'];
+		$nama_paket	= $paket[0]['nama_paket'];
+		$nama_tahun	= $paket[0]['nama_tahun'];
+		$main_jenis	= $paket[0]['main_jenis'];
+		$sub_jenis	= $paket[0]['sub_jenis'];
+
+		delete_files('./assets/data/'. $nama_tahun . "/" . $nama_ppk . "/" . $main_jenis . "/" . $sub_jenis . "/" .$nama_paket. '/' , TRUE);
+		rmdir('./assets/data/'. $nama_tahun . '/' . $nama_ppk . '/' . $main_jenis . '/' . $sub_jenis . '/' .$nama_paket. '/');
+		$where = array ('id_paket' =>$id_paket);
+		$deletepaket = $this->Datapaket_model->deletepaket($where,'tbl_paket');
+		// if ($deletepaket > 0) {
+			$this->session->set_flashdata('deleteberhasil', true);
+			redirect('ppk/daftarpaket/'.$id_jenis);
+		// }
+	}
+
+	public function deletepaketswakelola($id_paket)
+	{
+		//Nama PPK
+		$id_ppk 	= $this->session->userdata('id_ppk');
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
+		$nama_ppk 	= $data['nama_ppk'];
+		//Nama Paket, Main Jenis , Sub Jenis , Tahun 
+		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		$id_jenis 	= $paket[0]['id_jenis'];
+		$nama_paket	= $paket[0]['nama_paket'];
+		$nama_tahun	= $paket[0]['nama_tahun'];
+		$main_jenis	= $paket[0]['main_jenis'];
+
+		delete_files('./assets/data/'. $nama_tahun . "/" . $nama_ppk . "/" . $main_jenis . "/" .$nama_paket. '/' , TRUE);
+		rmdir('./assets/data/'. $nama_tahun . '/' . $nama_ppk . '/' . $main_jenis . '/'  .$nama_paket. '/');
 		
+		$where = array ('id_paket' =>$id_paket);
+		$deletepaket = $this->Datapaket_model->deletepaket($where,'tbl_paket');
+		// if ($deletepaket > 0) {
+			$this->session->set_flashdata('deleteberhasil', true);
+			redirect('ppk/daftarpaket/'.$id_jenis);
+		// }
+	}
+	
+	//----------------------------------------------------------
+	//----------------------- End of Paket ---------------------
+	//----------------------------------------------------------
+	//----------------------------------------------------------
+	//----------------------- Start of Jenis -------------------
+	//----------------------------------------------------------
+
+	public function jenispaket($id_tahun)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+		$data['data_tahun'] = $this->Datatahun_model->getwheretahun($id_tahun);
+
+
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+		$this->load->view('ppk/jenispaket',$data);
+		$this->load->view('ppk/footer');
 	}
 
+	public function pilihpaket($id_tahun, $id_jenis)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_tahun'] = $this->Datatahun_model->getwheretahun($id_tahun);
+		$data['where_jenis']= $this->Datajenis_model->getwherejenis($id_jenis);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+		$data['cek_paket']	=$this->Datapaket_model->cekpaket($id_tahun,$id_jenis,$id_ppk);
+
+		if ($data['cek_paket'] == NULL) {
+			$this->session->set_flashdata('kosong', 'true');
+			redirect('ppk/jenispaket/' . $id_tahun);	
+		}
+		else
+		{
+			$data['view_paket'] = $this->Datapaket_model->viewjenispaket($id_tahun,$id_jenis,$id_ppk);
+			$this->load->view('ppk/header',$data);
+			$this->load->view('ppk/sidebar',$data);
+			$this->load->view('ppk/pilihpaket',$data);
+			$this->load->view('ppk/footer');
+		}
+
+
+	}
 
 	public function test()
 	{
-		$id_tahun 	= "THN0001";
-		$nama_tahun	= $this->Datatahun_model->getwheretahun($id_tahun);
-		$data 		= array ('nama_tahun' => $nama_tahun['nama_tahun']);
-		$nama_tahun = $data['nama_tahun'];
-
-		$id_jenis 	= "JNS0005";
-		$nama_jenis	= $this->Datajenis_model->getwherejenis($id_jenis);
-		$data 		= array (
-			'main_jenis' 	=> $nama_jenis['main_jenis'],
-			'sub_jenis' 	=> $nama_jenis['sub_jenis'],
-
-		);
-		$main_jenis = $data['main_jenis'];
-		$sub_jenis = $data['sub_jenis'];
-
-
+		$id_paket 	= "PKT0001";
 		$id_ppk 	= $this->session->userdata('id_ppk');
 		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
 		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
 		$nama_ppk 	= $data['nama_ppk'];
 
-		echo "$nama_tahun / $nama_ppk / $main_jenis / $sub_jenis";
+		// $paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		// $data 		= array (
+		// 	'b.id_jenis'		=> $paket['b.id_jenis'],
+		// 	'nama_paket' 	=> $paket['nama_paket'],
+		// 	'nama_tahun'	=> $paket['nama_tahun'],
+		// 	'main_jenis'	=> $paket['main_jenis'],
+		// 	'sub_jenis'		=> $paket['sub_jenis']
+		// );
+		// $id_jenis 	= $data['b.id_jenis'];	
+		// $nama_paket = $data['nama_paket'];
+		// $nama_tahun = $data['nama_tahun'];
+		// $main_jenis = $data['main_jenis'];
+		// $sub_jenis 	= $data['sub_jenis'];
+
+		// echo "$nama_tahun / $nama_ppk / $main_jenis /$sub_jenis / $nama_paket /$id_jenis";
+		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		$id_jenis 	= $paket[0]['id_jenis'];
+		$nama_paket	= $paket[0]['nama_paket'];
+		$nama_tahun	= $paket[0]['nama_tahun'];
+		$main_jenis	= $paket[0]['main_jenis'];
+		$sub_jenis	= $paket[0]['sub_jenis'];
+
+		echo "$nama_tahun / $nama_ppk / $main_jenis /$sub_jenis / $nama_paket /$id_jenis";
+
+
 	}
-
-
 }
  ?>

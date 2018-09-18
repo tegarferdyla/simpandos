@@ -11,7 +11,7 @@
       </div>
       <div class="content-body">
         <!--stats-->
-        <section id="chartjs-bar-charts">
+        <!-- <section id="chartjs-bar-charts">
            <div class="row">
             <div class="col-12">
               <div class="card">
@@ -35,9 +35,9 @@
               </div>
             </div>
           </div>
-        </section>
+        </section> -->
         <!--/stats-->
-       <section >
+       <section>
           <div class="row">
             <h4 class="card-title" style="margin-left: 25px;">Daftar Tahun</h4>
           </div>
@@ -45,7 +45,7 @@
 
             <?php foreach ($data_tahun as $u) { ?>
             <div class="col-xl-3 col-lg-6 col-12">
-                <a href="<?php echo site_url('admin/daftartahun') ?>">
+                <a href="<?php echo site_url('ppk/jenispaket/'.$u['id_tahun']) ?>">
                   <div class="card">
                     <div class="card-content">
                       <div class="card-body">

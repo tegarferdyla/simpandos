@@ -27,12 +27,18 @@
           <span>Paket</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
           data-original-title="Apps"></i>
         </li>
-        <li class="nav-item <?php if ( $this->uri->segment(2)=="daftaruser" OR $this->uri->segment(2)=="edituser"){
-          echo 'active';} ?>"><a href="index.html"><i class="ft-folder"></i><span class="menu-title" data-i18n="">Daftar Paket</span></a>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="daftarpaket" OR $this->uri->segment(2)=="editkontraktual"){
+          echo 'active';} ?>"><a href=""><i class="ft-folder"></i><span class="menu-title" data-i18n="">Daftar Paket</span></a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="">Kontraktual</a>
+            <li><a class="menu-item" href="#">Kontraktual</a>
+              <ul class="menu-content">
+                <?php foreach ($data_jenis as $u) { ?>
+                <li><a class="" href="<?php echo base_url()."ppk/daftarpaket/".$u['id_jenis']; ?>"><?php echo $u['sub_jenis']; ?></a>
+                </li>
+              <?php } ?>
+              </ul>
             </li>
-            <li><a class="menu-item" href="">Swakelola</a>
+            <li><a class="menu-item" href="<?php echo base_url('ppk/daftarpaket/JNS0005') ?>">Swakelola</a>
             </li>
           </ul>
         </li>

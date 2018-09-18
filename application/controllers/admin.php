@@ -19,9 +19,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		{
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar');
-			$data['jmluser']  = $this->Datauser_model->jumlahuser();
-			$data['jmlppk']  = $this->Datappk_model->jumlahppk();	
-			$data['data_ppk'] = $this->Datappk_model->daftarppk();
+			$data['jmluser']  	= $this->Datauser_model->jumlahuser();
+			$data['jmlppk']  	= $this->Datappk_model->jumlahppk();	
+			$data['data_ppk']	= $this->Datappk_model->daftarppk();
+			$data['jmlpaket'] 	= $this->Datapaket_model->jmlpaket();	
 			$this->load->view('admin/dashboard', $data);
 			$this->load->view('admin/footer',$data);
 		}
@@ -651,6 +652,115 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		//----------------------------------------------------------
 		//----------------------- End Of Jenis ---------------------
 		//----------------------------------------------------------
+		public function daftarkepaladokumen ()
+		{	
+			$data['daftar_kepala'] = $this->Datadokumen_model->daftarkepaladokumenutama();
+			$data['daftar_kepalapend'] = $this->Datadokumen_model->daftarkepaladokumenpendukung();
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/kepaladokumen',$data);
+			$this->load->view('admin/footer');
+		}
 
+		public function inputdokumen ()
+		{
+			$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/inputdokumen',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function tambahkepaladok()
+		{
+			$nama_kepala = $this->input->post('nama_kepala');
+			$kategori	 = $this->input->post('kategori');
+			$main_jenis	 = $this->input->post('main_jenis');
+
+			if ($main_jenis == "Kontraktual") {
+				$id_jenis = $this->input->post('sub_jenis');
+				$data = array(
+					'id_kepaladok' 	=> $this->Penomoran_model->IDDOKUMEN(),
+					'nama_kepala'	=> $nama_kepala,
+					'kategori'		=> $kategori,
+					'id_jenis'		=> $id_jenis
+				);
+				$input = $this->Datadokumen_model->Tambahdokumen($data, 'tbl_kepaladok');
+				if ($input > 0) {
+					$this->session->set_flashdata('berhasil','true');
+					redirect('admin/daftarkepaladokumen');
+				}
+			}
+			elseif ($main_jenis == "Swakelola") {
+				$id_jenis = "JNS0005";
+				$data = array(
+
+					'id_kepaladok' 	=> $this->Penomoran_model->IDDOKUMEN(),
+					'nama_kepala'	=> $nama_kepala,
+					'kategori'		=> $kategori,
+					'id_jenis'		=> $id_jenis
+				);
+				$input = $this->Datadokumen_model->Tambahdokumen($data, 'tbl_kepaladok');
+				if ($input > 0) {
+					$this->session->set_flashdata('berhasil','true');
+					redirect('admin/daftarkepaladokumen');
+				}
+			}
+		}
+
+		public function tambahkepaladokpend ()
+		{
+			$nama_kepala = $this->input->post('nama_kepala');
+			$kategori	 = $this->input->post('kategori');
+			$data = array (
+				'id_kepaladok' 	=> $this->Penomoran_model->IDDOKUMEN(),
+				'nama_kepala'	=> $nama_kepala,
+				'kategori'		=> $kategori,
+				'id_jenis'		=> ""
+			);
+			$input = $this->Datadokumen_model->Tambahdokumen($data, 'tbl_kepaladok');
+			if ($input > 0) {
+				$this->session->set_flashdata('berhasilpend','true');
+				redirect('admin/daftarkepaladokumen');
+			}
+		}
+
+		// -------------------------------
+		// -------Sub Kepala Dokumen------
+		// -------------------------------
+
+		public function daftarsubkepaladokumen ()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$this->load->view('admin/subkepaladokumen');
+			$this->load->view('admin/footer');
+		}
+
+		public function inputsubdokumen ()
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['kepaladokumen'] = $this->Datadokumen_model->daftarkepaladok();
+			$data['daftarkepaladokpend'] = $this->Datadokumen_model->daftarkepaladokpend();
+			$this->load->view('admin/inputsubdokumen',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function tambahsubkepala ()
+		{
+			$sub_kepala 	= $this->input->post('subkepala');
+			$id_kepaladok	= $this->input->post('kepala_dok');
+			$data = array (
+				'id_subdok' 	 => $this->Penomoran_model->IDSUBDOKUMEN(),
+				'sub_dokumen'	 => $sub_kepala,
+				'id_kepaladok' 	 => $id_kepaladok
+			);
+			$input = $this->Datadokumen_model->Tambahsubdokumen($data, 'tbl_subdok'); 
+			if ($input > 0) {
+				$this->session->set_flashdata('berhasil','true');
+				redirect('admin/daftarsubkepaladokumen');
+			}
+		}
 	}
  ?>

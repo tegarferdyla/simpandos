@@ -19,7 +19,25 @@
         <li class="nav-item <?php if ( $this->uri->segment(2)=="inputppk"){
           echo 'active';} ?>"><a href="<?php echo base_url('admin/inputppk') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input PPK </span></a>
         </li>
-        <!-- jenis -->
+        <!-- Dokumen -->
+        <li class=" navigation-header">
+          <span>Dokumen</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
+          data-original-title="Apps"></i>
+        </li>
+         <li class="nav-item <?php if ( $this->uri->segment(2)=="daftardokumen" OR $this->uri->segment(2)=="editdokumen"){
+          echo 'active';} ?>"><a href=""><i class="ft-file-text"></i><span class="menu-title" data-i18n="">Daftar Dokumen</span></a>
+          <ul class="menu-content">
+            <li><a class="menu-item" href="<?php echo site_url('admin/daftarkepaladokumen') ?>">Kepala Dokumen</a></li>
+            <li><a class="menu-item" href="<?php echo site_url('admin/daftarsubkepaladokumen') ?>">Sub Kepala Dokumen</a></li>
+          </ul>
+        </li>
+       <li class="nav-item <?php if ( $this->uri->segment(2)=="inputdokumen"){
+          echo 'active';} ?>"><a href="<?php  echo site_url('admin/inputdokumen') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input Dokumen</span></a>
+        </li>
+        <li class="nav-item <?php if ( $this->uri->segment(2)=="inputsubdokumen"){
+          echo 'active';} ?>"><a href="<?php  echo site_url('admin/inputsubdokumen') ?>"><i class="ft-plus-circle"></i><span class="menu-title" data-i18n="">Input Sub Dokumen</span></a>
+        </li>
+        <!-- Jenis Paket  -->
         <li class=" navigation-header">
           <span>Jenis Paket</span><i class=" ft-minus" data-toggle="tooltip" data-placement="right"
           data-original-title="Apps"></i>

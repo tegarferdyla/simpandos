@@ -73,7 +73,7 @@
                 <div class="card-body">
                   <div class="media">
                     <div class="media-body text-left w-100">
-                      <h3 class="warning">170</h3>
+                      <h3 class="warning"><?php echo "$jmlpaket"; ?></h3>
                       <span>Total Paket</span>
                     </div>
                     <div class="media-right media-middle">

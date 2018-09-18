@@ -48,8 +48,11 @@
                         <div class="form-group row">
                           <label class="col-md-3 label-control" for="projectinput1">Jenis Paket</label>
                           <div class="col-md-9">
-                            <input type="text" id="projectinput1" class="form-control" placeholder="Nama Jenis"
-                            name="nama_jenis" required>
+                            <select name="nama_jenis" id="" class="form-control" required>
+                              <option value="">-- Pilih Jenis Paket --</option>
+                              <option value="Kontraktual">Kontraktual</option>
+                              <option value="Swakelola">Swakelola</option>
+                            </select>
                           </div>
                         </div>
                         <div class="form-group row">
