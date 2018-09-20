@@ -109,16 +109,19 @@
                             </tr>
                           </thead>
                           <tbody>
+                            <?php $no=1; ?>
+                            <?php foreach ($daftarsubdok as $u) { ?>
                               <tr>
-                                <td class="center">1</td>
-                                <td><i>Surat Minat Daerah</i></td>
-                                <td>Readiness Criteria</td>
-                                <td>Dokumen Utama</td>
+                                <td class="center"><?php echo ($no++); ?></td>
+                                <td><i><?php echo $u['sub_dokumen']; ?></i></td>
+                                <td><?php echo $u['nama_kepala']; ?></td>
+                                <td><?php echo $u['kategori']; ?></td>
                                 <td class="">
-                                  <a href =""><button type="button" class="btn btn-outline-primary "><i class="fa fa-edit"></i> Edit</button></a>
-                                  <a href ="" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Hapus</button></a>
+                                  <a href ="<?php echo base_url().'admin/editsubdok/'.$u['id_subdok']; ?>"><button type="button" class="btn btn-outline-primary "><i class="fa fa-edit"></i> Edit</button></a>
+                                  <a href ="<?php echo base_url().'admin/deletesubdok/'.$u['id_subdok']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Hapus</button></a>
                                 </td>
                               </tr>
+                            <?php } ?>  
                           </tbody>
                           <tfoot>
                             <tr>
@@ -144,17 +147,20 @@
                             <!-- <th>Action</th> -->
                           </tr>
                         </thead>
-                        <tbody>                      
+                        <tbody>
+                             <?php $no=1; ?>
+                             <?php foreach ($daftarsubpend as $u) { ?>                     
                             <tr>
-                              <td class="center">1</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
+                              <td class="center"><?php echo ($no++) ;?></td>
+                              <td><?php echo $u['sub_dokumen']; ?></td>
+                              <td><?php echo $u['nama_kepala']; ?></td>
+                              <td><?php echo $u['kategori']; ?></td>
                               <td class="right">
                                 <a href =""><button type="button" class="btn btn-outline-primary mr-1"><i class="fa fa-edit"></i> Edit</button></a>
                                 <a href ="" onclick="return confirm('Apa anda yakin ingin menghapus PPK ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
                               </td>
                             </tr>
+                            <?php } ?>
                         </tbody>
                         <tfoot>
                           <tr>

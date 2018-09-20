@@ -355,8 +355,40 @@ class ppk extends CI_Controller
 			$this->load->view('ppk/pilihpaket',$data);
 			$this->load->view('ppk/footer');
 		}
+	}
 
+	public function inputdokutama($id_jenis, $id_paket)
+	{	
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
 
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+
+		$data['where_paket'] 	= $this->Datapaket_model->wherepaket($id_paket);
+		$data['daftarkepala']	= $this->Datadokumen_model->daftarkepala($id_jenis);
+		$this->load->view('ppk/inputdokutama',$data);
+		$this->load->view('ppk/footer');
+	}
+
+	public function inputdokutamaswakelola($id_jenis, $id_paket)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+
+		$data['where_paket'] 	= $this->Datapaket_model->wherepaket($id_paket);
+		$data['daftarkepala']	= $this->Datadokumen_model->daftarkepala($id_jenis);
+		$this->load->view('ppk/inputdokutamaswakelola',$data);
+		$this->load->view('ppk/footer');
 	}
 
 	public function test()
@@ -369,7 +401,7 @@ class ppk extends CI_Controller
 
 		// $paket 		= $this->Datapaket_model->getwherepaket($id_paket);
 		// $data 		= array (
-		// 	'b.id_jenis'		=> $paket['b.id_jenis'],
+		// 	'b.id_jenis'	=> $paket['b.id_jenis'],
 		// 	'nama_paket' 	=> $paket['nama_paket'],
 		// 	'nama_tahun'	=> $paket['nama_tahun'],
 		// 	'main_jenis'	=> $paket['main_jenis'],

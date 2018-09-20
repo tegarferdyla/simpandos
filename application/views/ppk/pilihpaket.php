@@ -46,7 +46,7 @@
               <div class="mb-2 mt-2">
                 <h5 class="mb-0 text-uppercase">Jenis Paket : <font color="Blue"><?php echo $where_jenis['main_jenis']; ?></font></h5>
                 <?php if ($where_jenis['sub_jenis']) :?>
-                  <p>Sub Jenis Paket : <?php echo $where_jenis['sub_jenis']; ?></p>
+                  <p>Sub Jenis Paket : <?php echo $where_jenis['sub_jenis'] ?></p>
                 <?php endif ?> 
               </div>
               <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
@@ -60,10 +60,18 @@
                       <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                              <a href=""><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
+                              <?php if($where_jenis['id_jenis'] == 'JNS0002'): ?>
+                              <a href="<?php echo base_url()."ppk/inputdokutama/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
+                              <?php elseif ($where_jenis['id_jenis'] == 'JNS0003') :?>
+                              <a href="">Perencanaan Teknis</a>
+                              <?php elseif ($where_jenis['id_jenis'] == 'JNS0004') :?>
+                              <a href="">Pengadaan Alat Berat</a>  
+                              <?php elseif ($where_jenis['id_jenis'] == 'JNS0005') :?>
+                              <a href="<?php echo base_url()."ppk/inputdokutamaswakelola/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
+                              <?php endif ?>
                             </li>
                             <li class="list-group-item">
-                              <a href=""><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
+                              <a href="<?php echo site_url('admin/dashboard') ?>"><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
                             </li>
                           </ul>
                       </div>

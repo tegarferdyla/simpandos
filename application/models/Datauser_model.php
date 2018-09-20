@@ -79,7 +79,7 @@
         return $this->db->update('admin',$data_update);
     }
 
-     public function hapususer($where, $table)
+    public function hapususer($where, $table)
 	{
 		$this->db->where($where);
 		$this->db->delete($table);

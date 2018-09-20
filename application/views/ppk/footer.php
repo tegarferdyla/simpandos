@@ -32,6 +32,8 @@
 
   <script type="text/javascript" src="<?php echo base_url('app-assets/css/validator/bootstrapValidator.js') ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('app-assets/css/validator/jquery-1.10.2.min.js') ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('app-assets/js/dynamicfield.js') ?>"></script>
+
   <!-- END PAGE LEVEL JS-->
   <script type="text/javascript">
  function startTime()

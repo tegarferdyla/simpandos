@@ -51,6 +51,15 @@ class Datadokumen_model extends CI_Model
 		return $query->result();
 	}
 
+	public function daftarkepala($id_jenis)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_kepaladok');
+		$this->db->where('id_jenis', $id_jenis);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
 	// ----------------------------------------------
 	// ------------- Sub Kepala Dokumen -------------
 	// ---------------------------------------------- 
@@ -58,6 +67,36 @@ class Datadokumen_model extends CI_Model
 	public function Tambahsubdokumen($data, $table) 
 	{
 		return $this->db->insert($table, $data);
+	}
+
+	public function daftarsubkepaladokutama()
+	{
+		$query = $this->db->query('SELECT a.id_subdok, a.sub_dokumen, b.nama_kepala,b.kategori FROM tbl_subdok a ,tbl_kepaladok b where a.id_kepaladok = b.id_kepaladok AND b.kategori="Dokumen Utama" ');
+		return $query->result_array();
+	}
+
+	public function daftarsubkepaladokpend()
+	{
+		$query = $this->db->query('SELECT a.id_subdok, a.sub_dokumen, b.nama_kepala,b.kategori FROM tbl_subdok a ,tbl_kepaladok b where a.id_kepaladok = b.id_kepaladok AND b.kategori="Dokumen Pendukung" ');
+		return $query->result_array();
+	}
+
+	public function getwheresubdok($id_subdok)
+    {
+    	$query = $this->db->query("SELECT a.id_subdok, a.sub_dokumen,a.id_kepaladok, b.nama_kepala FROM tbl_subdok a , tbl_kepaladok b WHERE a.id_kepaladok = b.id_kepaladok AND a.id_subdok = '$id_subdok' ");
+    	return $query->row_array();
+    }
+
+    public function updatesubdok ($data_update,$id_subdok)
+    {
+        $this->db->where('id_subdok',$id_subdok);
+        return $this->db->update('tbl_subdok',$data_update);
+    }
+
+    public function deletesubdok($where, $table)
+	{
+		$this->db->where($where);
+		$this->db->delete($table);
 	}
 
 }

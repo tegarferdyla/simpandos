@@ -733,7 +733,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		{
 			$this->load->view('admin/header');
 			$this->load->view('admin/sidebar');
-			$this->load->view('admin/subkepaladokumen');
+			$data['daftarsubdok']  = $this->Datadokumen_model->daftarsubkepaladokutama();
+			$data['daftarsubpend'] = $this->Datadokumen_model->daftarsubkepaladokpend();
+			$this->load->view('admin/subkepaladokumen', $data);
 			$this->load->view('admin/footer');
 		}
 
@@ -761,6 +763,48 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$this->session->set_flashdata('berhasil','true');
 				redirect('admin/daftarsubkepaladokumen');
 			}
+		}
+
+		public function editsubdok ($id_subdok)
+		{
+			$this->load->view('admin/header');
+			$this->load->view('admin/sidebar');
+			$data['subdok']  = $this->Datadokumen_model->getwheresubdok($id_subdok);
+			$data['kepaladokumen'] = $this->Datadokumen_model->daftarkepaladok();
+			$data['daftarkepaladokpend'] = $this->Datadokumen_model->daftarkepaladokpend();
+			$this->load->view('admin/editsubdok',$data);
+			$this->load->view('admin/footer');
+		}
+
+		public function updatesubdok()
+		{
+			$id_subdok 		= $this->input->post('id_subdok');
+			$sub_dokumen	= $this->input->post('sub_dokumen');
+			$id_kepaladok	= $this->input->post('id_kepaladok');
+
+			$data_update = array (
+
+				'id_subdok'		=> $id_subdok,
+				'sub_dokumen'	=> $sub_dokumen,
+				'id_kepaladok'	=> $id_kepaladok 
+			);
+			$result = $this->Datadokumen_model->updatesubdok($data_update, $id_subdok);
+			if ($result > 0) {
+				$this->session->set_flashdata('updateberhasil','true');
+				redirect('admin/daftarsubkepaladokumen');
+			}
+			else {
+				$this->session->set_flashdata('updategagal','true');
+				redirect('admin/daftarsubkepaladokumen');
+			}
+		}
+
+		public function deletesubdok ($id_subdok)
+		{
+			$where = array ('id_subdok' =>$id_subdok);
+			$result = $this->Datadokumen_model->deletesubdok($where, 'tbl_subdok');
+			$this->session->set_flashdata('deleteberhasil','true');
+			redirect(base_url('admin/daftarsubkepaladokumen'));
 		}
 	}
  ?>
