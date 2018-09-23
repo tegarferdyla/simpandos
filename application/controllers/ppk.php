@@ -1,8 +1,6 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
-/**
- * 
- */
+
 class ppk extends CI_Controller
 {
 	
@@ -110,7 +108,6 @@ class ppk extends CI_Controller
 		 }
 
 	}
-
 
 	//----------------------------------------------------------
 	//----------------------- End Of Tahun ---------------------
@@ -393,37 +390,103 @@ class ppk extends CI_Controller
 
 	public function test()
 	{
-		$id_paket 	= "PKT0001";
+		$id_paket 	= $this->input->post('id_paket');
 		$id_ppk 	= $this->session->userdata('id_ppk');
 		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
-		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
-		$nama_ppk 	= $data['nama_ppk'];
+		$nama_ppk 	= $nama_ppk['nama_ppk'];
 
-		// $paket 		= $this->Datapaket_model->getwherepaket($id_paket);
-		// $data 		= array (
-		// 	'b.id_jenis'	=> $paket['b.id_jenis'],
-		// 	'nama_paket' 	=> $paket['nama_paket'],
-		// 	'nama_tahun'	=> $paket['nama_tahun'],
-		// 	'main_jenis'	=> $paket['main_jenis'],
-		// 	'sub_jenis'		=> $paket['sub_jenis']
-		// );
-		// $id_jenis 	= $data['b.id_jenis'];	
-		// $nama_paket = $data['nama_paket'];
-		// $nama_tahun = $data['nama_tahun'];
-		// $main_jenis = $data['main_jenis'];
-		// $sub_jenis 	= $data['sub_jenis'];
-
-		// echo "$nama_tahun / $nama_ppk / $main_jenis /$sub_jenis / $nama_paket /$id_jenis";
 		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
 		$id_jenis 	= $paket[0]['id_jenis'];
 		$nama_paket	= $paket[0]['nama_paket'];
 		$nama_tahun	= $paket[0]['nama_tahun'];
 		$main_jenis	= $paket[0]['main_jenis'];
 		$sub_jenis	= $paket[0]['sub_jenis'];
+		$namabaru 	= $nama_tahun."-".$nama_paket."-";
+		$this->load->library('upload');
+		if ($_FILES['smd']['name'][0]!=NULL) {
+			$smdcount = count($_FILES['smd']['name']);
+			for ($i = 0; $i < $smdcount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['smd']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['smd']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['smd']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['smd']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['smd']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$a[] = $this->upload->data();
+				rename($a[$i]['full_path'], $a[$i]['file_path'] . $namabaru . $a[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$a[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_subdok'	=>	'SUB0001');
+				$this->Datafiles_model->data_add($data);
+				redirect('ppk/inputdokutama/'.$id_jenis."/".$id_paket,'refresh');
+			}
+		}
+		if ($_FILES['smh']['name'][0]!=NUll) {
+			$smhcount = count($_FILES['smh']['name']);
+			for ($i = 0; $i < $smhcount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['smh']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['smh']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['smh']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['smh']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['smh']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$b[] = $this->upload->data();
+				rename($b[$i]['full_path'], $b[$i]['file_path'] . $namabaru . $b[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$b[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_subdok'	=>	'SUB0002');
+				$this->Datafiles_model->data_add($data);
+				redirect('ppk/inputdokutama/'.$id_jenis."/".$id_paket,'refresh');
+			}
+		}
+	}
 
-		echo "$nama_tahun / $nama_ppk / $main_jenis /$sub_jenis / $nama_paket /$id_jenis";
+	public function testinput()
+	{
+		$this->load->library('upload');
+		if (isset($_FILES['smd'])) {
+			$smdcount = count($_FILES['smd']['name']);
+			for ($i = 0; $i < $smdcount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['smd']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['smd']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['smd']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['smd']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['smd']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'     => FALSE,
+					'upload_path'	=> './assets/data/'
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$a[] = $this->upload->data();
+				print_r($a[$i]['file_name']);
+				$data = array('nama_file'	=> $a[$i]['file_name'],
+								'id_paket'	=> 'PKT0003',
+								'id_subdok'	=>	'SUB0001');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['smh']) {
 
-
+		}
+	}
+	public function inputarr()
+	{
+		$this->load->view('ppk/test');
+		// $this->load->view('ppk/footer');
 	}
 }
  ?>

@@ -806,5 +806,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$this->session->set_flashdata('deleteberhasil','true');
 			redirect(base_url('admin/daftarsubkepaladokumen'));
 		}
+
+		public function test()
+		{
+			echo"TEstet";
+		}
 	}
  ?>

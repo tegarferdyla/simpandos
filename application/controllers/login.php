@@ -20,7 +20,7 @@
 						}else if ($this->session->userdata('bagian')=='Kasatker') {
 							redirect('Kasatker');
 						}elseif ($this->session->userdata('bagian')=='PPK') {
-							redirect('PPK1');
+							redirect('ppk');
 						}elseif ($this->session->userdata('bagian')=='BMN') {
 							redirect('Nmn');
 						}elseif ($this->session->userdata('bagian')=='Keuangan') {

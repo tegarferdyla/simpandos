@@ -8,7 +8,7 @@ $(document).ready(function(){
         var addto = "#swakelola" + next;
         var addRemove = "#swakelola" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="swakelola'+ next +'" name="'+ next +'" type="text" placeholder="Laporan Swakelola '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="swakelola'+ next +'" name="'+ next +'" type="file" placeholder="Laporan Swakelola '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -37,7 +37,7 @@ $(document).ready(function(){
         var addto = "#field" + next;
         var addRemove = "#field" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="field'+ next +'" name="smd'+ next +'" type="text" placeholder="Surat Minat Daerah '+ next +'"> ';
+        var newIn = '<input class="form-control input" id="field'+ next +'" name="smd['+ (next-1) +']" type="file"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -64,7 +64,7 @@ $(document).ready(function(){
         var addto = "#smh" + next;
         var addRemove = "#smh" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="smh'+ next +'" name="smh'+ next +'" type="text" placeholder="Surat Minat Hibah '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="smh'+ (next-1) +'" name="smh['+ next +']" type="file" placeholder="Surat Minat Hibah '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -91,7 +91,7 @@ $(document).ready(function(){
         var addto = "#skl" + next;
         var addRemove = "#skl" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="skl'+ next +'" name="skl'+ next +'" type="text" placeholder="Surat Kesiapan Lahan '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="skl'+ next +'" name="skl['+ next +']" type="file" placeholder="Surat Kesiapan Lahan '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -118,7 +118,7 @@ $(document).ready(function(){
         var addto = "#ksb" + next;
         var addRemove = "#ksb" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="ksb'+ next +'" name="ksb'+ next +'" type="text" placeholder="Kesepakatan Bersama '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="ksb'+ next +'" name="ksb['+ next +']" type="file" placeholder="Kesepakatan Bersama '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -144,7 +144,7 @@ $(document).ready(function(){
         var addto = "#pks" + next;
         var addRemove = "#pks" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="pks'+ next +'" name="pks'+ next +'" type="text" placeholder="Kesepakatan Bersama '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="pks'+ next +'" name="pks['+ next +']" type="file" placeholder="Kesepakatan Bersama '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -174,7 +174,7 @@ $(document).ready(function(){
         var addto = "#SPPBJ" + next;
         var addRemove = "#SPPBJ" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="SPPBJ'+ next +'" name="SPPBJ'+ next +'" type="text" placeholder="SPPBJ '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="SPPBJ'+ next +'" name="SPPBJ'+ next +'" type="file" placeholder="SPPBJ '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -201,7 +201,7 @@ $(document).ready(function(){
         var addto = "#SPMK" + next;
         var addRemove = "#SPMK" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="SPMK'+ next +'" name="SPMK'+ next +'" type="text" placeholder="SPMK '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="SPMK'+ next +'" name="SPMK'+ next +'" type="file" placeholder="SPMK '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -227,7 +227,7 @@ $(document).ready(function(){
         var addto = "#naskon" + next;
         var addRemove = "#naskon" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="naskon'+ next +'" name="naskon'+ next +'" type="text" placeholder="Naskah Kontrak '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="naskon'+ next +'" name="naskon'+ next +'" type="file" placeholder="Naskah Kontrak '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
@@ -253,7 +253,7 @@ $(document).ready(function(){
         var addto = "#rmk" + next;
         var addRemove = "#rmk" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="rmk'+ next +'" name="rmk'+ next +'" type="text" placeholder="Rencana Mutu Kontrak '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="rmk'+ next +'" name="rmk'+ next +'" type="file" placeholder="Rencana Mutu Kontrak '+ next +'"> ';
         var newInput = $(newIn);
         var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);

@@ -70,7 +70,8 @@
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tab31" aria-expanded="true" aria-labelledby="base-tab31">
 
-                      <form class="form input-append">
+                      <form class="form input-append" action="<?php echo site_url('ppk/test') ?>" method="post" enctype="multipart/form-data">
+                        <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
                       <div class="form-body">
                         <div class="row">
 
@@ -78,7 +79,7 @@
                             <div class="form-group">
                               <label for="">Surat Minat Daerah</label>
                                 <a class="text-success add-smd" style="padding-left:17em"><i class="ft-plus"></i> Add More File</a>
-                                <input autocomplete="off" class="form-control input" id="field1" name="smd1" type="text" placeholder="Surat Minat Daerah 1" data-items="8">
+                                <input class="form-control input" id="field1" name="smd[0]" type="file">
                             </div>
                           </div>
 
@@ -86,7 +87,7 @@
                             <div class="form-group">
                               <label for="projectinput2">Surat Menerima Hibah</label>
                               <a class="text-success add-smh" style="padding-left:15em"><i class="ft-plus"></i> Add More File</a>
-                             <input autocomplete="off" class="form-control input" id="smh1" name="smh1" type="text" placeholder="Surat Menerima Hibah 1" data-items="8">
+                             <input class="form-control input" id="smh1" name="smh[0]" type="file">
                             </div>
                           </div>
                         </div>
@@ -96,7 +97,7 @@
                             <div class="form-group">
                               <label for="projectinput3">Surat Kesiapan Lahan</label>
                                <a class="text-success add-skl" style="padding-left:16em"><i class="ft-plus"></i> Add More File</a>
-                              <input autocomplete="off" class="form-control input" id="skl1" name="skl1" type="text" placeholder="Surat Kesiapan Lahan 1" data-items="8">
+                              <input autocomplete="off" class="form-control input" id="skl1" name="skl[1]" type="text" placeholder="Surat Kesiapan Lahan 1" data-items="8">
                             </div>
                           </div>
 
@@ -104,7 +105,7 @@
                             <div class="form-group">
                               <label for="projectinput4">Kesepakatan Bersama</label>
                               <a class="text-success add-ksb" style="padding-left:15em"><i class="ft-plus"></i> Add More File</a>
-                              <input autocomplete="off" class="form-control input" id="ksb1" name="ksb1" type="text" placeholder="Kesepakatan Bersama 1" data-items="8">
+                              <input autocomplete="off" class="form-control input" id="ksb1" name="ksb[1]" type="text" placeholder="Kesepakatan Bersama 1" data-items="8">
                             </div>
                           </div>
                         </div>
@@ -114,7 +115,7 @@
                             <div class="form-group">
                               <label for="projectinput3">Perjanjian Kerjasma (PKS)</label>
                                <a class="text-success add-pks" style="padding-left:14em"><i class="ft-plus"></i> Add More File</a>
-                              <input autocomplete="off" class="form-control input" id="pks1" name="pks1" type="text" placeholder="Perjanjian Kerjasma (PKS) 1" data-items="8">
+                              <input autocomplete="off" class="form-control input" id="pks1" name="pks[1]" type="text" placeholder="Perjanjian Kerjasma (PKS) 1" data-items="8">
                             </div>
                           </div>
                         </div>
@@ -123,9 +124,10 @@
                         <button type="button" class="btn btn-warning mr-1">
                           <i class="ft-x"></i> Cancel
                         </button>
-                        <button type="submit" class="btn btn-primary">
+                        <!-- <button type="submit" class="btn btn-primary">
                           <i class="fa fa-check-square-o"></i> Save
-                        </button>
+                        </button> -->
+                        <input type="submit">
                       </div>
                       </form>
                       </div>

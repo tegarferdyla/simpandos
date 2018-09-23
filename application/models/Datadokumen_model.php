@@ -99,5 +99,15 @@ class Datadokumen_model extends CI_Model
 		$this->db->delete($table);
 	}
 
+	public function daftarsubdok($id_kepaladok)
+	{
+		$this->db->select('*');
+		$this->db->from('tbl_subdok');
+		$this->db->where('id_kepaladok',$id_kepaladok);
+		$query = $this->db->get();
+		return $query->result();
+
+	}
+
 }
  ?>
