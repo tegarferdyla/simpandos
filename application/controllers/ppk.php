@@ -388,7 +388,11 @@ class ppk extends CI_Controller
 		$this->load->view('ppk/footer');
 	}
 
-	public function test()
+// -----------------------------------------------------------------------------------------------------------
+//--------------------------------------- SAVE DOKUMEN UTAMA PEMBANGUNAN ------------------------------------
+// -----------------------------------------------------------------------------------------------------------
+	// 1. Readiness Criteria
+	public function readyness()
 	{
 		$id_paket 	= $this->input->post('id_paket');
 		$id_ppk 	= $this->session->userdata('id_ppk');
@@ -424,7 +428,6 @@ class ppk extends CI_Controller
 								'id_paket'	=> $id_paket,
 								'id_subdok'	=>	'SUB0001');
 				$this->Datafiles_model->data_add($data);
-				redirect('ppk/inputdokutama/'.$id_jenis."/".$id_paket,'refresh');
 			}
 		}
 		if ($_FILES['smh']['name'][0]!=NUll) {
@@ -448,11 +451,13 @@ class ppk extends CI_Controller
 								'id_paket'	=> $id_paket,
 								'id_subdok'	=>	'SUB0002');
 				$this->Datafiles_model->data_add($data);
-				redirect('ppk/inputdokutama/'.$id_jenis."/".$id_paket,'refresh');
 			}
 		}
+		redirect('ppk/inputdokutama/'.$id_jenis."/".$id_paket,'refresh');
 	}
-
+// -------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------ FUNGSI TESTER ----------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 	public function testinput()
 	{
 		$this->load->library('upload');

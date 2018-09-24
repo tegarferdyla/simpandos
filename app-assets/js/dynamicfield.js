@@ -64,9 +64,9 @@ $(document).ready(function(){
         var addto = "#smh" + next;
         var addRemove = "#smh" + (next);
         next = next + 1;
-        var newIn = '<input autocomplete="off" class="form-control input" id="smh'+ (next-1) +'" name="smh['+ next +']" type="file" placeholder="Surat Minat Hibah '+ next +'"> ';
+        var newIn = '<input autocomplete="off" class="form-control input" id="smh'+ next +'" name="smh['+ (next-1) +']" type="file" placeholder="Surat Minat Hibah '+ next +'"> ';
         var newInput = $(newIn);
-        var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next - 1 )+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
+        var removeBtn = '<br><a style="padding-left:29em" id="remove '+(next-1)+'" class="text-danger right remove-me"><i class="ft-x"></i> Remove</a> <div class="col-md-3"></div>';
         var removeButton = $(removeBtn);
         $(addto).after(newInput);
         $(addRemove).after(removeButton);

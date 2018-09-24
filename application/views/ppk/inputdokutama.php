@@ -39,14 +39,7 @@
                 </div>
                 <div class="card-content collapse show">
                   <div class="card-body card-dashboard">
-                    <?php if ($this->session->flashdata('nipsalah')): ?>
-                    <div class="alert alert-warning alert-dismissible mb-2" role="alert">
-                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="false">&times;</span>
-                      </button>
-                      <strong> NIP yang anda daftarkan sudah tersedia !</strong>
-                    </div>
-                    <?php elseif ($this->session->flashdata('berhasil')): ?>
+                    <?php if ($this->session->flashdata('berhasil')): ?>
                     <div class="alert alert-success alert-dismissible mb-2" role="alert">
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="false">&times;</span>
@@ -70,7 +63,7 @@
                     <div class="tab-content px-1 pt-1">
                       <div role="tabpanel" class="tab-pane active" id="tab31" aria-expanded="true" aria-labelledby="base-tab31">
 
-                      <form class="form input-append" action="<?php echo site_url('ppk/test') ?>" method="post" enctype="multipart/form-data">
+                      <form class="form input-append" action="<?php echo site_url('ppk/readyness') ?>" method="post" enctype="multipart/form-data">
                         <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
                       <div class="form-body">
                         <div class="row">
