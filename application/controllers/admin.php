@@ -22,7 +22,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$data['jmluser']  	= $this->Datauser_model->jumlahuser();
 			$data['jmlppk']  	= $this->Datappk_model->jumlahppk();	
 			$data['data_ppk']	= $this->Datappk_model->daftarppk();
-			$data['jmlpaket'] 	= $this->Datapaket_model->jmlpaket();	
+			$data['jmlpaket'] 	= $this->Datapaket_model->jmlpaket();
+			$data['chart_admin']= $this->Datapaket_model->chartadmin();	
 			$this->load->view('admin/dashboard', $data);
 			$this->load->view('admin/footer',$data);
 		}

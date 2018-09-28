@@ -106,13 +106,13 @@
                       <h4 class="card-title">Daftar PPK</h4>
                       <ul class="pl-0 list-unstyled">
                           <li class="mb-1">
-                            <?php $i=0; foreach ($data_ppk as $u) {$i++ ?>
+                            <?php $i=0; foreach ($chart_admin as $u) {$i++ ?>
                             <div class="row">
                               <div class="col-sm-2 right">
                                 <small class="color-box sm" style="background-color: <?php echo $warna[$i]; ?>; color: <?php echo $warna[$i]; ?>; " > > ></small>
                               </div>
                               <div class="col-sm-10">
-                                <h6 class="block" style ="margin-top: 4px"><?php echo $u['nama_ppk'] ?></h6>
+                                <h6 class="block" style ="margin-top: 4px"><?php echo $u->nama_ppk ?></h6>
                               </div>
                             </div>
                           <?php } ?>

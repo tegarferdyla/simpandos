@@ -33,6 +33,8 @@
   <script type="text/javascript" src="<?php echo base_url('app-assets/css/validator/bootstrapValidator.js') ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('app-assets/css/validator/jquery-1.10.2.min.js') ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('app-assets/js/dynamicfield.js') ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('app-assets/js/dynamicbaru.js') ?>"></script>
+
 
   <!-- END PAGE LEVEL JS-->
   <script type="text/javascript">
@@ -58,9 +60,52 @@
     return i;
     }
   </script>
+  <!-- Pie Chart -->
+  <script type="text/javascript">
+  $(window).on("load", function(){
+
+    //Get the context of the Chart canvas element we want to select
+    var ctx = $("#simple-pie-chart");
+
+    // Chart Options
+    var chartOptions = {
+        legend: false,
+        responsive: true,
+        maintainAspectRatio: false,
+        responsiveAnimationDuration:500,
+    };
+
+    // Chart Data
+    var chartData = {
+        labels: [
+          <?php foreach ($chart as $r) {
+              echo "'$r->sub_jenis',";
+          }?>],
+        datasets: [{
+            label: "My First dataset",
+            data: [
+            <?php foreach ($chart as $r ) {
+              echo "'$r->jumlah',";
+            } ?>],
+            backgroundColor: ['#00A5A8', '#FF7D4D', '#626E82','#FF4558', '#16D39A'],
+        }]
+    };
+
+    var config = {
+        type: 'pie',
+        // Chart Options
+        options : chartOptions,
+
+        data : chartData
+    };
+
+    // Create the chart
+    var pieSimpleChart = new Chart(ctx, config);
+});
+</script>
 
   <!-- Bar Chart -->
-  <script type="text/javascript">
+<!--   <script type="text/javascript">
     $(window).on("load", function(){
 
     //Get the context of the Chart canvas element we want to select
@@ -138,6 +183,6 @@
     // Create the chart
     var lineChart = new Chart(ctx, config);
 });
-  </script>
+  </script> -->
 </body>
 </html>

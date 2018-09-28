@@ -8,7 +8,8 @@
 </head>
 <body>
 	<form method="post" action="<?php echo site_url('ppk/testinput') ?>" enctype="multipart/form-data">
-		  <input name="name" style="color:#ffffff;" class="name required" type="button" onclick="addInputsmd()" value="Add smd" /> <input name="name" style="color:#ffffff;" class="name required" type="button" onclick="addInputsmh()" value="Add smh" />
+		  <input  style="color:#ffffff;" class="name required" type="button" onclick="addInputsmd()" value="Add smd" />
+          <input name="name" style="color:#ffffff;" class="name required" type="button" onclick="addInputsmh()" value="Add smh" />
 		  <div id="jenis">
 		  	
 		  </div>
@@ -51,6 +52,7 @@ function addInputsmh() {
         firstInput  = document.createElement("input");
         firstInput.name  = "smh["+pNR+"]" ;
         firstInput.type = "file";
+        firstInput.class ="form-control"
         
         text.appendChild(firstInput);
         text.appendChild(document.createElement("br"));

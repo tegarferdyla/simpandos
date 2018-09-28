@@ -61,7 +61,7 @@
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                               <?php if($where_jenis['id_jenis'] == 'JNS0002'): ?>
-                              <a href="<?php echo base_url()."ppk/inputdokutama/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
+                              <a href="<?php echo base_url()."ppk/viewfile/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0003') :?>
                               <a href="">Perencanaan Teknis</a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0004') :?>

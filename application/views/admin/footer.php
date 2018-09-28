@@ -45,12 +45,15 @@
     // Chart Data
     var chartData = {
         labels: [
-          <?php foreach ($data_ppk as $u) {
-              echo "'$u[nama_ppk]',";
+          <?php foreach ($chart_admin as $r) {
+              echo "'$r->nama_ppk',";
           }?>],
         datasets: [{
             label: "My First dataset",
-            data: [85, 65,70],
+            data: [
+            <?php foreach ($chart_admin as $r) {
+                echo "'$r->jumlah_paket',"; 
+            }?>],
             backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A'],
         }]
     };
