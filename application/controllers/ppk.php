@@ -813,6 +813,450 @@ class ppk extends CI_Controller
 		$this->session->set_flashdata('berhasil', true);
 		redirect('ppk/viewfile/'.$id_jenis."/".$id_paket);
 	}
+	//---------------------------------------- 4. Hasil Klarifikasi Pasca MC0 -----------------------
+	public function pasca()
+	{
+		$id_paket 	= $this->input->post('id_paket');
+		$id_ppk 	= $this->session->userdata('id_ppk');
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$nama_ppk 	= $nama_ppk['nama_ppk'];
+
+		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		$id_jenis 	= $paket[0]['id_jenis'];
+		$id_tahun	= $paket[0]['id_tahun'];
+		$nama_paket	= $paket[0]['nama_paket'];
+		$nama_tahun	= $paket[0]['nama_tahun'];
+		$main_jenis	= $paket[0]['main_jenis'];
+		$sub_jenis	= $paket[0]['sub_jenis'];
+		$namabaru 	= $nama_tahun."-".$nama_paket."-";
+		$this->load->library('upload');
+		if ($_FILES['boq_psc']['name'][0]!=NULL) {
+			$boq_psccount = count($_FILES['boq_psc']['name']);
+			for ($i = 0; $i < $boq_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['boq_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['boq_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['boq_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['boq_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['boq_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$a[] = $this->upload->data();
+				rename($a[$i]['full_path'], $a[$i]['file_path'] . $namabaru . $a[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$a[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0015');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['jst_psc']['name'][0]!=NULL) {
+			$jst_psccount = count($_FILES['jst_psc']['name']);
+			for ($i = 0; $i < $jst_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['jst_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['jst_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['jst_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['jst_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['jst_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$b[] = $this->upload->data();
+				rename($b[$i]['full_path'], $b[$i]['file_path'] . $namabaru . $b[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$b[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0016');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['slp_psc']['name'][0]!=NULL) {
+			$slp_psccount = count($_FILES['slp_psc']['name']);
+			for ($i = 0; $i < $slp_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['slp_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['slp_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['slp_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['slp_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['slp_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$c[] = $this->upload->data();
+				rename($c[$i]['full_path'], $c[$i]['file_path'] . $namabaru . $c[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$c[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0017');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['kurva_psc']['name'][0]!=NULL) {
+			$kurva_psccount = count($_FILES['kurva_psc']['name']);
+			for ($i = 0; $i < $kurva_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['kurva_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['kurva_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['kurva_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['kurva_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['kurva_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$d[] = $this->upload->data();
+				rename($d[$i]['full_path'], $d[$i]['file_path'] . $namabaru . $d[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$d[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0018');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['sd_psc']['name'][0]!=NULL) {
+			$sd_psccount = count($_FILES['sd_psc']['name']);
+			for ($i = 0; $i < $sd_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['sd_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['sd_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['sd_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['sd_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['sd_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$e[] = $this->upload->data();
+				rename($e[$i]['full_path'], $e[$i]['file_path'] . $namabaru . $e[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$e[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0019');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['bakn_psc']['name'][0]!=NULL) {
+			$bakn_psccount = count($_FILES['bakn_psc']['name']);
+			for ($i = 0; $i < $bakn_psccount; $i++){
+				$_FILES['userfile']['name']     = $_FILES['bakn_psc']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['bakn_psc']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['bakn_psc']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['bakn_psc']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['bakn_psc']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$e[] = $this->upload->data();
+				rename($e[$i]['full_path'], $e[$i]['file_path'] . $namabaru . $e[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$e[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0020');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		if ($_FILES['na1']['name'][0]!=NULL) {
+			$na1count = count($_FILES['na1']['name']);
+			for ($i = 0; $i < $na1count; $i++){
+				$_FILES['userfile']['name']     = $_FILES['na1']['name'][$i];
+				$_FILES['userfile']['type']     = $_FILES['na1']['type'][$i];
+				$_FILES['userfile']['tmp_name'] = $_FILES['na1']['tmp_name'][$i];
+				$_FILES['userfile']['error']    = $_FILES['na1']['error'][$i];
+				$_FILES['userfile']['size']     = $_FILES['na1']['size'][$i];
+				$config = array(
+					'allowed_types' => '*',
+					'overwrite'	=> FALSE,
+					'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+				);
+				$this->upload->initialize($config);
+				$this->upload->do_upload();
+				$e[] = $this->upload->data();
+				rename($e[$i]['full_path'], $e[$i]['file_path'] . $namabaru . $e[$i]['file_name']);
+				$data = array('nama_file'	=> $namabaru.$e[$i]['file_name'],
+								'id_paket'	=> $id_paket,
+								'id_tahun'	=> $id_tahun,
+								'id_jenis'	=> $id_jenis,
+								'id_subdok'	=> 'SUB0021');
+				$this->Datafiles_model->data_add($data);
+			}
+		}
+		$this->session->set_flashdata('berhasil', true);
+		redirect('ppk/viewfile/'.$id_jenis."/".$id_paket);
+	}
+	public function addendum ()
+	{
+		$id_paket 	= $this->input->post('id_paket');
+		$id_ppk 	= $this->session->userdata('id_ppk');
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$nama_ppk 	= $nama_ppk['nama_ppk'];
+
+		$paket 		= $this->Datapaket_model->getwherepaket($id_paket);
+		$id_jenis 	= $paket[0]['id_jenis'];
+		$id_tahun	= $paket[0]['id_tahun'];
+		$nama_paket	= $paket[0]['nama_paket'];
+		$nama_tahun	= $paket[0]['nama_tahun'];
+		$main_jenis	= $paket[0]['main_jenis'];
+		$sub_jenis	= $paket[0]['sub_jenis'];
+		$namabaru 	= $nama_tahun."-".$nama_paket."-";
+		$this->load->library('upload');
+
+		if ($this->input->post('topic1')) {
+			if ($_FILES['bal_ad2']['name'][0]!=NULL) {
+				$bal_ad2count = count($_FILES['bal_ad2']['name']);
+				for ($i = 0; $i < $bal_ad2count; $i++){
+					$_FILES['userfile']['name']     = $_FILES['bal_ad2']['name'][$i];
+					$_FILES['userfile']['type']     = $_FILES['bal_ad2']['type'][$i];
+					$_FILES['userfile']['tmp_name'] = $_FILES['bal_ad2']['tmp_name'][$i];
+					$_FILES['userfile']['error']    = $_FILES['bal_ad2']['error'][$i];
+					$_FILES['userfile']['size']     = $_FILES['bal_ad2']['size'][$i];
+					$config = array(
+						'allowed_types' => '*',
+						'overwrite'	=> FALSE,
+						'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+					);
+					$this->upload->initialize($config);
+					$this->upload->do_upload();
+					$a[] = $this->upload->data();
+					rename($a[$i]['full_path'], $a[$i]['file_path'] . $namabaru . $a[$i]['file_name']);
+					$data = array('nama_file'	=> $namabaru.$a[$i]['file_name'],
+									'id_paket'	=> $id_paket,
+									'id_tahun'	=> $id_tahun,
+									'id_jenis'	=> $id_jenis,
+									'id_subdok'	=> 'SUB0022');
+					$this->Datafiles_model->data_add($data);
+				}
+			}
+			if ($_FILES['boq_ad2']['name'][0]!=NULL) {
+				$boq_ad2count = count($_FILES['boq_ad2']['name']);
+				for ($i = 0; $i < $boq_ad2count; $i++){
+					$_FILES['userfile']['name']     = $_FILES['boq_ad2']['name'][$i];
+					$_FILES['userfile']['type']     = $_FILES['boq_ad2']['type'][$i];
+					$_FILES['userfile']['tmp_name'] = $_FILES['boq_ad2']['tmp_name'][$i];
+					$_FILES['userfile']['error']    = $_FILES['boq_ad2']['error'][$i];
+					$_FILES['userfile']['size']     = $_FILES['boq_ad2']['size'][$i];
+					$config = array(
+						'allowed_types' => '*',
+						'overwrite'	=> FALSE,
+						'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+					);
+					$this->upload->initialize($config);
+					$this->upload->do_upload();
+					$b[] = $this->upload->data();
+					rename($b[$i]['full_path'], $b[$i]['file_path'] . $namabaru . $b[$i]['file_name']);
+					$data = array('nama_file'	=> $namabaru.$b[$i]['file_name'],
+									'id_paket'	=> $id_paket,
+									'id_tahun'	=> $id_tahun,
+									'id_jenis'	=> $id_jenis,
+									'id_subdok'	=> 'SUB0023');
+					$this->Datafiles_model->data_add($data);
+				}
+			}
+			// if ($_FILES['jst_ad2']['name'][0]!=NULL) {
+			// 	$jst_ad2count = count($_FILES['jst_ad2']['name']);
+			// 	for ($i = 0; $i < $jst_ad2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['jst_ad2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['jst_ad2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['jst_ad2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['jst_ad2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['jst_ad2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$c[] = $this->upload->data();
+			// 		rename($c[$i]['full_path'], $c[$i]['file_path'] . $namabaru . $c[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$c[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0024');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+			// if ($_FILES['slp_ad2']['name'][0]!=NULL) {
+			// 	$slp_ad2count = count($_FILES['slp_ad2']['name']);
+			// 	for ($i = 0; $i < $slp_ad2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['slp_ad2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['slp_ad2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['slp_ad2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['slp_ad2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['slp_ad2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$d[] = $this->upload->data();
+			// 		rename($d[$i]['full_path'], $d[$i]['file_path'] . $namabaru . $d[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$d[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0025');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+			// if ($_FILES['kurva_ad2']['name'][0]!=NULL) {
+			// 	$kurva_ad2count = count($_FILES['kurva_ad2']['name']);
+			// 	for ($i = 0; $i < $kurva_ad2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['kurva_ad2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['kurva_ad2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['kurva_ad2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['kurva_ad2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['kurva_ad2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$e[] = $this->upload->data();
+			// 		rename($e[$i]['full_path'], $e[$i]['file_path'] . $namabaru . $e[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$e[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0026');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+			// if ($_FILES['sd_ad2']['name'][0]!=NULL) {
+			// 	$sd_ad2count = count($_FILES['sd_ad2']['name']);
+			// 	for ($i = 0; $i < $sd_ad2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['sd_ad2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['sd_ad2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['sd_ad2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['sd_ad2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['sd_ad2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$f[] = $this->upload->data();
+			// 		rename($f[$i]['full_path'], $f[$i]['file_path'] . $namabaru . $f[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$f[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0027');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+			// if ($_FILES['bakn_ad2']['name'][0]!=NULL) {
+			// 	$bakn_ad2count = count($_FILES['bakn_ad2']['name']);
+			// 	for ($i = 0; $i < $bakn_ad2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['bakn_ad2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['bakn_ad2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['bakn_ad2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['bakn_ad2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['bakn_ad2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$g[] = $this->upload->data();
+			// 		rename($g[$i]['full_path'], $g[$i]['file_path'] . $namabaru . $g[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$g[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0028');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+			// if ($_FILES['na2']['name'][0]!=NULL) {
+			// 	$na2count = count($_FILES['na2']['name']);
+			// 	for ($i = 0; $i < $na2count; $i++){
+			// 		$_FILES['userfile']['name']     = $_FILES['na2']['name'][$i];
+			// 		$_FILES['userfile']['type']     = $_FILES['na2']['type'][$i];
+			// 		$_FILES['userfile']['tmp_name'] = $_FILES['na2']['tmp_name'][$i];
+			// 		$_FILES['userfile']['error']    = $_FILES['na2']['error'][$i];
+			// 		$_FILES['userfile']['size']     = $_FILES['na2']['size'][$i];
+			// 		$config = array(
+			// 			'allowed_types' => '*',
+			// 			'overwrite'	=> FALSE,
+			// 			'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+			// 		);
+			// 		$this->upload->initialize($config);
+			// 		$this->upload->do_upload();
+			// 		$h[] = $this->upload->data();
+			// 		rename($h[$i]['full_path'], $h[$i]['file_path'] . $namabaru . $h[$i]['file_name']);
+			// 		$data = array('nama_file'	=> $namabaru.$h[$i]['file_name'],
+			// 						'id_paket'	=> $id_paket,
+			// 						'id_tahun'	=> $id_tahun,
+			// 						'id_jenis'	=> $id_jenis,
+			// 						'id_subdok'	=> 'SUB0029');
+			// 		$this->Datafiles_model->data_add($data);
+			// 	}
+			// }
+		}
+		if ($this->input->post('topic2')){
+			if ($_FILES['bal_ad3']['name'][0]!=NULL) {
+				$bal_ad3count = count($_FILES['bal_ad3']['name']);
+				for ($i = 0; $i < $bal_ad3count; $i++){
+					$_FILES['userfile']['name']     = $_FILES['bal_ad3']['name'][$i];
+					$_FILES['userfile']['type']     = $_FILES['bal_ad3']['type'][$i];
+					$_FILES['userfile']['tmp_name'] = $_FILES['bal_ad3']['tmp_name'][$i];
+					$_FILES['userfile']['error']    = $_FILES['bal_ad3']['error'][$i];
+					$_FILES['userfile']['size']     = $_FILES['bal_ad3']['size'][$i];
+					$config = array(
+						'allowed_types' => '*',
+						'overwrite'	=> FALSE,
+						'upload_path' => './assets/data/'.$nama_tahun."/".$nama_ppk."/".$main_jenis."/".$sub_jenis."/".$nama_paket."/"
+					);
+					$this->upload->initialize($config);
+					$this->upload->do_upload();
+					$a[] = $this->upload->data();
+					rename($a[$i]['full_path'], $a[$i]['file_path'] . $namabaru . $a[$i]['file_name']);
+					$data = array('nama_file'	=> $namabaru.$a[$i]['file_name'],
+									'id_paket'	=> $id_paket,
+									'id_tahun'	=> $id_tahun,
+									'id_jenis'	=> $id_jenis,
+									'id_subdok'	=> 'SUB0030');
+					$this->Datafiles_model->data_add($data);
+				}
+			}
+		}
+		$this->session->set_flashdata('berhasil', true);
+		redirect('ppk/viewfile/'.$id_jenis."/".$id_paket);
+	}
 // --------------------------------------------------------------------------------------------------
 // --------------------------------- VIEW FILE JENIS PEMBANGUNAN ------------------------------------
 // --------------------------------------------------------------------------------------------------
@@ -872,6 +1316,54 @@ class ppk extends CI_Controller
 			}
 			if ($r['id_subdok']=="SUB0014") {
 				$data['file_pcm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0014');
+			}
+			if ($r['id_subdok']=="SUB0015") {
+				$data['file_boq_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0015');
+			}
+			if ($r['id_subdok']=="SUB0016") {
+				$data['file_jst_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0016');
+			}
+			if ($r['id_subdok']=="SUB0017") {
+				$data['file_slp_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0017');
+			}
+			if ($r['id_subdok']=="SUB0018") {
+				$data['file_kurva_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0018');
+			}
+			if ($r['id_subdok']=="SUB0019") {
+				$data['file_sd_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0019');
+			}
+			if ($r['id_subdok']=="SUB0020") {
+				$data['file_bakn_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0020');
+			}
+			if ($r['id_subdok']=="SUB0021") {
+				$data['file_na1'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0021');
+			}
+			if ($r['id_subdok']=="SUB0022") {
+				$data['file_bal_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0022');
+			}
+			if ($r['id_subdok']=="SUB0023") {
+				$data['file_boq_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0023');
+			}
+			if ($r['id_subdok']=="SUB0024") {
+				$data['file_jst_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0024');
+			}
+			if ($r['id_subdok']=="SUB0025") {
+				$data['file_slp_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0025');
+			}
+			if ($r['id_subdok']=="SUB0026") {
+				$data['file_kurva_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0026');
+			}
+			if ($r['id_subdok']=="SUB0027") {
+				$data['file_sd_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0027');
+			}
+			if ($r['id_subdok']=="SUB0028") {
+				$data['file_bakn_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0028');
+			}
+			if ($r['id_subdok']=="SUB0029") {
+				$data['file_na2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0029');
+			}
+			if ($r['id_subdok']=="SUB0030") {
+				$data['file_bal_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0030');
 			}
 		}
 		$this->load->view('ppk/viewfilepembangunan',$data);
@@ -936,6 +1428,54 @@ class ppk extends CI_Controller
 			}
 			if ($r['id_subdok']=="SUB0014") {
 				$data['file_pcm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0014');
+			}
+			if ($r['id_subdok']=="SUB0015") {
+				$data['file_boq_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0015');
+			}
+			if ($r['id_subdok']=="SUB0016") {
+				$data['file_jst_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0016');
+			}
+			if ($r['id_subdok']=="SUB0017") {
+				$data['file_slp_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0017');
+			}
+			if ($r['id_subdok']=="SUB0018") {
+				$data['file_kurva_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0018');
+			}
+			if ($r['id_subdok']=="SUB0019") {
+				$data['file_sd_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0019');
+			}
+			if ($r['id_subdok']=="SUB0020") {
+				$data['file_bakn_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0020');
+			}
+			if ($r['id_subdok']=="SUB0021") {
+				$data['file_na1'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0021');
+			}
+			if ($r['id_subdok']=="SUB0022") {
+				$data['file_bal_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0022');
+			}
+			if ($r['id_subdok']=="SUB0023") {
+				$data['file_boq_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0023');
+			}
+			if ($r['id_subdok']=="SUB0024") {
+				$data['file_jst_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0024');
+			}
+			if ($r['id_subdok']=="SUB0025") {
+				$data['file_slp_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0025');
+			}
+			if ($r['id_subdok']=="SUB0026") {
+				$data['file_kurva_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0026');
+			}
+			if ($r['id_subdok']=="SUB0027") {
+				$data['file_sd_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0027');
+			}
+			if ($r['id_subdok']=="SUB0028") {
+				$data['file_bakn_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0028');
+			}
+			if ($r['id_subdok']=="SUB0029") {
+				$data['file_na2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0029');
+			}
+			if ($r['id_subdok']=="SUB0030") {
+				$data['file_bal_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0030');
 			}
 		}
 		$this->load->view('ppk/updatefilepembangunan',$data);

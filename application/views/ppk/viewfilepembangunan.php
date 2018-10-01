@@ -368,11 +368,141 @@
                             </div>
                             </div>
                           </div>
-                          
+
                       </div>
 
                     </div>
+                    <!-- --------------------------------------------------------------------- -->
+                    <!-- ---------------- Hasil klarifikasi Pasca MC0 ------------------------ -->
+                    <!-- --------------------------------------------------------------------- -->
 
+                      <div class="tab-pane" id="tab34" aria-labelledby="base-tab34">
+                        <div class="form-body">
+                          
+                          <div class="row">
+
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b><i>Bill of Quantity</i></b></label>
+                              <br>
+                              <?php if (!empty($file_boq_psc)): ?>
+                                <?php foreach ($file_boq_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Justifikasi dan Spesifikasi Teknis</b></label>
+                              <br>
+                              <?php if (!empty($file_jst_psc)): ?>
+                                <?php foreach ($file_jst_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+
+                          </div>
+                          <div class="row">
+                            
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Surat Lampiran Pendukung</b></label>
+                              <br>
+                              <?php if (!empty($file_slp_psc)): ?>
+                                <?php foreach ($file_slp_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Kurva S Revisi</b></label>
+                              <br>
+                              <?php if (!empty($file_kurva_psc)): ?>
+                                <?php foreach ($file_kurva_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b><i>Shop Drawing</i></b></label>
+                              <br>
+                              <?php if (!empty($file_sd_psc)): ?>
+                                <?php foreach ($file_sd_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Berita Acara Klarifikasi Negosiasi</b></label>
+                              <br>
+                              <?php if (!empty($file_bakn_psc)): ?>
+                                <?php foreach ($file_bakn_psc as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Naskah Addendum I</b></label>
+                              <br>
+                              <?php if (!empty($file_na1)): ?>
+                                <?php foreach ($file_na1 as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+                          </div>
+
+                        </div>  
+                      </div>
+                      <!-- --------------------------------------------------------------------- -->
+                    <!-- ---------------- Hasil klarifikasi Pasca MC0 ------------------------ -->
+                    <!-- --------------------------------------------------------------------- -->
+
+                    <div class="tab-pane" id="tab35" aria-labelledby="base-tab35">
+                      <div class="form-body">
+                        
+                      </div>
+                    </div>    
                     </div>
                   </div>
                 </div>
