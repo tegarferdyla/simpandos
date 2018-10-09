@@ -1418,9 +1418,411 @@
                     <!-- --------------------------------------------------------------------- -->
                      <div class="tab-pane" id="tab36" aria-labelledby="base-tab36">
                       <form class="form input-append" action="<?php echo site_url('ppk/laporan') ?>" method ="post" enctype="multipart/form-data">
-                      <input type="text" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">  
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Laporan Harian</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:17em" data-counter=0 data-tipefile="lh" value="Add lh"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_lh)): ?>
+                              <?php foreach ($file_lh as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Laporan Mingguan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="lm" value="Add lm"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_lm)): ?>
+                              <?php foreach ($file_lm as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Laporan Bulanan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="lb" value="Add lb"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_lb)): ?>
+                              <?php foreach ($file_lb as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Sertifikat Pembayaran</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:14em" data-counter=0 data-tipefile="sp" value="Add sp"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_sp)): ?>
+                              <?php foreach ($file_sp as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+            
                       </form>
+                    </div>
+                    <!-- --------------------------------------------------------------------- -->
+                    <!-- ------------------------ Uji Kualitas ---------------------- -->
+                    <!-- --------------------------------------------------------------------- -->
+                    <div class="tab-pane" id="tab37" aria-labelledby="base-tab37">
+                      <form class="form input-append" action="<?php echo site_url('ppk/ujikualitas') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara Pengujian Material</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:10em" data-counter=0 data-tipefile="bapm" value="Add bapm"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_bapm)): ?>
+                              <?php foreach ($file_bapm as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                      </form>
+                    </div>
+                    <!-- --------------------------------------------------------------------- -->
+                    <!-- ------------------------ Show Cause Meeting (SCM) ------------------- -->
+                    <!-- --------------------------------------------------------------------- -->
+                    <div class="tab-pane" id="tab38" aria-labelledby="base-tab38">
+                      <form class="form input-append" action="<?php echo site_url('ppk/scm') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara <i>Show Cause Meeting </i> (SCM)</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:6em" data-counter=0 data-tipefile="scm" value="Add scm"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_scm)): ?>
+                              <?php foreach ($file_scm as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                      </form>
+                    </div>
+                    <!-- ---------------------------------------------------------------------- -->
+                    <!-- ------------------------ Provosional Hand Over ------------------------ -->
+                    <!-- ----------------------------------------------------------------------- -->
+      
+                    <div class="tab-pane" id="tab39" aria-labelledby="base-tab39">
+                    <form class="form input-append" action="<?php echo site_url('ppk/pho') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Surat Permohonan PHO</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:13em" data-counter=0 data-tipefile="sp_pho" value="Add sp_pho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_sp_pho)): ?>
+                              <?php foreach ($file_sp_pho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara <i>First Visit</i></b></label>
+                            <a class="text-success btn-add-input" style="padding-left:15em" data-counter=0 data-tipefile="ba_pho" value="Add ba_pho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_ba_pho)): ?>
+                              <?php foreach ($file_ba_pho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara <i>Second Visit</i></b></label>
+                            <a class="text-success btn-add-input" style="padding-left:13em" data-counter=0 data-tipefile="basv_pho" value="Add basv_pho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_basv_pho)): ?>
+                              <?php foreach ($file_basv_pho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara Serah Terima Pekerjaan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:8em" data-counter=0 data-tipefile="bastp_pho" value="Add bastp_pho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_bastp_pho)): ?>
+                              <?php foreach ($file_bastp_pho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                    </form>
+                    </div>
+                    <!-- ---------------------------------------------------------------------- -->
+                    <!-- ------------------------ Final Hand Over ----------------------------- -->
+                    <!-- ----------------------------------------------------------------------- -->
+      
+                    <div class="tab-pane" id="tab40" aria-labelledby="base-tab40">
+                    <form class="form input-append" action="<?php echo site_url('ppk/fho') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Surat Permohonan FHO</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:13em" data-counter=0 data-tipefile="sp_fho" value="Add sp_fho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_sp_fho)): ?>
+                              <?php foreach ($file_sp_fho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara <i>First Visit</i></b></label>
+                            <a class="text-success btn-add-input" style="padding-left:15em" data-counter=0 data-tipefile="ba_fho" value="Add ba_fho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_ba_fho)): ?>
+                              <?php foreach ($file_ba_fho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara <i>Second Visit</i></b></label>
+                            <a class="text-success btn-add-input" style="padding-left:13em" data-counter=0 data-tipefile="basv_fho" value="Add basv_fho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_basv_fho)): ?>
+                              <?php foreach ($file_basv_fho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara Serah Terima Pekerjaan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:8em" data-counter=0 data-tipefile="bastp_fho" value="Add bastp_fho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_bastp_fho)): ?>
+                              <?php foreach ($file_bastp_fho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                    </form>
+                    </div>
+                    <!-- ---------------------------------------------------------------------- -->
+                    <!-- ------------------------ Final Hand Over ----------------------------- -->
+                    <!-- ----------------------------------------------------------------------- -->
+      
+                    <div class="tab-pane" id="tab41" aria-labelledby="base-tab41">
+                    <form class="form input-append" action="<?php echo site_url('ppk/dokumentasi') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Dokumentasi </b></label>
+                            <a class="text-success btn-add-input" style="padding-left:15em" data-counter=0 data-tipefile="dok" value="Add dok"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_dok)): ?>
+                              <?php foreach ($file_dok as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                        </form>
                     </div>  
+
                   </div>
 
                 </div>

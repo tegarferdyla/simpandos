@@ -63,15 +63,15 @@
                               <?php if($where_jenis['id_jenis'] == 'JNS0002'): ?>
                               <a href="<?php echo base_url()."ppk/viewfile/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0003') :?>
-                              <a href="">Perencanaan Teknis</a>
+                               <a href="<?php echo base_url()."ppk/viewfilekonsultan/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0004') :?>
-                              <a href="">Pengadaan Alat Berat</a>  
+                              <a href="<?php echo base_url()."ppk/viewfilepengadaan/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0005') :?>
                               <a href="<?php echo base_url()."ppk/inputdokutamaswakelola/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php endif ?>
                             </li>
                             <li class="list-group-item">
-                              <a href="<?php echo site_url('admin/dashboard') ?>"><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
+                              <a href="<?php echo base_url()."ppk/viewfilependukung/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
                             </li>
                           </ul>
                       </div>
