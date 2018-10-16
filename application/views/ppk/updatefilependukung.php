@@ -61,6 +61,10 @@
                         <a class="nav-link" id="base-tab32" data-toggle="tab" aria-controls="tab32"
                         href="#tab32" aria-expanded="true">Keuangan / SPM</a>
                       </li>
+                      <li class="nav-item">
+                        <a class="nav-link" id="base-tab33" data-toggle="tab" aria-controls="tab33"
+                        href="#tab33" aria-expanded="true">Bendahara</a>
+                      </li>
                     </ul>
                     <!-- --------------------------------------------------------------------- -->
                     <!-- -------------------LAPORAN PERENCANAAN -------------------------------- -->
@@ -324,6 +328,104 @@
                         </button>
                       </div>
                         </form>
+                      </div>
+
+                      <div role="tabpanel" class="tab-pane" id="tab33" aria-expanded="true" aria-labelledby="base-tab33">
+                      <form class="form input-append" action="<?php echo site_url('ppk/bendahara') ?>" method ="post" enctype="multipart/form-data">
+                      <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
+                      <div class="row">
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>LPJ</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:25em" data-counter=0 data-tipefile="lpj" value="Add lpj"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_lpj)): ?>
+                              <?php foreach ($file_lpj as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                 <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara Pemeriksaan Kas dan Rekonsiliasi</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:3.5em" data-counter=0 data-tipefile="rekonsi" value="Add rekonsi"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_rekonsi)): ?>
+                              <?php foreach ($file_rekonsi as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                 <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Rekening Koran</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:19em" data-counter=0 data-tipefile="rk" value="Add rk"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_rk)): ?>
+                              <?php foreach ($file_rk as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                 <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>Berita Acara Pemeriksaan Kas</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:12em" data-counter=0 data-tipefile="bapk" value="Add bapk"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_bapk)): ?>
+                              <?php foreach ($file_bapk as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                 <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                          </div>
+                        </div>
+                        <div class="form-actions right">
+                        <button type="button" class="btn btn-warning mr-1">
+                          <i class="ft-x"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                          <i class="fa fa-check-square-o"></i> Save
+                        </button>
+                      </div>
+                      </form>
                       </div>
                   </div>
                 </div>

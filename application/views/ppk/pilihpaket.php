@@ -51,27 +51,32 @@
               </div>
               <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
                 <div class="card collapse-icon accordion-icon-rotate">
-                  <?php foreach ($view_paket as $u) { ?>
+                  <?php foreach ($hasil as $u) { ?>
                   <div id="heading11" class="card-header">
-                    <a data-toggle="collapse" data-parent="#accordionWrap1" href="#<?php echo $u['id_paket']; ?>" aria-expanded="false" class="card-title lead"><?php echo $u['nama_paket']; ?></a>
+                    <div class="row">
+                    <div class="col-md-11">
+                    <a data-toggle="collapse" data-parent="#accordionWrap1" href="#<?php echo $u->id_paket; ?>" aria-expanded="false" class="card-title lead"><?php echo $u->nama_paket;?></a>
+                    </div>
+                    <div class="col-md-1"><a href="" class="card-title lead"><?php echo $u->paket_terkumpul ?></a></div>
+                    </div>
                   </div>
-                  <div id="<?php echo $u['id_paket']; ?>" role="tabpanel" aria-labelledby="heading11" class="collapse">
+                  <div id="<?php echo $u->id_paket; ?>" role="tabpanel" aria-labelledby="heading11" class="collapse">
                     <div class="card-content">
                       <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                               <?php if($where_jenis['id_jenis'] == 'JNS0002'): ?>
-                              <a href="<?php echo base_url()."ppk/viewfile/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
+                              <a href="<?php echo base_url()."ppk/viewfile/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0003') :?>
-                               <a href="<?php echo base_url()."ppk/viewfilekonsultan/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
+                               <a href="<?php echo base_url()."ppk/viewfilekonsultan/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0004') :?>
-                              <a href="<?php echo base_url()."ppk/viewfilepengadaan/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
+                              <a href="<?php echo base_url()."ppk/viewfilepengadaan/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0005') :?>
-                              <a href="<?php echo base_url()."ppk/inputdokutamaswakelola/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
+                              <a href="<?php echo base_url()."ppk/inputdokutamaswakelola/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php endif ?>
                             </li>
                             <li class="list-group-item">
-                              <a href="<?php echo base_url()."ppk/viewfilependukung/".$u['id_jenis']."/".$u['id_paket'] ?>"><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
+                              <a href="<?php echo base_url()."ppk/viewfilependukung/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file-text"></span> <font style="color:black">&nbsp; Dokumen Pendukung</font></a>
                             </li>
                           </ul>
                       </div>

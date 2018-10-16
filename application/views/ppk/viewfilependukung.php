@@ -45,6 +45,9 @@
                       type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ft-zap icon-left"></i> Aksi</button>
                       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item" href="<?php echo base_url()."ppk/updatefilependukung/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>">Update Dokumen</a>
+                        <?php if ($where_paket['id_jenis'] == 'JNS0003') :?>
+                          <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporankonsultan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>">Print Laporan</a>
+                        <?php endif ?>
                       </div>
                     </div>
                   </div>
@@ -75,6 +78,10 @@
                       <li class="nav-item">
                         <a class="nav-link " id="base-tab32" data-toggle="tab" aria-controls="tab32"
                         href="#tab32" aria-expanded="true">Keuangan / SPM</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link " id="base-tab33" data-toggle="tab" aria-controls="tab33"
+                        href="#tab33" aria-expanded="true">Bendahara</a>
                       </li>
                     </ul>
                     <!-- --------------------------------------------------------------------- -->
@@ -299,6 +306,86 @@
                             </div>
                         </div>
       
+                         </div>
+                      </div>
+                      <div role="tabpanel" class="tab-pane" id="tab33" aria-expanded="true" aria-labelledby="base-tab33">
+                         <div class="form-body">
+                          <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>LPJ</b></label>
+                              <br>
+                              <?php if (!empty($file_lpj)): ?>
+                                <?php foreach ($file_lpj as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <?php if ($where_paket['id_jenis'] == 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php elseif ($where_paket['id_jenis'] != 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php endif ?>  
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div> 
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Berita Acara Pemeriksaan Kas dan Rekonsiliasi</b></label>
+                              <br>
+                              <?php if (!empty($file_rekonsi)): ?>
+                                <?php foreach ($file_rekonsi as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <?php if ($where_paket['id_jenis'] == 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php elseif ($where_paket['id_jenis'] != 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php endif ?>  
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Rekening Koran</b></label>
+                              <br>
+                              <?php if (!empty($file_rk)): ?>
+                                <?php foreach ($file_rk as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <?php if ($where_paket['id_jenis'] == 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php elseif ($where_paket['id_jenis'] != 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php endif ?>  
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div> 
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>Berita Acara Pemeriksaan Kas</b></label>
+                              <br>
+                              <?php if (!empty($file_bapk)): ?>
+                                <?php foreach ($file_bapk as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <?php if ($where_paket['id_jenis'] == 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php elseif ($where_paket['id_jenis'] != 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php endif ?>  
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div>
+                        </div>
                          </div>
                       </div> 
 
