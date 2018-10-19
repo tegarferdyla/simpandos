@@ -44,6 +44,7 @@
                       type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="ft-zap icon-left"></i> Aksi</button>
                       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item" href="<?php echo base_url()."ppk/updatefilepembangunan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>">Update Dokumen</a>
+                        <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporanpembangunan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>" target ="_blank">Print Laporan</a>
                       </div>
                     </div>
                   </div>

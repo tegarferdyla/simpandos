@@ -57,7 +57,13 @@
                     <div class="col-md-11">
                     <a data-toggle="collapse" data-parent="#accordionWrap1" href="#<?php echo $u->id_paket; ?>" aria-expanded="false" class="card-title lead"><?php echo $u->nama_paket;?></a>
                     </div>
-                    <div class="col-md-1"><a href="" class="card-title lead"><?php echo $u->paket_terkumpul ?></a></div>
+                    <div class="col-md-1">
+                      <?php if (!empty($u->paket_terkumpul)) :?>
+                        <a href="" class="card-title lead"><?php echo $u->paket_terkumpul ?></a>
+                      <?php elseif (empty($u->paket_terkumpul)) :?>
+                        <a href="" class="card-title lead">0</a>
+                      <?php endif?>
+                    </div>
                     </div>
                   </div>
                   <div id="<?php echo $u->id_paket; ?>" role="tabpanel" aria-labelledby="heading11" class="collapse">
@@ -72,7 +78,7 @@
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0004') :?>
                               <a href="<?php echo base_url()."ppk/viewfilepengadaan/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php elseif ($where_jenis['id_jenis'] == 'JNS0005') :?>
-                              <a href="<?php echo base_url()."ppk/inputdokutamaswakelola/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
+                              <a href="<?php echo base_url()."ppk/viewfileswakelola/".$u->id_jenis."/".$u->id_paket ?>"><span class="fa fa-file"></span> <font style="color:black">&nbsp; Dokumen Utama</font></a>  
                               <?php endif ?>
                             </li>
                             <li class="list-group-item">

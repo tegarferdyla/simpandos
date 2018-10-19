@@ -363,11 +363,12 @@ class ppk extends CI_Controller
 				$id_jenis 		= $view_paket[$i]['id_jenis'];
 				$id_tahun 		= $view_paket[$i]['id_tahun'];
 				$nama_paket		= $view_paket[$i]['nama_paket'];
-				if (empty($countdata['perhitungan'][$i]->hasil)) {
-					$perhitungan = '0';
-				}
-				elseif(!empty($countdata['perhitungan'][$i]->hasil)){
+				if (!empty($countdata['perhitungan'][$i]->hasil)) {
+					$id_paket 	= $view_paket[$i]['id_paket']; 
 					$perhitungan = $countdata['perhitungan'][$i]->hasil;
+				}
+				elseif (empty($countdata['perhitungan'][$i]->hasil)) {
+					$perhitungan = '0';
 				}
 				$json[] = array(
 						'id_paket' 	 		=> $id_paket,
@@ -4333,6 +4334,425 @@ class ppk extends CI_Controller
 			}
 		}
 		$this->load->view('ppk/detaillaporankonsultan',$data);
+	}
+
+	public function printlaporanpengadaan($id_jenis, $id_paket)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['where_paket'] 	= $this->Datapaket_model->wherepaket($id_paket);
+		$daftarfile		= $this->Datafiles_model->daftarfile($id_paket);
+
+		foreach ($daftarfile as $r){
+			if ($r['id_subdok']=="SUB0073") {
+				$data['file_sm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0073');
+			}
+			if ($r['id_subdok']=="SUB0074") {
+				$data['file_spmh'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0074');
+			}
+			if ($r['id_subdok']=="SUB0075") {
+				$data['file_pk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0075');
+			}
+			if ($r['id_subdok']=="SUB0076") {
+				$data['file_bast'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0076');
+			}
+			if ($r['id_subdok']=="SUB0077") {
+				$data['file_sk_kemen'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0077');
+			}
+			if ($r['id_subdok']=="SUB0078") {
+				$data['file_rekomtek'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0078');
+			}
+			if ($r['id_subdok']=="SUB0079") {
+				$data['file_hibah_kemen'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0079');
+			}
+			if ($r['id_subdok']=="SUB0080") {
+				$data['file_hibah_satker'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0080');
+			}
+			if ($r['id_subdok']=="SUB0081") {
+				$data['file_naskah_hibah'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0081');
+			}
+			if ($r['id_subdok']=="SUB0082") {
+				$data['file_ph'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0082');
+			}
+			if ($r['id_subdok']=="SUB0083") {
+				$data['file_dh'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0083');
+			}
+
+			//File Pendukung
+			if ($r['id_subdok']=="SUB0085") {
+				$data['file_sas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0085');
+			}
+			if ($r['id_subdok']=="SUB0086") {
+				$data['file_rt'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0086');
+			}
+			if ($r['id_subdok']=="SUB0087") {
+				$data['file_shkk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0087');
+			}
+			if ($r['id_subdok']=="SUB0088") {
+				$data['file_pp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0088');
+			}
+			if ($r['id_subdok']=="SUB0089") {
+				$data['file_kuitansi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0089');
+			}
+			if ($r['id_subdok']=="SUB0090") {
+				$data['file_karwas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0090');
+			}
+			if ($r['id_subdok']=="SUB0091") {
+				$data['file_fp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0091');
+			}
+			if ($r['id_subdok']=="SUB0092") {
+				$data['file_ppn'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0092');
+			}
+			if ($r['id_subdok']=="SUB0093") {
+				$data['file_spp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0093');
+			}
+			if ($r['id_subdok']=="SUB0094") {
+				$data['file_spm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0094');
+			}
+			if ($r['id_subdok']=="SUB0095") {
+				$data['file_sp2d'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0095');
+			}
+			if ($r['id_subdok']=="SUB0096") {
+				$data['file_lpj'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0096');
+			}
+			if ($r['id_subdok']=="SUB0097") {
+				$data['file_rekonsi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0097');
+			}
+			if ($r['id_subdok']=="SUB0098") {
+				$data['file_rk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0098');
+			}
+			if ($r['id_subdok']=="SUB0099") {
+				$data['file_bapk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0099');
+			}
+		}
+		$this->load->view('ppk/detaillaporanpengadaan',$data);
+	}
+
+	public function printlaporanswakelola ($id_jenis, $id_paket)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['where_paket'] 	= $this->Datapaket_model->wherepaket($id_paket);
+		$daftarfile		= $this->Datafiles_model->daftarfile($id_paket);
+
+		foreach ($daftarfile as $r){
+			if ($r['id_subdok']=="SUB0084") {
+				$data['file_swa'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0084');
+			}
+
+			//File Pendukung
+			if ($r['id_subdok']=="SUB0085") {
+				$data['file_sas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0085');
+			}
+			if ($r['id_subdok']=="SUB0086") {
+				$data['file_rt'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0086');
+			}
+			if ($r['id_subdok']=="SUB0087") {
+				$data['file_shkk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0087');
+			}
+			if ($r['id_subdok']=="SUB0088") {
+				$data['file_pp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0088');
+			}
+			if ($r['id_subdok']=="SUB0089") {
+				$data['file_kuitansi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0089');
+			}
+			if ($r['id_subdok']=="SUB0090") {
+				$data['file_karwas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0090');
+			}
+			if ($r['id_subdok']=="SUB0091") {
+				$data['file_fp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0091');
+			}
+			if ($r['id_subdok']=="SUB0092") {
+				$data['file_ppn'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0092');
+			}
+			if ($r['id_subdok']=="SUB0093") {
+				$data['file_spp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0093');
+			}
+			if ($r['id_subdok']=="SUB0094") {
+				$data['file_spm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0094');
+			}
+			if ($r['id_subdok']=="SUB0095") {
+				$data['file_sp2d'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0095');
+			}
+			if ($r['id_subdok']=="SUB0096") {
+				$data['file_lpj'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0096');
+			}
+			if ($r['id_subdok']=="SUB0097") {
+				$data['file_rekonsi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0097');
+			}
+			if ($r['id_subdok']=="SUB0098") {
+				$data['file_rk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0098');
+			}
+			if ($r['id_subdok']=="SUB0099") {
+				$data['file_bapk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0099');
+			}
+		}
+		$this->load->view('ppk/detaillaporanswakelola',$data);
+	}
+
+	public function printlaporanpembangunan($id_jenis, $id_paket)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['where_paket'] 	= $this->Datapaket_model->wherepaket($id_paket);
+		$daftarfile		= $this->Datafiles_model->daftarfile($id_paket);
+		foreach ($daftarfile as $r){
+			if ($r['id_subdok']=="SUB0001") {
+				$data['file_smd'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0001');
+			}
+			if ($r['id_subdok']=="SUB0002") {
+				$data['file_smh'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0002');
+			}
+			if ($r['id_subdok']=="SUB0003") {
+				$data['file_skl'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0003');
+			}
+			if ($r['id_subdok']=="SUB0004") {
+				$data['file_ksb'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0004');
+			}
+			if ($r['id_subdok']=="SUB0005") {
+				$data['file_pks'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0005');
+			}
+			if ($r['id_subdok']=="SUB0006") {
+				$data['file_sk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0006');
+			}
+			if ($r['id_subdok']=="SUB0007") {
+				$data['file_sppbj'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0007');
+			}
+			if ($r['id_subdok']=="SUB0008") {
+				$data['file_spmk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0008');
+			}
+			if ($r['id_subdok']=="SUB0009") {
+				$data['file_naskon'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0009');
+			}
+			if ($r['id_subdok']=="SUB0010") {
+				$data['file_rmk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0010');
+			}
+			if ($r['id_subdok']=="SUB0011") {
+				$data['file_dd'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0011');
+			}
+			if ($r['id_subdok']=="SUB0012") {
+				$data['file_bal_mco'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0012');
+			}
+			if ($r['id_subdok']=="SUB0013") {
+				$data['file_jst_mco'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0013');
+			}
+			if ($r['id_subdok']=="SUB0014") {
+				$data['file_pcm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0014');
+			}
+			if ($r['id_subdok']=="SUB0015") {
+				$data['file_boq_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0015');
+			}
+			if ($r['id_subdok']=="SUB0016") {
+				$data['file_jst_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0016');
+			}
+			if ($r['id_subdok']=="SUB0017") {
+				$data['file_slp_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0017');
+			}
+			if ($r['id_subdok']=="SUB0018") {
+				$data['file_kurva_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0018');
+			}
+			if ($r['id_subdok']=="SUB0019") {
+				$data['file_sd_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0019');
+			}
+			if ($r['id_subdok']=="SUB0020") {
+				$data['file_bakn_psc'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0020');
+			}
+			if ($r['id_subdok']=="SUB0021") {
+				$data['file_na1'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0021');
+			}
+			if ($r['id_subdok']=="SUB0022") {
+				$data['file_bal_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0022');
+			}
+			if ($r['id_subdok']=="SUB0023") {
+				$data['file_boq_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0023');
+			}
+			if ($r['id_subdok']=="SUB0024") {
+				$data['file_jst_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0024');
+			}
+			if ($r['id_subdok']=="SUB0025") {
+				$data['file_slp_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0025');
+			}
+			if ($r['id_subdok']=="SUB0026") {
+				$data['file_kurva_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0026');
+			}
+			if ($r['id_subdok']=="SUB0027") {
+				$data['file_sd_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0027');
+			}
+			if ($r['id_subdok']=="SUB0028") {
+				$data['file_bakn_ad2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0028');
+			}
+			if ($r['id_subdok']=="SUB0029") {
+				$data['file_na2'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0029');
+			}
+			if ($r['id_subdok']=="SUB0030") {
+				$data['file_bal_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0030');
+			}
+			if ($r['id_subdok']=="SUB0031") {
+				$data['file_boq_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0031');
+			}
+			if ($r['id_subdok']=="SUB0032") {
+				$data['file_jst_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0032');
+			}
+			if ($r['id_subdok']=="SUB0033") {
+				$data['file_slp_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0033');
+			}
+			if ($r['id_subdok']=="SUB0034") {
+				$data['file_kurva_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0034');
+			}
+			if ($r['id_subdok']=="SUB0035") {
+				$data['file_sd_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0035');
+			}
+			if ($r['id_subdok']=="SUB0036") {
+				$data['file_bakn_ad3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0036');
+			}
+			if ($r['id_subdok']=="SUB0037") {
+				$data['file_na3'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0037');
+			}
+			if ($r['id_subdok']=="SUB0038") {
+				$data['file_bal_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0038');
+			}
+			if ($r['id_subdok']=="SUB0039") {
+				$data['file_boq_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0039');
+			}
+			if ($r['id_subdok']=="SUB0040") {
+				$data['file_jst_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0040');
+			}
+			if ($r['id_subdok']=="SUB0041") {
+				$data['file_slp_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0041');
+			}
+			if ($r['id_subdok']=="SUB0042") {
+				$data['file_kurva_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0042');
+			}
+			if ($r['id_subdok']=="SUB0043") {
+				$data['file_sd_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0043');
+			}
+			if ($r['id_subdok']=="SUB0044") {
+				$data['file_bakn_ad4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0044');
+			}
+			if ($r['id_subdok']=="SUB0045") {
+				$data['file_na4'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0045');
+			}
+			if ($r['id_subdok']=="SUB0046") {
+				$data['file_bal_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0046');
+			}
+			if ($r['id_subdok']=="SUB0047") {
+				$data['file_boq_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0047');
+			}
+			if ($r['id_subdok']=="SUB0048") {
+				$data['file_jst_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0048');
+			}
+			if ($r['id_subdok']=="SUB0049") {
+				$data['file_slp_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0049');
+			}
+			if ($r['id_subdok']=="SUB0050") {
+				$data['file_kurva_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0050');
+			}
+			if ($r['id_subdok']=="SUB0051") {
+				$data['file_sd_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0051');
+			}
+			if ($r['id_subdok']=="SUB0052") {
+				$data['file_bakn_ad5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0052');
+			}
+			if ($r['id_subdok']=="SUB0053") {
+				$data['file_na5'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0053');
+			}
+			if ($r['id_subdok']=="SUB0054") {
+				$data['file_lh'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0054');
+			}
+			if ($r['id_subdok']=="SUB0055") {
+				$data['file_lm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0055');
+			}
+			if ($r['id_subdok']=="SUB0056") {
+				$data['file_lb'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0056');
+			}
+			if ($r['id_subdok']=="SUB0057") {
+				$data['file_sp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0057');
+			}
+			if ($r['id_subdok']=="SUB0058") {
+				$data['file_bapm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0058');
+			}
+			if ($r['id_subdok']=="SUB0059") {
+				$data['file_scm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0059');
+			}
+			if ($r['id_subdok']=="SUB0060") {
+				$data['file_sp_pho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0060');
+			}
+			if ($r['id_subdok']=="SUB0061") {
+				$data['file_ba_pho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0061');
+			}
+			if ($r['id_subdok']=="SUB0062") {
+				$data['file_basv_pho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0062');
+			}
+			if ($r['id_subdok']=="SUB0063") {
+				$data['file_bastp_pho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0063');
+			}
+			if ($r['id_subdok']=="SUB0064") {
+				$data['file_sp_fho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0064');
+			}
+			if ($r['id_subdok']=="SUB0065") {
+				$data['file_ba_fho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0065');
+			}
+			if ($r['id_subdok']=="SUB0066") {
+				$data['file_basv_fho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0066');
+			}
+			if ($r['id_subdok']=="SUB0067") {
+				$data['file_bastp_fho'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0067');
+			}
+			if ($r['id_subdok']=="SUB0068") {
+				$data['file_dok'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0068');
+			}
+
+			//File Pendukung
+			if ($r['id_subdok']=="SUB0085") {
+				$data['file_sas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0085');
+			}
+			if ($r['id_subdok']=="SUB0086") {
+				$data['file_rt'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0086');
+			}
+			if ($r['id_subdok']=="SUB0087") {
+				$data['file_shkk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0087');
+			}
+			if ($r['id_subdok']=="SUB0088") {
+				$data['file_pp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0088');
+			}
+			if ($r['id_subdok']=="SUB0089") {
+				$data['file_kuitansi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0089');
+			}
+			if ($r['id_subdok']=="SUB0090") {
+				$data['file_karwas'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0090');
+			}
+			if ($r['id_subdok']=="SUB0091") {
+				$data['file_fp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0091');
+			}
+			if ($r['id_subdok']=="SUB0092") {
+				$data['file_ppn'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0092');
+			}
+			if ($r['id_subdok']=="SUB0093") {
+				$data['file_spp'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0093');
+			}
+			if ($r['id_subdok']=="SUB0094") {
+				$data['file_spm'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0094');
+			}
+			if ($r['id_subdok']=="SUB0095") {
+				$data['file_sp2d'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0095');
+			}
+			if ($r['id_subdok']=="SUB0096") {
+				$data['file_lpj'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0096');
+			}
+			if ($r['id_subdok']=="SUB0097") {
+				$data['file_rekonsi'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0097');
+			}
+			if ($r['id_subdok']=="SUB0098") {
+				$data['file_rk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0098');
+			}
+			if ($r['id_subdok']=="SUB0099") {
+				$data['file_bapk'] = $this->Datafiles_model->daftarsubdok($id_paket,'SUB0099');
+			}
+		}
+		$this->load->view('ppk/detaillaporanpembangunan',$data);
 	}
 
 // -------------------------------------------------------------------------------------------------------------

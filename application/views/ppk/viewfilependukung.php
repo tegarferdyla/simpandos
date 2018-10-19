@@ -46,7 +46,11 @@
                       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item" href="<?php echo base_url()."ppk/updatefilependukung/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>">Update Dokumen</a>
                         <?php if ($where_paket['id_jenis'] == 'JNS0003') :?>
-                          <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporankonsultan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>">Print Laporan</a>
+                          <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporankonsultan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>" target="_blank">Print Laporan</a>
+                        <?php elseif ($where_paket['id_jenis'] == 'JNS0004') :?>
+                           <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporanpengadaan/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>" target="_blank">Print Laporan</a> 
+                        <?php elseif ($where_paket['id_jenis'] == 'JNS0005') :?>
+                           <a class="dropdown-item" href="<?php echo base_url()."ppk/printlaporanswakelola/".$where_paket['id_jenis']."/".$where_paket['id_paket'] ?>" target="_blank">Print Laporan</a>  
                         <?php endif ?>
                       </div>
                     </div>

@@ -49,7 +49,7 @@ class Datafiles_model extends CI_Model {
 	{
 		$query = $this->db->query("
 			SELECT id_paket , sum(total) hasil , id_jenis from(SELECT id_paket, subdok ,COUNT(subdok) total ,id_jenis FROM (
-        		SELECT id_paket , id_subdok subdok ,id_jenis from tbl_file where id_tahun = '$id_tahun' AND id_jenis ='$id_jenis' GROUP By id_paket, id_subdok) a
+        		SELECT id_paket , id_subdok subdok ,id_jenis from tbl_file where id_tahun = '$id_tahun' AND id_jenis ='$id_jenis' GROUP By id_paket, id_subdok ORDER By id_paket DESC) a
 				GROUP by id_paket , subdok) b
 			GROUP by id_paket ORDER by id_paket DESC");
 		return $query->result(); 

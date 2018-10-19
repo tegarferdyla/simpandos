@@ -63,7 +63,7 @@
                           <th>Tahun</th>
                           <th>Nama Paket</th>
                           <th>Jenis</th>
-                          <?php if ($get_jenis['sub_jenis']): ?>
+                          <?php if ($get_jenis['sub_jenis'] != 'Swakelola'): ?>
                           <th>Sub Jenis</th>                            
                           <?php endif ?>
                           <th>Action</th>
@@ -77,13 +77,14 @@
                           <td><?php echo $u['nama_tahun']; ?></td>
                           <td><?php echo $u['nama_paket']; ?></td>
                           <td><?php echo $u['main_jenis']; ?></td>
-                          <?php if ($get_jenis['sub_jenis']):?>
+                          <?php if ($u['sub_jenis'] != 'Swakelola' ):?>
                           <td><?php echo $u['sub_jenis']; ?></td>
                           <?php endif ?>
                           <td class="right">
-                            <?php if ($get_jenis['sub_jenis']):?>
+                            <?php if ($get_jenis['sub_jenis'] != 'Swakelola'):?>
                             <a href ="<?php echo base_url()."ppk/deletepaketkontraktual/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus Paket ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
-                            <?php elseif (!$get_jenis['sub_jenis']):?>
+                            <?php elseif ($get_jenis['sub_jenis']):?>
+                            <a href ="<?php echo base_url()."ppk/updatepaketswakelola/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin mengubah Paket ini?')"><button type="button" class="btn btn-outline-success mr-1"><i class="fa fa-edit"></i> Edit</button></a>
                             <a href ="<?php echo base_url()."ppk/deletepaketswakelola/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus Paket ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
                             <?php endif ?>
                           </td>
@@ -96,7 +97,7 @@
                           <th>Tahun</th>
                           <th>Nama Paket</th>
                           <th>Jenis</th>
-                          <?php if ($get_jenis['sub_jenis']): ?>
+                          <?php if ($get_jenis['sub_jenis'] !='Swakelola'): ?>
                           <th>Sub Jenis</th>                            
                           <?php endif ?>
                           <th>Action</th>
