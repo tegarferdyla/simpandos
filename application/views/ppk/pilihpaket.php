@@ -58,11 +58,7 @@
                     <a data-toggle="collapse" data-parent="#accordionWrap1" href="#<?php echo $u->id_paket; ?>" aria-expanded="false" class="card-title lead"><?php echo $u->nama_paket;?></a>
                     </div>
                     <div class="col-md-1">
-                      <?php if (!empty($u->paket_terkumpul)) :?>
-                        <a href="" class="card-title lead"><?php echo $u->paket_terkumpul ?></a>
-                      <?php elseif (empty($u->paket_terkumpul)) :?>
-                        <a href="" class="card-title lead">0</a>
-                      <?php endif?>
+                        <a href="" class="card-title lead"><?php echo $u->paket_terkumpul_persen ?> %</a>
                     </div>
                     </div>
                   </div>
