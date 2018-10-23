@@ -75,7 +75,7 @@
                                  <small class="color-box sm" style="background-color: <?php echo $warna[$i]; ?>; color: <?php echo $warna[$i]; ?>; " > > ></small>
                               </div>
                               <div class="col-sm-10">
-                                <h6 class="block" style ="margin-top: 4px"><?php echo $r->sub_jenis ?></h6>
+                                <a href="<?php echo base_url()."ppk/pilihpaket/".$r->id_tahun."/".$r->id_jenis ?>"><h6 class="block" style ="margin-top: 4px"><?php echo $r->sub_jenis ?></h6></a>
                               </div>
                             </div>
                              <?php } ?>

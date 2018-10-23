@@ -411,42 +411,21 @@ class ppk extends CI_Controller
 							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/$view_paket[$key]['pembagi'])*100,1);
 						}
 						elseif ($value2['id_jenis'] == 'JNS0003') {
-							$view_paket[$key]['paket_terkumpul_persen'] = $value2['hasil'];
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/19)*100,1);
+						}
+						elseif($value2['id_jenis'] == 'JNS0004'){
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/26)*100,1);	
+						}
+						elseif($value2['id_jenis'] == 'JNS0005'){
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/16)*100,1);	
 						}
 						break;
 					}
 					else{
-						$view_paket[$key]['test'] = "0";
-						$view_paket[$key]['paket_terkumpul'] = 0;
 						$view_paket[$key]['paket_terkumpul_persen'] = 0;
-						$persentase = 0;
 					}
 				}
 			}
-			// die(print_r($view_paket));
-
-			// for($i=0; $i<count($view_paket); $i++){
-			// 	$id_paket 		= $view_paket[$i]['id_paket'];
-			// 	$id_jenis 		= $view_paket[$i]['id_jenis'];
-			// 	$id_tahun 		= $view_paket[$i]['id_tahun'];
-			// 	$nama_paket		= $view_paket[$i]['nama_paket'];
-			// 	if (!empty($countdata['perhitungan'][$i]->hasil)) {
-			// 		$id_paket 	= $view_paket[$i]['id_paket']; 
-			// 		$perhitungan = $countdata['perhitungan'][$i]->hasil;
-			// 	}
-			// 	elseif (empty($countdata['perhitungan'][$i]->hasil)) {
-			// 		$perhitungan = '0';
-			// 	}
-			// 	$json[] = array(
-			// 			'id_paket' 	 		=> $id_paket,
-			// 			'id_jenis' 	 		=> $id_jenis,
-			// 			'id_tahun' 	 		=> $id_tahun,
-			// 			'nama_paket' 		=> $nama_paket,
-			// 			'paket_terkumpul'	=> $perhitungan
-			// 	);
-			// }
-			// die(print_r($json));
-
 			$cetak = json_encode($view_paket);
 			$data['hasil'] = json_decode($cetak);
 			$this->load->view('ppk/header',$data);
@@ -4823,6 +4802,122 @@ class ppk extends CI_Controller
 		$this->load->view('ppk/detaillaporanpembangunan',$data);
 	}
 
+	public function updatepaketkontraktual($id_paket)
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_tahun'] = $this->Datatahun_model->daftartahunppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+		$data['wherepaket']	= $this->Datapaket_model->getwherepaket($id_paket);
+
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+		$this->load->view('ppk/editpaketkontraktual',$data);
+		$this->load->view('admin/footer');
+	}
+// -------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------ EDIT PAKET -------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+	public function editpaketkontraktual()
+	{
+		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+
+		$id_paket 		= $this->input->post('id_paket');
+		$namapaket_baru	= $this->input->post('namapaket_baru');
+ 	}
+ // -------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------ CETAK LAPORAN PAKET -----------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+ 	public function cetaklaporan($id_tahun, $id_jenis)
+ 	{
+ 		$id_user = $this->session->userdata('id_user');
+		$id_ppk = $this->session->userdata('id_ppk');
+		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
+		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_tahun'] = $this->Datatahun_model->getwheretahun($id_tahun);
+		$data['where_jenis']= $this->Datajenis_model->getwherejenis($id_jenis);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+		$view_paket = $this->Datapaket_model->viewjenispaket($id_tahun,$id_jenis,$id_ppk);
+			// Perhitungan
+			$countdata['perhitungan'] = $this->Datafiles_model->perhitungan($id_tahun,$id_jenis);
+			// die(print_r($countdata['perhitungan']));
+			foreach ($view_paket as $key => $value) {
+				foreach ($countdata['perhitungan'] as $key2 => $value2) {
+					if($value["id_paket"] == $value2["id_paket"]){
+						$view_paket[$key]['paket_terkumpul'] = $value2['hasil'];
+						$view_paket[$key]['id_jenis'] = $value2['id_jenis'];
+						if ($value2['id_jenis'] == 'JNS0002') {
+							$cekadendum = $this->Datafiles_model->daftarfile($view_paket[$key]['id_paket']);
+							foreach ($cekadendum as $u => $addendum2) {
+								if ($addendum2['id_subdok'] == 'SUB0022'|| $addendum2['id_subdok'] == 'SUB0023'||$addendum2['id_subdok'] == 'SUB0024' || $addendum2['id_subdok'] == 'SUB0025'|| $addendum2['id_subdok'] == 'SUB0026'|| $addendum2['id_subdok'] == 'SUB0027'|| $addendum2['id_subdok'] == 'SUB0028'|| $addendum2['id_subdok'] == 'SUB0029') {
+									$view_paket[$key]['ad2'] = 8;
+									break;
+								}
+								else
+								{
+									$view_paket[$key]['ad2'] = 0;	
+								}
+							}
+							foreach ($cekadendum as $u => $addendum3) {
+								if ($addendum3['id_subdok'] == 'SUB0030' || $addendum3['id_subdok'] == 'SUB0031'|| $addendum3['id_subdok'] == 'SUB0032'||$addendum3['id_subdok'] == 'SUB0033' || $addendum3['id_subdok'] == 'SUB0034'|| $addendum3['id_subdok'] == 'SUB0035'|| $addendum3['id_subdok'] == 'SUB0036'|| $addendum3['id_subdok'] == 'SUB0037') {
+									$view_paket[$key]['ad3'] = 8;
+									break;
+								}
+								else
+								{
+									$view_paket[$key]['ad3'] = 0;
+								}
+							}
+							foreach ($cekadendum as $u => $addendum4) {
+								if ($addendum4['id_subdok'] == 'SUB0038' || $addendum4['id_subdok'] == 'SUB0039'|| $addendum4['id_subdok'] == 'SUB0040'||$addendum4['id_subdok'] == 'SUB0041' || $addendum4['id_subdok'] == 'SUB0042'|| $addendum4['id_subdok'] == 'SUB0043'|| $addendum4['id_subdok'] == 'SUB0044'|| $addendum4['id_subdok'] == 'SUB0045') {
+									$view_paket[$key]['ad4'] = 8;
+									break;
+								}
+								else
+								{
+									$view_paket[$key]['ad4'] = 0;
+								}
+							}
+							foreach ($cekadendum as $u => $addendum5) {
+								if ($addendum5['id_subdok'] == 'SUB0046' || $addendum5['id_subdok'] == 'SUB0047'|| $addendum5['id_subdok'] == 'SUB0048'||$addendum5['id_subdok'] == 'SUB0049' || $addendum5['id_subdok'] == 'SUB0050'|| $addendum5['id_subdok'] == 'SUB0051'|| $addendum5['id_subdok'] == 'SUB0052'|| $addendum5['id_subdok'] == 'SUB0053') {
+									$view_paket[$key]['ad5'] = 8;
+									break;
+								}
+								else
+								{
+									$view_paket[$key]['ad5'] = 0;
+								}
+							}
+							$view_paket[$key]['pembagi'] = 51 + $view_paket[$key]['ad2'] + $view_paket[$key]['ad3'] + $view_paket[$key]['ad4'] + 
+							$view_paket[$key]['ad5'];
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/$view_paket[$key]['pembagi'])*100,1);
+						}
+						elseif ($value2['id_jenis'] == 'JNS0003') {
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/19)*100,1);
+						}
+						elseif($value2['id_jenis'] == 'JNS0004'){
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/26)*100,1);	
+						}
+						elseif($value2['id_jenis'] == 'JNS0005'){
+							$view_paket[$key]['paket_terkumpul_persen'] = number_format(($value2['hasil']/16)*100,1);	
+						}
+						break;
+					}
+					else{
+						$view_paket[$key]['paket_terkumpul_persen'] = 0;
+					}
+				}
+			}
+			$cetak = json_encode($view_paket);
+			$data['hasil'] = json_decode($cetak);
+
+		$this->load->view('ppk/laporanpaket',$data);
+ 	}
 // -------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------ FUNGSI TESTER ----------------------------------------------
 // -------------------------------------------------------------------------------------------------------------

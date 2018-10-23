@@ -43,12 +43,24 @@
         <section>
           <div class="row match-height">
             <div class="col-lg-12 col-xl-12">
-              <div class="mb-2 mt-2">
-                <h5 class="mb-0 text-uppercase">Jenis Paket : <font color="Blue"><?php echo $where_jenis['main_jenis']; ?></font></h5>
-                <?php if ($where_jenis['sub_jenis']) :?>
-                  <p>Sub Jenis Paket : <?php echo $where_jenis['sub_jenis'] ?></p>
-                <?php endif ?> 
+              <div class="row">
+
+                <div class="col-md-10">
+                  <div class="mb-2 mt-2">
+                    <h5 class="mb-0 text-uppercase">Jenis Paket : <font color="Blue"><?php echo $where_jenis['main_jenis']; ?></font></h5>
+                    <?php if ($where_jenis['sub_jenis']) :?>
+                      <p>Sub Jenis Paket : <?php echo $where_jenis['sub_jenis'] ?></p>
+                    <?php endif ?> 
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="mb-2 mt-2">
+                    <a href="<?php echo base_url()."ppk/cetaklaporan/".$data_tahun['id_tahun']."/".$where_jenis['id_jenis'] ?>" style="color:green; float: right;" target= "_blank" ><i class="ft-printer" title="Cetak Laporan"></i> Cetak Laporan</a>
+                  </div>  
+                </div>
+
               </div>
+
               <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
                 <div class="card collapse-icon accordion-icon-rotate">
                   <?php foreach ($hasil as $u) { ?>
@@ -58,7 +70,11 @@
                     <a data-toggle="collapse" data-parent="#accordionWrap1" href="#<?php echo $u->id_paket; ?>" aria-expanded="false" class="card-title lead"><?php echo $u->nama_paket;?></a>
                     </div>
                     <div class="col-md-1">
+                        <?php if (!empty($u->paket_terkumpul_persen)) :?>
                         <a href="" class="card-title lead"><?php echo $u->paket_terkumpul_persen ?> %</a>
+                        <?php elseif (empty($u->paket_terkumpul_persen)) :?>
+                        <a href="" class="card-title lead">0%</a>
+                      <?php endif ?>
                     </div>
                     </div>
                   </div>
