@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2018 at 01:00 AM
+-- Generation Time: Oct 24, 2018 at 02:26 PM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -86,7 +86,17 @@ INSERT INTO `tbl_file` (`id_file`, `nama_file`, `id_paket`, `id_tahun`, `id_jeni
 (47, '2014-Paket 2 Pembangunan- Pendukung -47633.jpg', 'PKT0002', 'THN0003', 'JNS0002', 'SUB0085'),
 (49, '2014-Paket 1 Pembangunan-Banner_Bukber_2_copy.jpg', 'PKT0001', 'THN0003', 'JNS0002', 'SUB0002'),
 (50, '2014-Contoh Teknis-UTS.doc', 'PKT0005', 'THN0003', 'JNS0003', 'SUB0069'),
-(51, '2014-Contoh Teknis- Pendukung -bem.png', 'PKT0005', 'THN0003', 'JNS0003', 'SUB0085');
+(51, '2014-Contoh Teknis- Pendukung -bem.png', 'PKT0005', 'THN0003', 'JNS0003', 'SUB0085'),
+(52, '2016-PAket 2016-', 'PKT0013', 'THN0006', 'JNS0002', 'SUB0001'),
+(53, '2016-PAket 2016- Pendukung -', 'PKT0013', 'THN0006', 'JNS0002', 'SUB0085'),
+(54, '2016-PAket 2016- Pendukung -', 'PKT0013', 'THN0006', 'JNS0002', 'SUB0086'),
+(55, '2018-Pembangunan Drainase-Laporan_Agustus-Septembe1r.pdf', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0001'),
+(56, '2018-Pembangunan Drainase-Drawing1.jpg', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0002'),
+(57, '2018-Pembangunan Drainase-NOMENKLATUR_DIGITALISASI_DOKUMEN_PPLP_STRATEGIS.docx', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0003'),
+(58, '2018-Pembangunan Drainase-weekly_report_-_simpandos.xlsx', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0001'),
+(59, '2018-Pembangunan Drainase-tapmpil.txt', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0022'),
+(60, '2018-Pembangunan Drainase-tat.txt', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0100'),
+(61, '2018-Pembangunan Drainase- Pendukung -DSC_2566.JPG', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0101');
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,16 @@ INSERT INTO `tbl_paket` (`id_paket`, `nama_paket`, `deskripsi`, `input_by`, `id_
 ('PKT0006', 'Contoh Pengadaan', 'Contoh Pengadaan', 'User PPK 1', 'JNS0004', 'THN0003', 'PPK0002'),
 ('PKT0007', 'Paket 2015', 'asdasd', 'User PPK 1', 'JNS0002', 'THN0001', 'PPK0002'),
 ('PKT0008', 'Paket Ppk 2', 'asdsa', 'User PPK 2', 'JNS0002', 'THN0004', 'PPK0003'),
-('PKT0009', 'Kosong', 'ksoong', 'User PPK 1', 'JNS0002', 'THN0003', 'PPK0002');
+('PKT0010', 'Paket 2018', 'Paket 2018', 'User PPK 1', 'JNS0002', 'THN0005', 'PPK0002'),
+('PKT0011', 'Paket Konsultan 2018', 'Test', 'User PPK 1', 'JNS0003', 'THN0005', 'PPK0002'),
+('PKT0012', 'Paket Konsultan 2 2018', 'Pkaet 2018 2', 'User PPK 1', 'JNS0003', 'THN0005', 'PPK0002'),
+('PKT0013', 'Paket 2016', '', 'User PPK 1', 'JNS0002', 'THN0006', 'PPK0002'),
+('PKT0014', 'Contoh Paket 2016', 'Contoh paket 2016', 'User PPK 2', 'JNS0002', 'THN0007', 'PPK0003'),
+('PKT0015', 'Pembangunan Drainase', '', 'User PPK 2', 'JNS0002', 'THN0008', 'PPK0003'),
+('PKT0016', 'Masterplan Kota Bekasi', '', 'User PPK 2', 'JNS0003', 'THN0008', 'PPK0003'),
+('PKT0017', 'Pengadaan Truk Tinja', '', 'User PPK 2', 'JNS0004', 'THN0008', 'PPK0003'),
+('PKT0018', 'Pengadaan ATK', '', 'User PPK 2', 'JNS0005', 'THN0008', 'PPK0003'),
+('PKT0019', 'Test 1', '', 'User PPK 2', 'JNS0002', 'THN0008', 'PPK0003');
 
 -- --------------------------------------------------------
 
@@ -197,7 +216,7 @@ CREATE TABLE `tbl_ppk` (
 --
 
 INSERT INTO `tbl_ppk` (`id_ppk`, `nama_ppk`, `keterangan`) VALUES
-('PPK0002', 'Tester Panjang Gelar nye', 'PPK Tester Panjang Banget 2'),
+('PPK0002', 'PPK Persampahan ', 'PPK Tester Panjang Banget 2'),
 ('PPK0003', 'PPK Tester Ke 2', 'PPK Tester Ke 2');
 
 -- --------------------------------------------------------
@@ -301,9 +320,9 @@ INSERT INTO `tbl_subdok` (`id_subdok`, `sub_dokumen`, `id_kepaladok`) VALUES
 ('SUB0082', 'Perjanjian Hibah antara Satker dengan Kepala Daerah', 'KPL0019'),
 ('SUB0083', 'Dokumen Hibah BPKB ke Pemda', 'KPL0019'),
 ('SUB0084', 'Laporan Swakelola', 'KPL0020'),
-('SUB0085', 'Surat Alih status', 'KPL0003'),
+('SUB0085', 'Surat Alih status / Hibah', 'KPL0003'),
 ('SUB0086', 'Rekomendasi Teknis', 'KPL0003'),
-('SUB0087', 'Surat Hibah Ke Kementrian Keuangan', 'KPL0003'),
+('SUB0087', 'BAST Pengelolaan', 'KPL0003'),
 ('SUB0088', 'Permohonan Pembayaran', 'KPL0017'),
 ('SUB0089', 'Kuitansi', 'KPL0017'),
 ('SUB0090', 'Kartu Pengawasan (Karwas)', 'KPL0017'),
@@ -315,7 +334,10 @@ INSERT INTO `tbl_subdok` (`id_subdok`, `sub_dokumen`, `id_kepaladok`) VALUES
 ('SUB0096', 'LPJ', 'KPL0018'),
 ('SUB0097', 'Berita Acara Pemeriksaan Kas dan Rekonsiliasi', 'KPL0018'),
 ('SUB0098', 'Rekening Koran', 'KPL0018'),
-('SUB0099', 'Berita Acara Pemeriksaan Kas', 'KPL0018');
+('SUB0099', 'Berita Acara Pemeriksaan Kas', 'KPL0018'),
+('SUB0100', 'As Build Drawing', 'KPL0013'),
+('SUB0101', 'BAST Asset', 'KPL0003'),
+('SUB0102', 'KAK & HPS', 'KPL0020');
 
 -- --------------------------------------------------------
 
@@ -339,7 +361,10 @@ INSERT INTO `tbl_tahun` (`id_tahun`, `nama_tahun`, `deskripsi`, `input_by`, `id_
 ('THN0001', '2015', 'Tahun 2015', 'User PPK 1', 'PPK0002'),
 ('THN0003', '2014', 'Tahun 2014', 'User PPK 1', 'PPK0002'),
 ('THN0004', '2015', 'Tahun 2015', 'User PPK 2', 'PPK0003'),
-('THN0005', '2018', 'Tahun 2018', 'User PPK 1', 'PPK0002');
+('THN0005', '2018', 'Tahun 2018', 'User PPK 1', 'PPK0002'),
+('THN0006', '2016', 'Tahun 2016', 'User PPK 1', 'PPK0002'),
+('THN0007', '2016', 'Tahun 2016', 'User PPK 2', 'PPK0003'),
+('THN0008', '2018', '', 'User PPK 2', 'PPK0003');
 
 -- --------------------------------------------------------
 
@@ -443,7 +468,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_file`
 --
 ALTER TABLE `tbl_file`
-  MODIFY `id_file` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id_file` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
