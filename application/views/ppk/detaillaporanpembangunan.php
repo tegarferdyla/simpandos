@@ -1622,6 +1622,25 @@
                                     </td>
                                 <?php endif ?>
                             </tr>
+                            <tr style="font-size: 13px;" class="bg-grey">
+                                <td class="p-10 center">5</td>
+                                <td class="p-10">As Build Drawing</td>
+                                <?php if (!empty($file_abd_pho)): ?>
+                                    <td class="p-10">
+                                        <?php foreach ($file_abd_pho as $u) { ?>
+                                            <?php echo $u['nama_file']?> <hr>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/check.png')?>">
+                                    </td>
+                                <?php else : ?>
+                                    <td class="p-10">Data Belum di Upload</td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/cancel.png')?>">
+                                    </td>
+                                <?php endif ?>
+                            </tr>
                         </tbody>
                     </table>
                     <!-- End Provisional Hand Over (PHO) -->
@@ -1845,12 +1864,31 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">3</td>
-                                <td class="p-10">Surat Hibah Ke Kementerian Keuangan</td>
+                                <td class="p-10">BAST Pengelolaan</td>
                                 <?php if (!empty($file_shkk)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_shkk as $u) { ?>
                                                 <li><?php echo $u['nama_file']?></li>
                                             </ul>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/check.png')?>">
+                                    </td>
+                                <?php else : ?>
+                                    <td class="p-10">Data Belum di Upload</td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/cancel.png')?>">
+                                    </td>
+                                <?php endif ?>
+                            </tr>
+                            <tr style="font-size: 13px;" class="bg-grey">
+                                <td class="p-10 center">4</td>
+                                <td class="p-10">BAST Asset</td>
+                                <?php if (!empty($file_bast_bmn)): ?>
+                                    <td class="p-10">
+                                        <?php foreach ($file_bast_bmn as $u) { ?>
+                                                <?php echo $u['nama_file']?><hr>    
                                         <?php } ?>
                                     </td>
                                     <td class="p-10 center">
@@ -2064,7 +2102,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">1</td>
-                                <td class="p-10">LPJ</td>
+                                <td class="p-10">Jaminan Uang Muka</td>
                                 <?php if (!empty($file_lpj)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_lpj as $u) { ?>
@@ -2083,7 +2121,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">2</td>
-                                <td class="p-10">Berita Acara Pemeriksaan Kas dan Rekonsiliasi</td>
+                                <td class="p-10">Jaminan Pelaksanaan</td>
                                 <?php if (!empty($file_rekonsi)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_rekonsi as $u) { ?>
@@ -2103,7 +2141,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">3</td>
-                                <td class="p-10">Rekening Koran</td>
+                                <td class="p-10">Jaminan Pemeliharaan</td>
                                 <?php if (!empty($file_rk)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_rk as $u) { ?>
@@ -2123,7 +2161,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">4</td>
-                                <td class="p-10">Berita Acara Pemeriksaan Kas</td>
+                                <td class="p-10">Laporan Pajak</td>
                                 <?php if (!empty($file_bapk)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_bapk as $u) { ?>

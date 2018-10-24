@@ -1682,6 +1682,28 @@
                           </div>
                         </div>
                       </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b><i>As Build Drawing</i></b></label>
+                            <a class="text-success btn-add-input" style="padding-left:18em" data-counter=0 data-tipefile="abd_pho" value="Add abd_pho"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_abd_pho)): ?>
+                              <?php foreach ($file_abd_pho as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfilekontraktual/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
+                      </div>
                       <div class="form-actions right">
                         <button type="button" class="btn btn-warning mr-1">
                           <i class="ft-x"></i> Cancel

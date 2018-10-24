@@ -53,12 +53,14 @@
                 <div class="card-content collapse show">
                   <div class="card-body card-dashboard">
                     <ul class="nav nav-tabs nav-linetriangle no-hover-bg">
+                      <?php if ($where_paket['id_jenis'] != 'JNS0005') :?>
                       <li class="nav-item">
                         <a class="nav-link active" id="base-tab31" data-toggle="tab" aria-controls="tab31"
                         href="#tab31" aria-expanded="true">BMN</a>
                       </li>
+                    <?php endif ?>
                       <li class="nav-item">
-                        <a class="nav-link" id="base-tab32" data-toggle="tab" aria-controls="tab32"
+                        <a class="nav-link <?php if($where_paket['id_jenis'] == 'JNS0005') {echo 'active';} ?>" id="base-tab32" data-toggle="tab" aria-controls="tab32"
                         href="#tab32" aria-expanded="true">Keuangan / SPM</a>
                       </li>
                       <li class="nav-item">
@@ -70,14 +72,15 @@
                     <!-- -------------------LAPORAN PERENCANAAN -------------------------------- -->
                     <!-- --------------------------------------------------------------------- -->
                     <div class="tab-content px-1 pt-1">
+                      <?php if ($where_paket['id_jenis'] != 'JNS0005' ) :?>
                       <div role="tabpanel" class="tab-pane active" id="tab31" aria-expanded="true" aria-labelledby="base-tab31">
                       <form class="form input-append" action="<?php echo site_url('ppk/bmn') ?>" method ="post" enctype="multipart/form-data">
                       <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
                         <div class="row">
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Surat Alih Status</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="sas" value="Add sas"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Surat Alih Status / Hibah</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:14em" data-counter=0 data-tipefile="sas" value="Add sas"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_sas)): ?>
                               <?php foreach ($file_sas as $u) { ?>
@@ -118,11 +121,31 @@
                         <div class="row">
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Surat Hibah ke Kementerian Keuangan</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:6em" data-counter=0 data-tipefile="shkk" value="Add shkk"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>BAST Pengelolaan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:18em" data-counter=0 data-tipefile="shkk" value="Add shkk"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_shkk)): ?>
                               <?php foreach ($file_shkk as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                 <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                          </div>
+                          <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>BAST Asset</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:21em" data-counter=0 data-tipefile="bast_bmn" value="Add bast_bmn"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_bast_bmn)): ?>
+                              <?php foreach ($file_bast_bmn as $u) { ?>
                                 <p style="color: green"><?php echo $u['nama_file'] ?></p>
                                  <a href="<?php echo base_url()."ppk/hapusfilependukung/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
                               <?php } ?>
@@ -147,8 +170,8 @@
                       </div>                      
                       </form>
                       </div>
-
-                      <div role="tabpanel" class="tab-pane" id="tab32" aria-expanded="true" aria-labelledby="base-tab32">
+                      <?php endif ?>
+                      <div role="tabpanel" class="tab-pane <?php if($where_paket['id_jenis'] == 'JNS0005') {echo 'active';} ?> " id="tab32" aria-expanded="true" aria-labelledby="base-tab32">
                         <form class="form input-append" action="<?php echo site_url('ppk/spm') ?>" method ="post" enctype="multipart/form-data">
                         <input type="hidden" value="<?php echo $where_paket['id_paket']; ?>" name="id_paket">
                           <div class="row">
@@ -336,8 +359,8 @@
                       <div class="row">
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>LPJ</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:25em" data-counter=0 data-tipefile="lpj" value="Add lpj"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Jaminan Uang Muka</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="lpj" value="Add lpj"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_lpj)): ?>
                               <?php foreach ($file_lpj as $u) { ?>
@@ -356,8 +379,8 @@
                           </div>
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Berita Acara Pemeriksaan Kas dan Rekonsiliasi</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:3.5em" data-counter=0 data-tipefile="rekonsi" value="Add rekonsi"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Jaminan Pelaksanaan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:14em" data-counter=0 data-tipefile="rekonsi" value="Add rekonsi"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_rekonsi)): ?>
                               <?php foreach ($file_rekonsi as $u) { ?>
@@ -378,8 +401,8 @@
                         <div class="row">
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Rekening Koran</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:19em" data-counter=0 data-tipefile="rk" value="Add rk"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Jaminan Pemeliharaan</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:14em" data-counter=0 data-tipefile="rk" value="Add rk"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_rk)): ?>
                               <?php foreach ($file_rk as $u) { ?>
@@ -398,8 +421,8 @@
                           </div>
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Berita Acara Pemeriksaan Kas</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:12em" data-counter=0 data-tipefile="bapk" value="Add bapk"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Laporan Pajak</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:18em" data-counter=0 data-tipefile="bapk" value="Add bapk"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_bapk)): ?>
                               <?php foreach ($file_bapk as $u) { ?>

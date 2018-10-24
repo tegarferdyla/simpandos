@@ -85,6 +85,26 @@
                             </div>  
                           </div>
                         </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label for=""><b>KAK & HPS</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:20em" data-counter=0 data-tipefile="kak_hps" value="Add kak_hps"><i class="ft-plus"></i> Tambah File</a>
+                            <br>
+                            <?php if (!empty($file_kak_hps)): ?>
+                              <?php foreach ($file_kak_hps as $u) { ?>
+                                <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                <a href="<?php echo base_url()."ppk/hapusfileswakelola/".$where_paket['id_paket']."/".$u['id_file']; ?>"><button type="button" class="btn btn-icon btn-danger mr-1"><i class="fa fa-times"></i> Hapus</button></a>
+                              <?php } ?>
+                            <?php else: ?>
+                              <p style="color:red">Tidak Ada Data</p>  
+                            <?php endif ?>
+                            <div class ="form-group" style="margin-top:12 ">
+                               <div class="input-div">
+                                
+                              </div>
+                            </div>  
+                          </div>
+                        </div>
                         </div>
                         <div class="form-actions right">
                         <button type="button" class="btn btn-warning mr-1">

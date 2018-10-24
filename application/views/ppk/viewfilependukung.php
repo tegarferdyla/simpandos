@@ -75,12 +75,14 @@
                     </div>
                     <?php endif ?>
                     <ul class="nav nav-tabs nav-linetriangle no-hover-bg">
+                       <?php if ($where_paket['id_jenis'] != 'JNS0005') :?>
                       <li class="nav-item">
                         <a class="nav-link active" id="base-tab31" data-toggle="tab" aria-controls="tab31"
                         href="#tab31" aria-expanded="true">BMN</a>
                       </li>
+                    <?php endif ?>
                       <li class="nav-item">
-                        <a class="nav-link " id="base-tab32" data-toggle="tab" aria-controls="tab32"
+                        <a class="nav-link <?php if($where_paket['id_jenis'] == 'JNS0005') {echo 'active';} ?>" id="base-tab32" data-toggle="tab" aria-controls="tab32"
                         href="#tab32" aria-expanded="true">Keuangan / SPM</a>
                       </li>
                       <li class="nav-item">
@@ -92,12 +94,13 @@
                     <!-- -------------------LAPORAN SWAKELOLA -------------------------------- -->
                     <!-- --------------------------------------------------------------------- -->
                     <div class="tab-content px-1 pt-1">
+                      <?php if ($where_paket['id_jenis'] != 'JNS0005' ) :?>
                       <div role="tabpanel" class="tab-pane active" id="tab31" aria-expanded="true" aria-labelledby="base-tab31">
                         <div class="form-body">
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Surat Alih Status</b></label>
+                              <label for=""><b>Surat Alih Status / Hibah</b></label>
                               <br>
                               <?php if (!empty($file_sas)): ?>
                                 <?php foreach ($file_sas as $u) { ?>
@@ -135,7 +138,7 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Surat Hibah Ke Kementrian Keuangan</b></label>
+                              <label for=""><b>BAST Pengelolaan</b></label>
                               <br>
                               <?php if (!empty($file_shkk)): ?>
                                 <?php foreach ($file_shkk as $u) { ?>
@@ -151,10 +154,29 @@
                               <?php endif ?>
                               </div>
                             </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>BAST Asset</b></label>
+                              <br>
+                              <?php if (!empty($file_bast_bmn)): ?>
+                                <?php foreach ($file_bast_bmn as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <?php if ($where_paket['id_jenis'] == 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php elseif ($where_paket['id_jenis'] != 'JNS0005') :?>
+                                    <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                  <?php endif ?>  
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div>
                         </div>
                       </div>
                       </div>
-                      <div role="tabpanel" class="tab-pane" id="tab32" aria-expanded="true" aria-labelledby="base-tab32">
+                    <?php endif ?>
+                      <div role="tabpanel" class="tab-pane <?php if($where_paket['id_jenis'] == 'JNS0005') {echo 'active';} ?>" id="tab32" aria-expanded="true" aria-labelledby="base-tab32">
                          <div class="form-body">
 
                           <div class="row">
@@ -317,7 +339,7 @@
                           <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>LPJ</b></label>
+                              <label for=""><b>Jaminan Uang Muka</b></label>
                               <br>
                               <?php if (!empty($file_lpj)): ?>
                                 <?php foreach ($file_lpj as $u) { ?>
@@ -335,7 +357,7 @@
                             </div> 
                             <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Berita Acara Pemeriksaan Kas dan Rekonsiliasi</b></label>
+                              <label for=""><b>Jaminan Pelaksanaan</b></label>
                               <br>
                               <?php if (!empty($file_rekonsi)): ?>
                                 <?php foreach ($file_rekonsi as $u) { ?>
@@ -355,7 +377,7 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Rekening Koran</b></label>
+                              <label for=""><b>Jaminan Pemeliharaan</b></label>
                               <br>
                               <?php if (!empty($file_rk)): ?>
                                 <?php foreach ($file_rk as $u) { ?>
@@ -373,7 +395,7 @@
                             </div> 
                             <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Berita Acara Pemeriksaan Kas</b></label>
+                              <label for=""><b>Laporan Pajak</b></label>
                               <br>
                               <?php if (!empty($file_bapk)): ?>
                                 <?php foreach ($file_bapk as $u) { ?>

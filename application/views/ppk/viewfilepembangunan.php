@@ -1202,6 +1202,22 @@
                             </div>
                             </div>
                         </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b><i> As Build Drawing</i></b></label>
+                              <br>
+                              <?php if (!empty($file_abd_pho)): ?>
+                                <?php foreach ($file_abd_pho as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis']. '/'.$where_paket['sub_jenis'] .'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                            </div>
+                            </div>
+                        </div>
                       </div>
                     </div>
                     <!-- --------------------------------------------------------------------- -->
@@ -1276,7 +1292,7 @@
                     <!-- ------------------------------ Dokumentasi ---------------- -->
                     <!-- --------------------------------------------------------------------- -->
 
-                    <div class="tab-pane" id="tab38" aria-labelledby="base-tab38">
+                    <div class="tab-pane" id="tab41" aria-labelledby="base-tab41">
                       <div class="form-body">
                         <div class="row">
                           <div class="col-md-6">

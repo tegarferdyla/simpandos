@@ -153,6 +153,25 @@
                                     </td>
                                 <?php endif ?>
                             </tr>
+                            <tr style="font-size: 13px;" class="bg-grey">
+                                <td class="p-10 center">2</td>
+                                <td class="p-10">KAK & HPS</td>
+                                <?php if (!empty($file_kak_hps)): ?>
+                                    <td class="p-10">
+                                        <?php foreach ($file_kak_hps as $u) { ?>
+                                            <?php echo $u['nama_file']?> <hr>
+                                        <?php } ?>
+                                    </td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/check.png')?>">
+                                    </td>
+                                <?php else : ?>
+                                    <td class="p-10">Data Belum di Upload</td>
+                                    <td class="p-10 center">
+                                        <img src="<?php echo base_url('app-assets/images/laporan/cancel.png')?>">
+                                    </td>
+                                <?php endif ?>
+                            </tr>
                         </tbody>
                     </table>
                     <br><br>
@@ -168,7 +187,7 @@
                                 </td>
                             </tr>
                             <!-- Start Kelompok Surat 1 -->
-                            <tr style="font-size: 13px;">
+                            <!-- <tr style="font-size: 13px;">
                                 <td style="font-weight: 600;" colspan="4" class="col-tosca">
                                     I. BMN
                                 </td>
@@ -177,10 +196,10 @@
                                 <td colspan="4">
                                     <hr size="10" noshade style="background-color: #fede00; border: none;">
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
-                     <table width="100% isi-laporan">
+                     <!-- <table width="100% isi-laporan">
                         <tbody>
                             <tr>
                                 <td class="p-10 col-white bg-tosca">NO</td>
@@ -248,7 +267,7 @@
                                 <?php endif ?>
                             </tr>
                         </tbody>
-                    </table>
+                    </table> -->
                      <table width="100% isi-laporan">
                         <tbody>
                             <tr style="font-size: 13px;">
@@ -448,7 +467,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">1</td>
-                                <td class="p-10">LPJ</td>
+                                <td class="p-10">Jaminan Uang Muka</td>
                                 <?php if (!empty($file_lpj)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_lpj as $u) { ?>
@@ -467,7 +486,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">2</td>
-                                <td class="p-10">Berita Acara Pemeriksaan Kas dan Rekonsiliasi</td>
+                                <td class="p-10">Jaminan Pelaksanaan</td>
                                 <?php if (!empty($file_rekonsi)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_rekonsi as $u) { ?>
@@ -487,7 +506,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">3</td>
-                                <td class="p-10">Rekening Koran</td>
+                                <td class="p-10">Jaminan Pemeliharaan</td>
                                 <?php if (!empty($file_rk)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_rk as $u) { ?>
@@ -507,7 +526,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">4</td>
-                                <td class="p-10">Berita Acara Pemeriksaan Kas</td>
+                                <td class="p-10">Laporan Pajak</td>
                                 <?php if (!empty($file_bapk)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_bapk as $u) { ?>

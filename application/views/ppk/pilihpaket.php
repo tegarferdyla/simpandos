@@ -71,9 +71,9 @@
                     </div>
                     <div class="col-md-1">
                         <?php if (!empty($u->paket_terkumpul_persen)) :?>
-                        <a href="" class="card-title lead"><?php echo $u->paket_terkumpul_persen ?> %</a>
+                        <a href="" class="card-title lead text-danger"><?php echo $u->paket_terkumpul_persen ?> %</a>
                         <?php elseif (empty($u->paket_terkumpul_persen)) :?>
-                        <a href="" class="card-title lead">0%</a>
+                        <a href="" class="card-title lead text-danger">0%</a>
                       <?php endif ?>
                     </div>
                     </div>

@@ -94,6 +94,20 @@
                               <?php endif ?>
                               </div>
                             </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                              <label for=""><b>KAK & HPS</b></label>
+                              <br>
+                              <?php if (!empty($file_kak_hps)): ?>
+                                <?php foreach ($file_kak_hps as $u) { ?>
+                                  <p style="color: green"><?php echo $u['nama_file'] ?></p>
+                                  <a href="<?php echo base_url('assets/data/'.$where_paket['nama_tahun']. '/'.$data_ppk['nama_ppk'].'/'.$where_paket['main_jenis'].'/'. $where_paket['nama_paket'].'/'.$u['nama_file']) ?>" target = "_blank"><button type="button" class="btn btn-icon btn-primary mr-1"><i class="fa fa-download"></i> Download</button></a>
+                                <?php } ?>
+                              <?php else: ?>
+                                <p style="color:red">Tidak Ada Data</p>  
+                              <?php endif ?>
+                              </div>
+                            </div>
                         </div>
                       </div>
                       </div>
