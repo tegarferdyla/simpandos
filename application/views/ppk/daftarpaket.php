@@ -46,7 +46,7 @@
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="false">&times;</span>
                       </button>
-                      <strong> PPK Berhasil di Perbaharui !</strong>
+                      <strong> Paket Berhasil di Perbaharui !</strong>
                     </div>
                     <?php elseif ($this->session->flashdata('deleteberhasil')): ?>
                     <div class="alert alert-primary alert-dismissible mb-2" role="alert">
@@ -82,10 +82,10 @@
                           <?php endif ?>
                           <td class="right">
                             <?php if ($get_jenis['sub_jenis'] != 'Swakelola'):?>
-                            <!-- <a href ="<?php echo base_url()."ppk/updatepaketkontraktual/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin mengubah Paket ini?')"><button type="button" class="btn btn-outline-success mr-1"><i class="fa fa-edit"></i> Edit</button></a> -->
+                            <a href ="<?php echo base_url()."ppk/updatepaketkontraktual/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin mengubah Paket ini?')"><button type="button" class="btn btn-outline-success mr-1"><i class="fa fa-edit"></i> Edit</button></a>
                             <a href ="<?php echo base_url()."ppk/deletepaketkontraktual/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus Paket ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
                             <?php elseif ($get_jenis['sub_jenis']):?>
-                            <!-- <a href ="<?php echo base_url()."ppk/updatepaketswakelola/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin mengubah Paket ini?')"><button type="button" class="btn btn-outline-success mr-1"><i class="fa fa-edit"></i> Edit</button></a> -->
+                            <a href ="<?php echo base_url()."ppk/updatepaketswakelola/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin mengubah Paket ini?')"><button type="button" class="btn btn-outline-success mr-1"><i class="fa fa-edit"></i> Edit</button></a>
                             <a href ="<?php echo base_url()."ppk/deletepaketswakelola/".$u['id_paket']; ?>" onclick="return confirm('Apa anda yakin ingin menghapus Paket ini?')"><button type="button" class="btn btn-outline-danger mr-1"><i class="fa fa-trash"></i> Hapus</button></a>
                             <?php endif ?>
                           </td>

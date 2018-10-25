@@ -4921,7 +4921,9 @@ class ppk extends CI_Controller
 		}
 		$this->load->view('ppk/detaillaporanpembangunan',$data);
 	}
-
+// -------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------ EDIT PAKET -------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 	public function updatepaketkontraktual($id_paket)
 	{
 		$id_user = $this->session->userdata('id_user');
@@ -4937,18 +4939,160 @@ class ppk extends CI_Controller
 		$this->load->view('ppk/editpaketkontraktual',$data);
 		$this->load->view('admin/footer');
 	}
-// -------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------ EDIT PAKET -------------------------------------------------
-// -------------------------------------------------------------------------------------------------------------
-	public function editpaketkontraktual()
+
+	public function updatepaketswakelola($id_paket)
 	{
 		$id_user = $this->session->userdata('id_user');
 		$id_ppk = $this->session->userdata('id_ppk');
 		$data['data_user'] = $this->Datauser_model->getwhereuser($id_user);
 		$data['data_ppk']  = $this->Datappk_model->getwhereppk($id_ppk);
+		$data['data_tahun'] = $this->Datatahun_model->daftartahunppk($id_ppk);
+		$data['data_jenis']	= $this->Datajenis_model->subjeniskontraktual();
+		$data['wherepaket']	= $this->Datapaket_model->getwherepaket($id_paket);
 
-		$id_paket 		= $this->input->post('id_paket');
-		$namapaket_baru	= $this->input->post('namapaket_baru');
+		$this->load->view('ppk/header',$data);
+		$this->load->view('ppk/sidebar',$data);
+		$this->load->view('ppk/editpaketswakelola',$data);
+		$this->load->view('admin/footer');
+	}
+
+	public function editpaketswakelola()
+	{
+		$id_user   = $this->session->userdata('id_user');
+		$id_ppk    = $this->session->userdata('id_ppk');
+		$nama_user = $this->Datauser_model->getwhereuser($id_user);
+		$data 	   = array ('nama_user' => $nama_user['nama_user']);
+		$nama 	   = $data['nama_user'];
+
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
+		$nama_ppk 	= $data['nama_ppk'];
+		
+		//File Baru
+		$id_paket 		 = $this->input->post('id_paket');
+		$namapaket_baru	 = $this->input->post('namapaket_baru');
+		$jenispaket		 = $this->input->post('jenispaket');
+		$id_tahun_baru	 = $this->input->post('id_tahun_baru');
+		$deskripsi_baru	 = $this->input->post('deskripsi_baru');
+		$nama_tahun_baru = $this->Datatahun_model->getwheretahun($id_tahun_baru);
+		$data 			 = array ('nama_tahun' => $nama_tahun_baru['nama_tahun']);
+		$nama_tahun_baru = $data['nama_tahun'];
+		
+		
+		//File Lama
+		$paket_lama 	 = $this->Datapaket_model->getwherepaket($id_paket);
+		$nama_paket_lama = $paket_lama[0]['nama_paket'];
+		$id_tahun_lama	 = $paket_lama[0]['id_tahun'];
+		$nama_tahun_lama = $this->Datatahun_model->getwheretahun($id_tahun_lama);
+		$data 			 = array ('nama_tahun' => $nama_tahun_lama['nama_tahun']);
+		$nama_tahun_lama = $data['nama_tahun'];
+
+
+		$file_lama		 = './assets/data/'.$nama_tahun_lama.'/'.$nama_ppk.'/'.$jenispaket.'/'.ucwords($nama_paket_lama).'/';
+		$file_baru 		 = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk.'/'.$jenispaket.'/'.ucwords($namapaket_baru).'/';
+
+		$thncheck    = './assets/data/'.$nama_tahun_baru;
+		$ppkcheck    = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk;
+		$jenischeck  = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk.'/'.$jenispaket;
+
+		if (!file_exists($thncheck)) {
+			mkdir($thncheck, 0777, true);
+		}elseif (!file_exists($ppkcheck)) {
+			mkdir($ppkcheck,0777,true);
+		}elseif (!file_exists($jenischeck)) {
+			mkdir($jenischeck,0777,true);
+		}
+
+		$pindah = rename($file_lama,$file_baru);
+		if ($pindah > 0) {
+			$data_update = array(
+				'nama_paket' => $namapaket_baru,
+				'deskripsi'  => $deskripsi_baru,
+				'input_by'	 => $nama,
+				'id_jenis'	 => 'JNS0005',
+				'id_tahun' 	 => $id_tahun_baru
+			);
+			$where = array('id_paket' => $id_paket);
+			$db 	= $this->Datapaket_model->updatepaket('tbl_paket',$data_update,$where);
+			if ($db>0) {
+				$this->session->set_flashdata('updateberhasil', true);
+				redirect('ppk/daftarpaket/JNS0005');
+			}
+		}
+	}
+	public function editpaketkontraktual()
+	{
+		$id_user   = $this->session->userdata('id_user');
+		$id_ppk    = $this->session->userdata('id_ppk');
+		$nama_user = $this->Datauser_model->getwhereuser($id_user);
+		$data 	   = array ('nama_user' => $nama_user['nama_user']);
+		$nama 	   = $data['nama_user'];
+
+		$nama_ppk	= $this->Datappk_model->getwhereppk($id_ppk);
+		$data 		= array ('nama_ppk' => $nama_ppk['nama_ppk']);
+		$nama_ppk 	= $data['nama_ppk'];
+		
+		//File Baru
+		$id_paket 		 = $this->input->post('id_paket');
+		$namapaket_baru	 = $this->input->post('namapaket_baru');
+		$jenispaket		 = $this->input->post('jenispaket');
+		$id_jenis_baru	 = $this->input->post('id_jenis_baru');
+		$id_tahun_baru	 = $this->input->post('id_tahun_baru');
+		$deskripsi_baru	 = $this->input->post('deskripsi_baru');
+		$nama_tahun_baru = $this->Datatahun_model->getwheretahun($id_tahun_baru);
+		$data 			 = array ('nama_tahun' => $nama_tahun_baru['nama_tahun']);
+		$nama_tahun_baru = $data['nama_tahun'];
+		$nama_jenis_baru = $this->Datajenis_model->getwherejenis($id_jenis_baru);
+		$data 			 = array ('sub_jenis'		=> $nama_jenis_baru['sub_jenis']);
+		$sub_jenis_baru  = $data['sub_jenis'];
+		
+		//File Lama
+		$paket_lama 	 = $this->Datapaket_model->getwherepaket($id_paket);
+		$nama_paket_lama = $paket_lama[0]['nama_paket'];
+		$id_tahun_lama	 = $paket_lama[0]['id_tahun'];
+		$id_jenis_lama	 = $paket_lama[0]['id_jenis'];
+		$nama_tahun_lama = $this->Datatahun_model->getwheretahun($id_tahun_lama);
+		$data 			 = array ('nama_tahun' => $nama_tahun_lama['nama_tahun']);
+		$nama_tahun_lama = $data['nama_tahun'];
+		$nama_jenis_lama = $this->Datajenis_model->getwherejenis($id_jenis_lama);
+		$data 			 = array ('sub_jenis'		=> $nama_jenis_lama['sub_jenis']);
+		$sub_jenis_lama  = $data['sub_jenis'];
+
+
+		$file_lama		 = './assets/data/'.$nama_tahun_lama.'/'.$nama_ppk.'/'.$jenispaket.'/'.$sub_jenis_lama.'/'.ucwords($nama_paket_lama).'/';
+		$file_baru 		 = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk.'/'.$jenispaket.'/'.$sub_jenis_baru.'/'.ucwords($namapaket_baru).'/';
+
+		$thncheck    = './assets/data/'.$nama_tahun_baru;
+		$ppkcheck    = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk;
+		$jenischeck  = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk.'/'.$jenispaket;
+		$subcheck 	 = './assets/data/'.$nama_tahun_baru.'/'.$nama_ppk.'/'.$jenispaket.'/'.$sub_jenis_baru;
+
+		if (!file_exists($thncheck)) {
+			mkdir($thncheck, 0777, true);
+		}elseif (!file_exists($ppkcheck)) {
+			mkdir($ppkcheck,0777,true);
+		}elseif (!file_exists($jenischeck)) {
+			mkdir($jenischeck,0777,true);
+		}elseif (!file_exists($subcheck)) {
+			mkdir($subcheck,0777,true);
+		}
+
+		$pindah = rename($file_lama,$file_baru);
+		if ($pindah > 0) {
+			$data_update = array(
+				'nama_paket' => $namapaket_baru,
+				'deskripsi'  => $deskripsi_baru,
+				'input_by'	 => $nama,
+				'id_jenis'	 => $id_jenis_baru,
+				'id_tahun' 	 => $id_tahun_baru
+			);
+			$where = array('id_paket' => $id_paket);
+			$db 	= $this->Datapaket_model->updatepaket('tbl_paket',$data_update,$where);
+			if ($db>0) {
+				$this->session->set_flashdata('updateberhasil', true);
+				redirect('ppk/daftarpaket/'.$id_jenis_baru);
+			}
+		}
  	}
  // -------------------------------------------------------------------------------------------------------------
 // ------------------------------------------------ CETAK LAPORAN PAKET -----------------------------------------

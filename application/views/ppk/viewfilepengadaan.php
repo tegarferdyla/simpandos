@@ -205,7 +205,7 @@
                         <div class="row">
                           <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Naskah Hibah antara Satker dengan Kepala Daerah</b></label>
+                              <label for=""><b>Sertifikat Alat Berat</b></label>
                               <br>
                               <?php if (!empty($file_naskah_hibah)): ?>
                                 <?php foreach ($file_naskah_hibah as $u) { ?>
@@ -219,7 +219,7 @@
                             </div>
                             <div class="col-md-6">
                             <div class="form-group">
-                              <label for=""><b>Perjanjian Hibah antara Satker dengan Kepala Daerah</b></label>
+                              <label for=""><b>Dokumen PHO BAST</b></label>
                               <br>
                               <?php if (!empty($file_ph)): ?>
                                 <?php foreach ($file_ph as $u) { ?>

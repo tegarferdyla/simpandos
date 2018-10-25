@@ -295,7 +295,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">9</td>
-                                <td class="p-10">Naskah Hibah antara Satker dengan Kepala Daerah</td>
+                                <td class="p-10">Sertifikat Alat Berat</td>
                                 <?php if (!empty($file_naskah_hibah)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_naskah_hibah as $u) { ?>
@@ -315,7 +315,7 @@
                             </tr>
                             <tr style="font-size: 13px;" class="bg-grey">
                                 <td class="p-10 center">10</td>
-                                <td class="p-10">Perjanjian Hibah antara Satker dengan Kepala Daerah </td>
+                                <td class="p-10">Dokumen PHO BAST</td>
                                 <?php if (!empty($file_ph)): ?>
                                     <td class="p-10">
                                         <?php foreach ($file_ph as $u) { ?>

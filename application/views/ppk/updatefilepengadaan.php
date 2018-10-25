@@ -237,8 +237,8 @@
                         <div class="row">
                           <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Naskah Hibah antara Satker dengan Kepala Daerah </b></label>
-                            <a class="text-success btn-add-input" style="padding-left:1em" data-counter=0 data-tipefile="naskah_hibah" value="Add naskah_hibah"><i class="ft-plus"></i> Tambah File</a>
+                            <label for=""><b>Sertifikat Alat Berat</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="naskah_hibah" value="Add naskah_hibah"><i class="ft-plus"></i> Tambah File</a>
                             <br>
                             <?php if (!empty($file_naskah_hibah)): ?>
                               <?php foreach ($file_naskah_hibah as $u) { ?>
@@ -257,8 +257,8 @@
                         </div>
                         <div class="col-md-6">
                           <div class="form-group">
-                            <label for=""><b>Perjanjian Hibah antara Satker dengan Kepala Daerah</b></label>
-                            <a class="text-success btn-add-input" style="padding-left:1em" data-counter=0 data-tipefile="ph" value="Add ph"><i class="ft-plus"></i> Tambah </a>
+                            <label for=""><b>Dokumen PHO BAST</b></label>
+                            <a class="text-success btn-add-input" style="padding-left:16em" data-counter=0 data-tipefile="ph" value="Add ph"><i class="ft-plus"></i> Tambah File </a>
                             <br>
                             <?php if (!empty($file_ph)): ?>
                               <?php foreach ($file_ph as $u) { ?>

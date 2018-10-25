@@ -91,6 +91,12 @@ class Datapaket_model extends CI_Model
         $query = $this->db->get();
         return $query->num_rows();
 	}
+	
+	public function updatepaket($table,$data_update,$where)
+	{
+		$res=$this->db->update($table,$data_update,$where);
+		return $res;
+	}
 
 }
  ?>

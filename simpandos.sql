@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2018 at 02:26 PM
+-- Generation Time: Oct 25, 2018 at 11:21 AM
 -- Server version: 10.1.29-MariaDB
 -- PHP Version: 7.2.0
 
@@ -96,7 +96,8 @@ INSERT INTO `tbl_file` (`id_file`, `nama_file`, `id_paket`, `id_tahun`, `id_jeni
 (58, '2018-Pembangunan Drainase-weekly_report_-_simpandos.xlsx', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0001'),
 (59, '2018-Pembangunan Drainase-tapmpil.txt', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0022'),
 (60, '2018-Pembangunan Drainase-tat.txt', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0100'),
-(61, '2018-Pembangunan Drainase- Pendukung -DSC_2566.JPG', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0101');
+(61, '2018-Pembangunan Drainase- Pendukung -DSC_2566.JPG', 'PKT0015', 'THN0008', 'JNS0002', 'SUB0101'),
+(62, '2018-Pembangunan Drainase-1.jpg', 'PKT0015', 'THN0008', 'JNS0004', 'SUB0073');
 
 -- --------------------------------------------------------
 
@@ -196,7 +197,7 @@ INSERT INTO `tbl_paket` (`id_paket`, `nama_paket`, `deskripsi`, `input_by`, `id_
 ('PKT0015', 'Pembangunan Drainase', '', 'User PPK 2', 'JNS0002', 'THN0008', 'PPK0003'),
 ('PKT0016', 'Masterplan Kota Bekasi', '', 'User PPK 2', 'JNS0003', 'THN0008', 'PPK0003'),
 ('PKT0017', 'Pengadaan Truk Tinja', '', 'User PPK 2', 'JNS0004', 'THN0008', 'PPK0003'),
-('PKT0018', 'Pengadaan ATK', '', 'User PPK 2', 'JNS0005', 'THN0008', 'PPK0003'),
+('PKT0018', 'Pengadaan ATK', '', 'User PPK 2', 'JNS0005', 'THN0007', 'PPK0003'),
 ('PKT0019', 'Test 1', '', 'User PPK 2', 'JNS0002', 'THN0008', 'PPK0003');
 
 -- --------------------------------------------------------
@@ -316,8 +317,8 @@ INSERT INTO `tbl_subdok` (`id_subdok`, `sub_dokumen`, `id_kepaladok`) VALUES
 ('SUB0078', 'Rekomtek Dirjen Ke Kasatker', 'KPL0019'),
 ('SUB0079', 'Pengajuan Hibah Ke Kementrian Keuangan', 'KPL0019'),
 ('SUB0080', 'Persetujuan Hibah Ke Satker', 'KPL0019'),
-('SUB0081', 'Naskah Hibah antara Satker dengan Kepala Daerah', 'KPL0019'),
-('SUB0082', 'Perjanjian Hibah antara Satker dengan Kepala Daerah', 'KPL0019'),
+('SUB0081', 'Sertifikat Alat Berat', 'KPL0019'),
+('SUB0082', 'Dokumen PHO BAST', 'KPL0019'),
 ('SUB0083', 'Dokumen Hibah BPKB ke Pemda', 'KPL0019'),
 ('SUB0084', 'Laporan Swakelola', 'KPL0020'),
 ('SUB0085', 'Surat Alih status / Hibah', 'KPL0003'),
@@ -468,7 +469,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `tbl_file`
 --
 ALTER TABLE `tbl_file`
-  MODIFY `id_file` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id_file` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

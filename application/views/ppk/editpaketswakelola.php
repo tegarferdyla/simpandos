@@ -2,13 +2,13 @@
     <div class="content-wrapper">
        <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-          <h3 class="content-header-title mb-0">Edit Paket Kontraktual</h3>
+          <h3 class="content-header-title mb-0">Edit Paket Swakelola</h3>
           <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="<?php echo site_url('admin') ?>">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Edit Paket Kontraktual</a>
+                <li class="breadcrumb-item active"><a href="#">Edit Paket Swakelola</a>
                 </li>
               </ol>
             </div>
@@ -34,7 +34,7 @@
                 <div class="card-content collpase show">
                   <div class="card-body">
 
-                    <form class="form form-horizontal" action="<?php echo base_url('ppk/editpaketkontraktual') ?>" method="post">
+                    <form class="form form-horizontal" action="<?php echo base_url('ppk/editpaketswakelola') ?>" method="post">
                       <div class="form-body">
                         <h4 class="form-section"><i class="ft-file"></i><?php echo $wherepaket[0]['nama_paket']; ?></h4>
                           <?php if ($this->session->flashdata('tahuntersedia')):?>
@@ -62,19 +62,7 @@
                         <div class="form-group row">
                           <label class="col-md-3 label-control" for="projectinput1">Jenis Paket</label>
                           <div class="col-md-9">
-                            <input type="text" id="projectinput1" class="form-control" name="jenispaket" readonly="" value="Kontraktual"> 
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label class="col-md-3 label-control" for="projectinput1">Sub Jenis</label>
-                          <div class="col-md-9">
-                            <select name="id_jenis_baru" class="form-control" required>
-                              <option value="<?php echo $wherepaket[0]['id_jenis'] ?>"><?php echo $wherepaket[0]['sub_jenis']; ?></option>
-                              <option value="">-- Ubah Sub Jenis Kontraktual --</option>
-                              <?php foreach ($data_jenis as $u) { ?>
-                                <option value="<?php echo $u['id_jenis'] ?>"><?php echo $u['sub_jenis']; ?></option>
-                              <?php } ?>
-                            </select>
+                            <input type="text" id="projectinput1" class="form-control" name="jenispaket" readonly="" value="Swakelola"> 
                           </div>
                         </div>
                         <div class="form-group row">
