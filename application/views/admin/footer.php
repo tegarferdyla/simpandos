@@ -54,7 +54,7 @@
             <?php foreach ($chart_admin as $r) {
                 echo "'$r->jumlah_paket',"; 
             }?>],
-            backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A'],
+            backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D','#FF4558', '#16D39A','#16a085','#96281B','#663399','#36D7B7','#F9690E','#FDE3A7'],
         }]
     };
 

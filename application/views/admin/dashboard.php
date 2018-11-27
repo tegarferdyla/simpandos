@@ -4,6 +4,12 @@
      $warna[3]   =  '#FF7D4D';
      $warna[4]   =  '#FF4558';
      $warna[5]   =  '#16D39A';
+     $warna[6] = '#16a085' ;
+     $warna[7] = '#96281B' ;
+     $warna[8] = '#663399' ;
+     $warna[9] = '#36D7B7' ;
+     $warna[10] ='#F9690E' ;
+     $warna[11] ='#FDE3A7' ;
    ?>
   <div class="app-content content">
     <div class="content-wrapper">
